@@ -18,6 +18,9 @@
 nav {
     position: fixed;
     padding: 1rem 3rem 1rem 3rem;
+    background-color: white;
+    width: 100%;
+    border-bottom: 2px solid black;
 }
 
 ul {

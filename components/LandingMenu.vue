@@ -1,23 +1,22 @@
 <template>
-    <div class="landing">
+    <section class="landing">
         <div class="landing-left">
             <h1>
-                <NuxtLink to="/">Luca Engelhard</NuxtLink>
+                <NuxtLink :to="mainLink.href">{{ mainLink.linkText }}</NuxtLink>
             </h1>
             <ul>
-
                 <li v-for="link in links">
                     <NuxtLink :to="link.href">{{ link.linkText }}</NuxtLink>
                 </li>
             </ul>
         </div>
         <img src="/assets/.placeholder/231104-anna geburtstag-012.jpg" alt="">
-    </div>
+    </section>
 </template>
 
 <script setup>
-const { links } = defineProps(["links"])
-console.log(links);
+const { mainLink, links } = defineProps(["mainLink", "links"])
+console.log(mainLink);
 </script>
 
 <style scoped>
@@ -33,13 +32,9 @@ console.log(links);
 }
 
 h1 {
-    font-size: 6rem;
     margin-bottom: 0;
 }
 
-ul {
-    font-size: 2rem;
-}
 
 img {
     width: 70%;

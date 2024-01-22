@@ -23,8 +23,6 @@ console.log(mainLink);
 .landing {
     width: 100%;
     height: 100vh;
-    display: grid;
-    align-items: center;
 }
 
 .landing-left {
@@ -32,9 +30,9 @@ console.log(mainLink);
 }
 
 h1 {
+    margin-top: 40vh;
     margin-bottom: 0;
 }
-
 
 img {
     width: 70%;

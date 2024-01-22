@@ -21,6 +21,9 @@ nav {
     background-color: white;
     width: 100%;
     border-bottom: 2px solid black;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
 
 ul {

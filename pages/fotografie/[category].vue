@@ -1,11 +1,9 @@
 <template>
-    <LandingMenu :mainLink="{ linkText: 'Fotografie', href: '/Fotografie' }" :links="[{ linkText: 'Politik', href: '/fotografie/politik' },
+    <LandingMenu :current="category" :mainLink="{ linkText: 'Fotografie', href: '/Fotografie' }" :links="[{ linkText: 'Politik', href: '/fotografie/politik' },
     { linkText: 'People', href: '/fotografie/people' }, { linkText: 'Things', href: '/fotografie/things' }]" />
 
     <ImageGallery v-for="section in set" :title="section.title" :id="section.id" />
 </template>
-
-<style scoped></style>
 
 <script setup>
 const { category } = useRoute().params

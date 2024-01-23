@@ -6,20 +6,27 @@
             </h1>
             <ul>
                 <li v-for="link in links">
-                    <NuxtLink :to="link.href">{{ link.linkText }}</NuxtLink>
+                    <NuxtLink style="font-weight: 600;" v-if="current === link.linkText.toLowerCase()" :to="link.href">{{
+                        link.linkText }}
+                    </NuxtLink>
+
+                    <NuxtLink v-else :to="link.href">{{ link.linkText }}</NuxtLink>
                 </li>
             </ul>
         </div>
-        <img src="/assets/.placeholder/231104-anna geburtstag-012.jpg" alt="">
+        <img v-if="image" src="/assets/.placeholder/231104-anna geburtstag-012.jpg" alt="">
+        <img v-else src="/assets/.placeholder/231104-anna geburtstag-012.jpg" alt="">
     </section>
 </template>
 
 <script setup>
-const { mainLink, links } = defineProps(["mainLink", "links"])
+const { mainLink, links, current, image } = defineProps(["mainLink", "links", "current", "image"])
+
 </script>
 
 <style scoped>
 .landing {
+
     width: 100%;
     height: 100vh;
 }
@@ -34,6 +41,9 @@ h1 {
 }
 
 img {
+    object-position: 50% 20%;
+    margin-top: 70px;
+    height: calc(100% - 70px);
     width: 70%;
     position: absolute;
     top: 0;

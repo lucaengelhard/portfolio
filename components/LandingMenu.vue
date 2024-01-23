@@ -16,7 +16,6 @@
 
 <script setup>
 const { mainLink, links } = defineProps(["mainLink", "links"])
-console.log(mainLink);
 </script>
 
 <style scoped>

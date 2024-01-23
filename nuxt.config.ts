@@ -5,4 +5,5 @@ export default defineNuxtConfig({
     flickrKey: process.env.FLICKR_API_KEY,
     flickrUserId: process.env.FLICR_USER_ID,
   },
+  modules: ["@vueuse/nuxt"],
 });

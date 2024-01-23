@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ title }}</h1>
-        <img :src="titleImage.url_m" alt="">
+        <img :src="titleImage.url_o" alt="">
     </div>
 </template>
 

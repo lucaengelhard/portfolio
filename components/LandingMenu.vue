@@ -26,7 +26,7 @@ const { mainLink, links, current, image } = defineProps(["mainLink", "links", "c
 
 <style scoped>
 .landing {
-
+    margin-top: 0;
     width: 100%;
     height: 100vh;
 }

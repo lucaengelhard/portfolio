@@ -1,21 +1,22 @@
 <template>
     <article>
-        <NuxtLink to="/gestaltung/Indymedia">
+        <NuxtLink to="/projekte/gestaltung/Indymedia">
             <div>
                 <h1>Indymedia</h1>
                 <p>Redesign</p>
             </div>
 
             <ul>
-                <li>NodeJS</li>
-                <li>JavaScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
+                <li v-for="tag in tags">{{ tag }}</li>
             </ul>
             <img src="/assets/.placeholder/indy-header.png" alt="">
         </NuxtLink>
     </article>
 </template>
+
+<script setup>
+const { id, tags } = defineProps(["id", "tags"])
+</script>
 
 <style scoped>
 article {

@@ -8,7 +8,7 @@
                 <NuxtLink to="/fotografie">Fotografie</NuxtLink>
             </li>
             <li>
-                <NuxtLink to="/gestaltung">Gestaltung</NuxtLink>
+                <NuxtLink to="/projekte">Projekte</NuxtLink>
             </li>
         </ul>
     </nav>

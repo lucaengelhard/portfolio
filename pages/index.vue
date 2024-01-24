@@ -1,6 +1,6 @@
 <template>
     <LandingMenu :mainLink="{ linkText: 'Luca Engelhard', href: '/' }" :links="[{ linkText: 'Fotografie', href: '/fotografie' },
-    { linkText: 'Gestaltung', href: '/gestaltung' }]" />
+    { linkText: 'Projekte', href: '/projekte' }]" />
 
     <TextBlock heading="Über mich" textContent="Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque
             sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis

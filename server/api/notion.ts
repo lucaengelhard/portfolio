@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 const { notionAPISecret } = useRuntimeConfig();
-const { notionPhotohgraphyPage } = useRuntimeConfig();
+const { notionPhotographyPage } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   const notion = new Client({ auth: notionAPISecret });
@@ -26,7 +26,7 @@ async function getPageId(event: any, notion: Client) {
     return id;
   }
 
-  const blocks = await getBlocks(notionPhotohgraphyPage, notion);
+  const blocks = await getBlocks(notionPhotographyPage, notion);
   for (let index = 0; index < blocks.results.length; index++) {
     const block = blocks.results[index];
 
@@ -38,8 +38,9 @@ async function getPageId(event: any, notion: Client) {
     if (
       block.child_page.title.toLowerCase() !==
       category?.toString().toLowerCase()
-    )
-      console.log(block);
+    ) {
+      continue;
+    }
 
     return block.id;
     //const pageInfo = await getPageInfo(block.id, notion);
@@ -120,7 +121,7 @@ async function getPageInfo(id: string, notion: Client) {
   const response = await notion.pages.retrieve({ page_id: id });
 
   return {
-    thumbnail: response.cover ? response.cover.file.url : undefined,
+    thumbnail: getPageThumbnail(response),
     id: response.id,
     title: response.properties.Name
       ? response.properties.Name.title[0].plain_text
@@ -132,7 +133,21 @@ async function getPageInfo(id: string, notion: Client) {
   };
 }
 
-function getPageSubtitle(response) {
+function getPageThumbnail(response: any) {
+  if (!response.cover) {
+    return undefined;
+  }
+
+  if (response.cover.type !== "external") {
+    return response.cover.file.url;
+  }
+
+  if (response.cover.type === "external") {
+    return response.cover.external.url;
+  }
+}
+
+function getPageSubtitle(response: any) {
   if (!response.properties.Untertitel) {
     return undefined;
   }

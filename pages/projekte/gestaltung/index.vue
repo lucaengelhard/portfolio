@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-const { data } = await useFetch(`/api/notion`);
+const { data } = await useFetch(`/api/notion?type=list`);
 const projects = toRaw(data.value);
 </script>
 

@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     flickrKey: process.env.FLICKR_API_KEY,
     flickrUserId: process.env.FLICR_USER_ID,
+    notionAPISecret: process.env.NOTION_API_SECRET,
   },
   modules: ["@vueuse/nuxt"],
 });

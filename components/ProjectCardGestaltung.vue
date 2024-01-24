@@ -1,21 +1,23 @@
 <template>
     <article>
-        <NuxtLink to="/projekte/gestaltung/Indymedia">
+        <NuxtLink :to="`/projekte/gestaltung/${project.title}`">
             <div>
-                <h1>Indymedia</h1>
-                <p>Redesign</p>
+                <h1>{{ project.title }}</h1>
+                <p>{{ project.subtitle }}</p>
             </div>
 
             <ul>
-                <li v-for="tag in tags">{{ tag }}</li>
+                <li v-for="tag in project.tags">{{ tag.name }}</li>
             </ul>
-            <img src="/assets/.placeholder/indy-header.png" alt="">
+            <img v-if="project.thumbnail" :src="project.thumbnail" alt="">
         </NuxtLink>
     </article>
 </template>
 
 <script setup>
-const { id, tags } = defineProps(["id", "tags"])
+
+const { project } = defineProps(["project"])
+
 </script>
 
 <style scoped>

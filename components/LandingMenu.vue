@@ -14,7 +14,7 @@
                 </li>
             </ul>
         </div>
-        <img v-if="image" :src="image.url" alt="">
+        <img v-if="image" :src="image" alt="">
         <img v-else src="/assets/.placeholder/231104-anna geburtstag-012.jpg" alt="">
     </section>
 </template>

@@ -1,12 +1,12 @@
 <template>
-    <ProjectCardGestaltung :project="page" />
+    <!-- <ProjectCardGestaltung :project="page" />
 
-    <PageBlock v-for="block in page.content" :block="block" />
+    <PageBlock v-for="block in page.content" :block="block" />-->
 </template>
 
 <script setup>
 const { project: title } = useRoute().params
-const { data } = await useFetch(`/api/notion?type=page&page=${title}`);
+const { data } = await useFetch(`/api/notion?type=project&title=${title}`);
 const page = toRaw(data.value);
 </script>
 

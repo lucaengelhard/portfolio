@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     flickrKey: process.env.FLICKR_API_KEY,
     flickrUserId: process.env.FLICR_USER_ID,
     notionAPISecret: process.env.NOTION_API_SECRET,
+    notionPhotohgraphyPage: process.env.NOTION_PHOTOGRAPHY_PAGE,
   },
   modules: ["@vueuse/nuxt"],
 });

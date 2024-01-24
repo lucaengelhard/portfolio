@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client";
 const { notionAPISecret } = useRuntimeConfig();
+const { notionPhotohgraphyPage } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   const notion = new Client({ auth: notionAPISecret });
@@ -9,14 +10,41 @@ export default defineEventHandler(async (event) => {
   switch (type) {
     case "list":
       return await getDatabase(notion, databaseId);
-      break;
+    case "project":
+      return await getProjectPage(notion, databaseId, event);
     case "page":
-      return await getPage(notion, databaseId, event);
-      break;
+      const id = await getPageId(event, notion);
+      return await getPage(notion, id);
     default:
       break;
   }
 });
+
+async function getPageId(event: any, notion: Client) {
+  const { id } = getQuery(event);
+  if (id) {
+    return id;
+  }
+
+  const blocks = await getBlocks(notionPhotohgraphyPage, notion);
+  for (let index = 0; index < blocks.results.length; index++) {
+    const block = blocks.results[index];
+
+    if (block.type !== "child_page") {
+      continue;
+    }
+    const { category } = getQuery(event);
+
+    if (
+      block.child_page.title.toLowerCase() !==
+      category?.toString().toLowerCase()
+    )
+      console.log(block);
+
+    return block.id;
+    //const pageInfo = await getPageInfo(block.id, notion);
+  }
+}
 
 async function getDatabase(notion: Client, databaseId: string) {
   const response = await notion.databases.query({
@@ -53,10 +81,8 @@ async function getDatabase(notion: Client, databaseId: string) {
   return projectList;
 }
 
-async function getProjectPage(notion: Client, databaseId: string, event: any) {}
-
-async function getPage(notion: Client, databaseId: string, event: any) {
-  const { page: title } = getQuery(event);
+async function getProjectPage(notion: Client, databaseId: string, event: any) {
+  const { title } = getQuery(event);
   const database = await notion.databases.query({
     database_id: databaseId,
     filter: {
@@ -77,27 +103,43 @@ async function getPage(notion: Client, databaseId: string, event: any) {
     },
   });
 
-  const page = await getBlocks(database.results[0].id, notion);
+  return await getPage(notion, database.results[0].id);
+}
+
+async function getPage(notion: Client, id: any) {
+  const page = await getBlocks(id, notion);
+  const pageInfo = await getPageInfo(id, notion);
+
   const blockList = await parseBlocks(page.results, notion);
+  pageInfo.content = blockList;
 
-  let projectInfo = {
-    thumbnail: database.results[0].cover
-      ? database.results[0].cover.file.url
+  return pageInfo;
+}
+
+async function getPageInfo(id: string, notion: Client) {
+  const response = await notion.pages.retrieve({ page_id: id });
+
+  return {
+    thumbnail: response.cover ? response.cover.file.url : undefined,
+    id: response.id,
+    title: response.properties.Name
+      ? response.properties.Name.title[0].plain_text
       : undefined,
-    id: page.id,
-    title: database.results[0].properties.Name
-      ? database.results[0].properties.Name.title[0].plain_text
+    tags: response.properties.Tags
+      ? response.properties.Tags.multi_select
       : undefined,
-    tags: database.results[0].properties.Tags
-      ? database.results[0].properties.Tags.multi_select
-      : undefined,
-    subtitle: database.results[0].properties.Untertitel.rich_text.length
-      ? database.results[0].properties.Untertitel.rich_text[0].plain_text
-      : undefined,
-    content: blockList,
+    subtitle: getPageSubtitle(response),
   };
+}
 
-  return projectInfo;
+function getPageSubtitle(response) {
+  if (!response.properties.Untertitel) {
+    return undefined;
+  }
+  if (!response.properties.Untertitel.rich_text.length) {
+    return undefined;
+  }
+  return response.properties.Untertitel.rich_text[0].plain_text;
 }
 
 async function getBlocks(blockId: string, notion: Client) {
@@ -123,6 +165,18 @@ async function parseBlocks(blocks: any, notion: Client) {
       case "column":
         blockList.push(await getBlockNested(block, notion));
         break;
+      case "heading_2":
+        blockList.push(getBlockHeading(block));
+        break;
+      case "heading_1":
+        blockList.push(getBlockHeading(block));
+        break;
+      case "heading_3":
+        blockList.push(getBlockHeading(block));
+        break;
+      case "bulleted_list_item":
+        blockList.push(await getBlockList(block, notion));
+        break;
       default:
         break;
     }
@@ -139,10 +193,17 @@ function getBlockImage(block: any) {
 }
 
 function getBlockParagraph(block: any) {
-  return {
-    type: block.type,
-    content: block.paragraph.rich_text[0].plain_text,
-  };
+  try {
+    return {
+      type: block.type,
+      content: block.paragraph.rich_text[0].plain_text,
+    };
+  } catch (error) {
+    return {
+      type: block.type,
+      content: "",
+    };
+  }
 }
 
 async function getBlockNested(block: any, notion: Client) {
@@ -156,4 +217,50 @@ async function getBlockNested(block: any, notion: Client) {
     type: "recursive",
     content: recursiveBlockList,
   };
+}
+
+function getBlockHeading(block: any) {
+  try {
+    return {
+      type: block.type,
+      text: block[block.type].rich_text[0].plain_text,
+    };
+  } catch (error) {
+    return {
+      type: block.type,
+      text: "",
+    };
+  }
+}
+
+async function getBlockList(block: any, notion: Client) {
+  if (block.has_children) {
+    try {
+      const text = block[block.type].rich_text[0].plain_text;
+      return {
+        type: "list",
+        text: text,
+        content: await getBlockNested(block, notion),
+      };
+    } catch (error) {
+      const text = "";
+      return {
+        type: "list",
+        text: text,
+        content: await getBlockNested(block, notion),
+      };
+    }
+  } else {
+    try {
+      return {
+        type: "list",
+        text: block[block.type].rich_text[0].plain_text,
+      };
+    } catch (error) {
+      return {
+        type: "list",
+        text: "",
+      };
+    }
+  }
 }

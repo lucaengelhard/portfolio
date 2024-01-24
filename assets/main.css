@@ -70,6 +70,8 @@ h1 {
 h2 {
   font-size: 2rem;
   margin-bottom: 0;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 p {

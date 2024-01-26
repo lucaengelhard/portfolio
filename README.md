@@ -1,3 +1,3 @@
-# Repository for my portfolio Luca Engelhard.com
+# Repository for my portfolio lucaengelhard.com
 
 

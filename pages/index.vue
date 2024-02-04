@@ -1,24 +1,28 @@
 <template>
     <main>
-        <WordWave text="about" />
+        <WordWave @mouseenter="imageLink = imageDefault" :text="about.title" />
         <img :src="imageLink" alt="" class="landing-bg" />
-        <ContentList path="/projects" v-slot="{ list }">
+        <ContentList :query="query" v-slot="{ list }">
             <div class="projectlist">
                 <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
                     @mouseleave="imageLink = imageDefault" />
             </div>
         </ContentList>
-
     </main>
 </template>
 
 <script setup>
-const imageLink = useState("imageLink")
-const imageDefault = "/images/231104-anna geburtstag-012.jpg"
+const { data: about } = await useAsyncData('about', () => queryContent('/').where({ title: "about" }).findOne())
 
-callOnce(() => {
-    imageLink.value = imageDefault
+const imageLink = useState("imageLink");
+const imageDefault = about.value.thumbnail;
+
+await callOnce(async () => {
+    const { data: aboutonce } = await useAsyncData('about', () => queryContent('/').where({ title: "about" }).findOne())
+    imageLink.value = aboutonce.value.thumbnail
 })
+
+const query = { path: '/', where: [{ title: { $ne: 'about' } }] }
 
 </script>
 

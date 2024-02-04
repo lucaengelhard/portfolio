@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ContentDoc :path="`/projects/${title}`" v-slot="{ doc }">
+        <ContentDoc :path="`/${title}`" v-slot="{ doc }">
             <div class="landing">
                 <div class="heading">
                     <WordWave text="" />

@@ -19,7 +19,7 @@ img {
 }
 
 p {
-  mix-blend-mode: difference;
+  color: black;
   margin-bottom: 2rem;
   margin-top: 2rem;
 }

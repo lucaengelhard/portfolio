@@ -9,6 +9,7 @@ body {
   font-family: "IBM Plex Sans", sans-serif;
   text-transform: lowercase;
   background-color: #f5f5dc;
+  font-size: 2rem;
 }
 
 img {
@@ -18,6 +19,11 @@ img {
 }
 
 p {
-  color: black;
+  mix-blend-mode: difference;
   margin-bottom: 2rem;
+}
+
+ul {
+  list-style-type: none;
+  mix-blend-mode: difference;
 }

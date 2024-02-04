@@ -1,5 +1,12 @@
 <template>
-    <NuxtLink :to="`/${text}`">
+    <NuxtLink v-if="link !== 'false'" :to="`/${text}`">
+        <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
+        }}</span>
+        </div>
+        <div><span v-for="( letter, index ) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
+        }}</span></div>
+    </NuxtLink>
+    <NuxtLink v-else>
         <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span>
         </div>
@@ -9,7 +16,7 @@
 </template>
 
 <script setup>
-const { text } = defineProps(["text"])
+const { text, link } = defineProps(["text", "link"])
 
 const cleanText = text ? text : "← home"
 

@@ -69,5 +69,6 @@ a {
     margin-top: 3rem;
     width: 70%;
     padding: 2rem;
+    min-height: 100vh;
 }
 </style>

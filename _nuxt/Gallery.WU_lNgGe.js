@@ -1,0 +1,1 @@
+import{l as s,b as t,c as r,G as a}from"./entry.c0f5JD3e.js";const c={},o={class:"gallery"};function d(e,n){return t(),r("div",o,[a(e.$slots,"default",{},void 0,!0)])}const _=s(c,[["render",d],["__scopeId","data-v-bd435dd2"]]);export{_ as default};

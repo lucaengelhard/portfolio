@@ -7,4 +7,5 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
   },
+  modules: ["@nuxt/content"],
 });

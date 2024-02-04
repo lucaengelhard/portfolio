@@ -2,18 +2,15 @@
     <main>
         <WordWave text="about" />
         <img :src="imageLink" alt="" class="landing-bg" />
-        <div class="projectlist">
-            <WordWave v-for="project in projects" :text="project.name" @mouseenter="imageLink = project.thumbnail"
+        <ContentList path="/projects" v-slot="{ list }" class="projectlist">
+            <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
                 @mouseleave="imageLink = imageDefault" />
-        </div>
+        </ContentList>
 
     </main>
 </template>
 
 <script setup>
-
-const projects = [{ name: "indymedia", thumbnail: "/images/indy-header.png", href: " " }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }, { name: "indymedia", thumbnail: "/images/indy-header.png" }]
-
 const imageLink = useState("imageLink")
 const imageDefault = "/images/231104-anna geburtstag-012.jpg"
 
@@ -76,5 +73,23 @@ main>*:nth-child(1) {
     translate: 0 -50%;
     object-fit: contain;
     scale: 0.8;
+    transition: all 0.3s;
+}
+
+.page-enter-from .landing-bg,
+.page-leave-to .landing-bg {
+    width: 100%;
+    height: 100%;
+    scale: 1;
+}
+
+a {
+    transition: all 0.3s;
+}
+
+.page-enter-from a,
+.page-leave-to a {
+    opacity: 0;
+    filter: blur(1rem);
 }
 </style>

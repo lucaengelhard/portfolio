@@ -1,6 +1,6 @@
 ---
 title: "about"
-thumbnail: "/images/231104-anna geburtstag-012.jpg"
+thumbnail: "/images/231104-anna_geburtstag-012.jpg"
 ---
 
 Hi! Ich bin Luca, Fotograf, Gestalter und auch ein bisschen Webentwickler.

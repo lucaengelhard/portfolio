@@ -2,9 +2,11 @@
     <main>
         <WordWave text="about" />
         <img :src="imageLink" alt="" class="landing-bg" />
-        <ContentList path="/projects" v-slot="{ list }" class="projectlist">
-            <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
-                @mouseleave="imageLink = imageDefault" />
+        <ContentList path="/projects" v-slot="{ list }">
+            <div class="projectlist">
+                <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
+                    @mouseleave="imageLink = imageDefault" />
+            </div>
         </ContentList>
 
     </main>

@@ -1,12 +1,19 @@
 <template>
-    <NuxtLink v-if="link !== 'false'" :to="`/${text}`">
+    <NuxtLink class="waveReverse" v-if="link === 'external'" :to="external" target="_blank">
         <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span>
         </div>
         <div><span v-for="( letter, index ) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span></div>
     </NuxtLink>
-    <NuxtLink v-else>
+    <NuxtLink v-else-if="link !== 'false'" :to="`/${text}`">
+        <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
+        }}</span>
+        </div>
+        <div><span v-for="( letter, index ) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
+        }}</span></div>
+    </NuxtLink>
+    <NuxtLink class="waveReverse" v-else>
         <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span>
         </div>
@@ -16,7 +23,7 @@
 </template>
 
 <script setup>
-const { text, link } = defineProps(["text", "link"])
+const { text, link, external } = defineProps(["text", "link", "external"])
 
 const cleanText = text ? text : "← home"
 
@@ -50,5 +57,15 @@ a span {
 
 a:hover span {
     translate: 0 -100%;
+}
+
+.waveReverse>div:nth-child(1) {
+    font-family: "IBM Plex Serif", serif;
+    font-style: italic;
+}
+
+.waveReverse>div:nth-child(2) {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-style: normal;
 }
 </style>

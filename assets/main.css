@@ -9,7 +9,7 @@ body {
   font-family: "IBM Plex Sans", sans-serif;
   text-transform: lowercase;
   background-color: #f5f5dc;
-  font-size: 2rem;
+  font-size: 4rem;
 }
 
 img {
@@ -21,6 +21,7 @@ img {
 p {
   mix-blend-mode: difference;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 ul {

@@ -31,6 +31,16 @@ Ich arbeite mit
 
 :wordWave{text="CraftCMS" link="false"}
 
+:wordWave{text="nodejs" link="false"}
+
 :wordWave{text="VueJS" link="false"}
 
 :wordWave{text="NuxtJS" link="false"}
+
+ich bin auch auf
+
+:wordWave{text="Instagram" link="external" external="https://www.instagram.com/luca__engelhard/"}
+
+:wordWave{text="Flickr" link="external" external="https://flickr.com/photos/benengelhard/"}
+
+:wordWave{text="github" link="external" external="https://github.com/lucaengelhard"}

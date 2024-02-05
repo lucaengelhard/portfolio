@@ -13,7 +13,7 @@
         <div><span v-for="( letter, index ) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span></div>
     </NuxtLink>
-    <NuxtLink class="waveReverse" v-else>
+    <NuxtLink class="waveReverse noLink" v-else>
         <div><span v-for="(letter, index) in  textArray " :style="{ transitionDelay: `${0.1 * index}s` }">{{ letter
         }}</span>
         </div>
@@ -34,7 +34,7 @@ const textArray = cleanText.split("")
 <style scoped>
 a {
     display: inline-block;
-    height: 80px;
+    height: 100px;
     overflow: hidden;
     cursor: pointer;
     padding-right: 2rem;
@@ -69,9 +69,13 @@ a:hover span {
     font-style: normal;
 }
 
+.noLink {
+    cursor: default;
+}
+
 @media screen and (max-width: 500px) {
     a {
-        height: 40px;
+        height: 50px;
         font-size: 2rem;
     }
 

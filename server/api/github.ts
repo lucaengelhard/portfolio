@@ -63,6 +63,8 @@ export default defineEventHandler(async (event) => {
       createMarkdown(repo);
     }
   });
+
+  return githubCache;
 });
 
 async function updateCache(githubCache: any, path: string) {

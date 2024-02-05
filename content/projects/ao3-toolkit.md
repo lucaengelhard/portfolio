@@ -1,6 +1,6 @@
 ---
 title: ao3-toolkit
-thumbnail: "/images/221201-klimakalender-014.jpg"
+thumbnail: "/images/code.png"
 ---
 A Toolkit for interfacing with the Archive of Our Own
 

@@ -35,7 +35,26 @@ export default defineEventHandler(async (event) => {
     fs.readFileSync(`${path}/githubcache.json`, "utf-8")
   );
 
-  const include = ["ao3-toolkit"];
+  const include: any = [];
+
+  for (const key in JSON.parse(
+    fs.readFileSync("./content/github/githubThumbs.json", "utf-8")
+  )) {
+    if (
+      Object.prototype.hasOwnProperty.call(
+        JSON.parse(
+          fs.readFileSync("./content/github/githubThumbs.json", "utf-8")
+        ),
+        key
+      )
+    ) {
+      const element = JSON.parse(
+        fs.readFileSync("./content/github/githubThumbs.json", "utf-8")
+      )[key];
+
+      include.push(key);
+    }
+  }
 
   githubCache.repos.forEach((repo: any) => {
     if (include.includes(repo.name)) {

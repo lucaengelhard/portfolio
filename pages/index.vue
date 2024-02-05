@@ -12,6 +12,10 @@
 </template>
 
 <script setup>
+useHead({
+    title: ""
+})
+
 const { data: about } = await useAsyncData('about', () => queryContent('/').where({ title: "about" }).findOne())
 
 const imageLink = useState("imageLink");
@@ -22,7 +26,7 @@ await callOnce(async () => {
     imageLink.value = aboutonce.value.thumbnail
 })
 
-const query = { path: '/', where: [{ title: { $ne: 'about' } }] }
+const query = { path: '/projects', where: [{ title: { $ne: 'about' } }] }
 
 </script>
 

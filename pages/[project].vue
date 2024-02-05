@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ContentDoc :path="`/${title}`" v-slot="{ doc }">
+        <ContentDoc :path="path" v-slot="{ doc }">
             <div class="landing">
                 <div class="heading">
                     <WordWave text="" />
@@ -18,6 +18,16 @@
 
 <script setup>
 const { project: title } = useRoute().params
+
+const notProjects = ["about", "seo"]
+
+let path = `/projects/${title}`
+
+if (notProjects.includes(title)) {
+    path = `/${title}`
+}
+
+
 </script>
 
 <style scoped>

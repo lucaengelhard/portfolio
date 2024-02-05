@@ -19,7 +19,6 @@ npm install ao3-toolkit
 
 :wordWave{text="Usage" link="false"}
 
-> [!IMPORTANT]
 > In a [blog post](https://archiveofourown.org/admin_posts/25888?show_comments=true) the admins talk about how they handle data scraping:
 > "We've put in place certain technical measures to hinder large-scale data scraping on AO3, such as rate limiting, and we're constantly monitoring our traffic for signs of abusive data collection. We do not make exceptions for researchers or those wishing to create datasets. However, we don't have a policy against responsible data collection — such as those done by academic researchers, fans backing up works to Wayback Machine or Google's search indexing. Putting systems in place that attempt to block all scraping would be difficult or impossible without also blocking legitimate uses of the site."
 

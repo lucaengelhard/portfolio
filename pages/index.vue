@@ -12,9 +12,6 @@
 </template>
 
 <script setup>
-
-//const { data: github } = await useFetch('/api/github')
-
 useHead({
     title: ""
 })

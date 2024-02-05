@@ -34,7 +34,7 @@ ul {
   position: relative;
   height: 100%;
   overflow: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
 
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -47,6 +47,7 @@ ul {
   height: 80vh;
   object-fit: contain;
   scroll-snap-align: start;
+  object-position: top;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

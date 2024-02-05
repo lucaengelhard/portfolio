@@ -1,8 +1,10 @@
 ---
 title: ao3-toolkit
-thumbnail: 
+thumbnail: "/images/221201-klimakalender-014.jpg"
 ---
 A Toolkit for interfacing with the Archive of Our Own
+
+
 
 :wordWave{text="ao3-toolkit" link="false"}
 

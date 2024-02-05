@@ -20,7 +20,7 @@ useHead({
 
 const { data: seo } = await useAsyncData('seo', () => queryContent('/').where({ filetitle: "seo" }).findOne())
 
-console.log(seo.value.title);
+
 
 useSeoMeta({
     title: seo.value.title,

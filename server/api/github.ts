@@ -27,10 +27,9 @@ export default defineEventHandler(async (event) => {
 
   var diffMins = Math.round(((timeDiff % 86400000) % 3600000) / 60000);
 
-  /*
   if (diffMins > 5) {
     updateCache(githubCache, path);
-  }*/
+  }
 
   githubCache = JSON.parse(
     fs.readFileSync(`${path}/githubcache.json`, "utf-8")
@@ -46,34 +45,45 @@ export default defineEventHandler(async (event) => {
 });
 
 async function updateCache(githubCache: any, path: string) {
-  //Get Repos
-  const res: any = await $fetch(
-    "https://api.github.com/users/lucaengelhard/repos"
-  );
+  console.log("requesting github api");
+  try {
+    //Get Repos
+    const res: any = await $fetch(
+      "https://api.github.com/users/lucaengelhard/repos"
+    );
 
-  let toFetchReadme: any = [];
+    let toFetchReadme: any = [];
 
-  res.forEach((element: any) => {
-    toFetchReadme.push(defineRepo(element));
-  });
+    res.forEach((element: any) => {
+      toFetchReadme.push(defineRepo(element));
+    });
 
-  githubCache.repos = await Promise.all(toFetchReadme);
+    githubCache.repos = await Promise.all(toFetchReadme);
 
-  fs.writeFileSync(`${path}/githubcache.json`, JSON.stringify(githubCache));
+    fs.writeFileSync(`${path}/githubcache.json`, JSON.stringify(githubCache));
+  } catch (error) {
+    console.log("request rejected");
+
+    githubCache.lastfetched = Date.now();
+    fs.writeFileSync(`${path}/githubcache.json`, JSON.stringify(githubCache));
+  }
 }
 
 function createMarkdown(repo: {
   name: string;
   description: string;
+  tags: string;
   readme: string;
 }) {
   const md = `---
 title: ${repo.name}
-thumbnail: 
+thumbnail: "${getThumbnail(repo)}"
 ---
 ${repo.description}
 
-${replaceHeading(repo.readme)}
+${repo.tags ? repo.tags : ""}
+
+${replaceHeading(repo.readme) ? replaceHeading(repo.readme) : ""}
 `;
 
   fs.writeFileSync(`./content/projects/${repo.name}.md`, md);
@@ -84,6 +94,7 @@ async function defineRepo(element: any) {
     return {
       name: element.name,
       description: element.description,
+      tags: parseTagElements(element.language),
       readme: await $fetch(
         `https://raw.githubusercontent.com/lucaengelhard/${element.name}/main/README.md`
       ),
@@ -97,23 +108,43 @@ async function defineRepo(element: any) {
   }
 }
 
+function getThumbnail(repo: {
+  name: string;
+  description: string;
+  tags: string;
+  readme: string;
+}): string {
+  return JSON.parse(
+    fs.readFileSync("./content/github/githubThumbs.json", "utf-8")
+  )[repo.name];
+}
+
+function parseTagElements(tags: any): string {
+  let tagArray: any = [];
+  tags.forEach((tag: string) => {
+    tagArray.push(`:wordWave{text="${tag}" link="false"}`);
+  });
+
+  return tagArray.join("\n\n");
+}
+
 function replaceHeading(readme: string) {
   const regXHeader = /#{1,6}.+/g;
   const regXReplace = /#{1,6}./g;
   const matchArray = readme.match(regXHeader);
 
+  if (!matchArray) {
+    return;
+  }
+
   matchArray.forEach((element: string) => {
     const elementText: string = element.replace(regXReplace, "");
-
-    console.log(elementText);
 
     readme = readme.replace(
       element,
       `:wordWave{text="${elementText}" link="false"}`
     );
   });
-
-  console.log(readme);
 
   return readme;
 }

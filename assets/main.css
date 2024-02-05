@@ -54,11 +54,20 @@ code {
   padding: 2rem;
   background: white;
   border-radius: 20px;
+  margin: 1rem 0 2rem 0;
 }
 
 ul {
   list-style-type: none;
   mix-blend-mode: difference;
+}
+
+.content p {
+  overflow: hidden;
+}
+
+.content p a {
+  white-space: nowrap;
 }
 
 .gallery p {

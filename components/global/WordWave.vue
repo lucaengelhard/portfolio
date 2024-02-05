@@ -37,11 +37,15 @@ a {
     height: 100px;
     overflow: hidden;
     cursor: pointer;
-    padding-right: 2rem;
+    margin-right: 2rem;
     white-space: nowrap;
 
     mix-blend-mode: difference;
     font-size: 4rem;
+}
+
+a>div:nth-child(1) {
+    overflow: hidden;
 }
 
 a>div:nth-child(2) {

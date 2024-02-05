@@ -5,6 +5,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   text-decoration: none;
+  text-overflow: ellipsis;
 }
 
 *::-webkit-scrollbar {
@@ -17,6 +18,7 @@ body {
   text-transform: lowercase;
   background-color: #f5f5dc;
   font-size: 4rem;
+  overflow-x: hidden;
 }
 
 img {
@@ -73,6 +75,8 @@ ul {
 
 .content a {
   text-decoration: underline;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .gallery p {

@@ -126,5 +126,4 @@ https://github.com/gmastergreatee/Fanfiction-Manager
 
 :wordWave{text="License" link="false"}
 
-
 [MIT](https://github.com/lucaengelhard/ao3-toolkit/blob/main/LICENSE)

@@ -1,6 +1,8 @@
 import fs from "fs";
 
 export default defineEventHandler(async (event) => {
+  console.log("github req");
+
   // Check if directory exists
   const path = "./content/github";
   if (!fs.existsSync(path)) {

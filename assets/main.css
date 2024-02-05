@@ -70,6 +70,10 @@ ul {
   white-space: nowrap;
 }
 
+.content a {
+  text-decoration: underline;
+}
+
 .gallery p {
   display: flex;
   position: relative;

@@ -58,13 +58,17 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  let markdownArray: any = [];
+
   githubCache.repos.forEach((repo: any) => {
     if (include.includes(repo.name)) {
-      createMarkdown(repo);
+      markdownArray.push(createMarkdown(repo));
     }
   });
 
-  return githubCache;
+  console.log(markdownArray);
+
+  return markdownArray;
 });
 
 async function updateCache(githubCache: any, path: string) {
@@ -110,6 +114,8 @@ ${replaceHeading(repo.readme) ? replaceHeading(repo.readme) : ""}
 `;
 
   fs.writeFileSync(`./content/projects/${repo.name}.md`, md);
+
+  return md;
 }
 
 async function defineRepo(element: any) {

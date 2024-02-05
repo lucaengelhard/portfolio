@@ -15,8 +15,6 @@
 
 const { data: github } = await useFetch('/api/github')
 
-console.log(github.value);
-
 useHead({
     title: ""
 })

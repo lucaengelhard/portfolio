@@ -68,4 +68,15 @@ a:hover span {
     font-family: "IBM Plex Sans", sans-serif;
     font-style: normal;
 }
+
+@media screen and (max-width: 500px) {
+    a {
+        height: 40px;
+        font-size: 2rem;
+    }
+
+    a span {
+        min-width: 5px;
+    }
+}
 </style>

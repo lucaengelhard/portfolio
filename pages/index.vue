@@ -35,6 +35,7 @@ main {
     align-content: center;
 
     position: relative;
+    overflow: hidden;
 }
 
 main>*:nth-child(1) {
@@ -42,7 +43,7 @@ main>*:nth-child(1) {
     top: 1rem;
     left: 3rem;
     mix-blend-mode: difference;
-    font-size: 4rem;
+
 
     overflow: hidden;
     cursor: pointer;
@@ -50,7 +51,6 @@ main>*:nth-child(1) {
 }
 
 .projectlist {
-    font-size: 4rem;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -98,5 +98,22 @@ a {
 .page-leave-to a {
     opacity: 0;
     filter: blur(1rem);
+}
+
+@media screen and (max-width: 500px) {
+    .landing-bg {
+        width: 100%;
+        scale: 1;
+    }
+
+    .projectlist {
+        padding: 8rem 2rem 2rem 2rem;
+        height: calc(100vh - 10rem);
+    }
+
+    main>*:nth-child(1) {
+        left: 2rem;
+    }
+
 }
 </style>

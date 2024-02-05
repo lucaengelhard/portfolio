@@ -35,7 +35,7 @@ const { project: title } = useRoute().params
     top: 1rem;
     left: 3rem;
     mix-blend-mode: difference;
-    font-size: 4rem;
+
 
     overflow: hidden;
     cursor: pointer;
@@ -70,5 +70,27 @@ a {
     width: 70%;
     padding: 2rem;
     min-height: 100vh;
+}
+
+@media screen and (max-width: 500px) {
+    .landing {
+        height: 50vh;
+    }
+
+    .landing-bg {
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        top: 0;
+        translate: 0 0;
+    }
+
+    .landing>.heading {
+        left: 2rem;
+    }
+
+    .content {
+        padding: 1rem;
+        width: calc(100% - 2rem)
+    }
 }
 </style>

@@ -54,3 +54,9 @@ ul {
 .gallery p::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 2rem;
+  }
+}

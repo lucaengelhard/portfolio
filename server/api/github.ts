@@ -152,18 +152,25 @@ function replaceHeading(readme: string) {
   const regXReplace = /#{1,6}./g;
   const matchArray = readme.match(regXHeader);
 
-  if (!matchArray) {
-    return;
+  if (matchArray) {
+    matchArray.forEach((element: string) => {
+      const elementText: string = element.replace(regXReplace, "");
+
+      readme = readme.replace(
+        element,
+        `:wordWave{text="${elementText}" link="false"}`
+      );
+    });
   }
 
-  matchArray.forEach((element: string) => {
-    const elementText: string = element.replace(regXReplace, "");
+  const regXImportant = /\[!IMPORTANT\]/g;
+  const importantMatchArray = readme.match(regXImportant);
 
-    readme = readme.replace(
-      element,
-      `:wordWave{text="${elementText}" link="false"}`
-    );
-  });
+  if (importantMatchArray) {
+    importantMatchArray.forEach((element: string) => {
+      readme = readme.replace(regXImportant, "");
+    });
+  }
 
   return readme;
 }

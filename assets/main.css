@@ -55,6 +55,7 @@ code {
   background: white;
   border-radius: 20px;
   margin: 1rem 0 2rem 0;
+  white-space: break-spaces;
 }
 
 ul {

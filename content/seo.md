@@ -4,6 +4,6 @@
     ogTitle: 'luca engelhard'
     description: 'luca engelhard: fotgraf, gestalter und auch ein bisschen webentwickler'
     ogDescription: 'luca engelhard: fotgraf, gestalter und auch ein bisschen webentwickler'
-    ogImage: 'https://example.com/image.png'
+    ogImage: 'lucaengelhard.com/images/231104-anna_geburtstag-012.jpg'
     twitterCard: 'summary_large_image'
 ---

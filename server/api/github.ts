@@ -73,7 +73,7 @@ thumbnail:
 ---
 ${repo.description}
 
-${repo.readme}
+${replaceHeading(repo.readme)}
 `;
 
   fs.writeFileSync(`./content/projects/${repo.name}.md`, md);
@@ -95,4 +95,25 @@ async function defineRepo(element: any) {
       readme: "",
     };
   }
+}
+
+function replaceHeading(readme: string) {
+  const regXHeader = /#{1,6}.+/g;
+  const regXReplace = /#{1,6}./g;
+  const matchArray = readme.match(regXHeader);
+
+  matchArray.forEach((element: string) => {
+    const elementText: string = element.replace(regXReplace, "");
+
+    console.log(elementText);
+
+    readme = readme.replace(
+      element,
+      `:wordWave{text="${elementText}" link="false"}`
+    );
+  });
+
+  console.log(readme);
+
+  return readme;
 }

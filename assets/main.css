@@ -4,6 +4,7 @@
   color: #ffffff;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  text-decoration: none;
 }
 
 *::-webkit-scrollbar {
@@ -24,10 +25,35 @@ img {
   object-fit: cover;
 }
 
-p {
+p,
+h1,
+h2,
+h3,
+h4 {
   color: black;
   margin-bottom: 2rem;
   margin-top: 2rem;
+  font-size: 4rem;
+}
+
+h4 {
+  margin-bottom: 0.5rem;
+}
+
+pre,
+a,
+code,
+p span {
+  color: black;
+}
+
+code {
+  font-size: 2rem;
+  width: 100%;
+  display: block;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
 }
 
 ul {

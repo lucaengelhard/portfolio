@@ -3,9 +3,9 @@ title: "about"
 thumbnail: "/images/231104-anna_geburtstag-012.jpg"
 ---
 
-Hi! Ich bin Luca, Fotograf, Gestalter und auch ein bisschen Webentwickler.
+Hi! I'm bin Luca, Photgrapher, Designer und also a fledgeling web developer.
 
-Ich arbeite mit
+I work with
 
 :wordWave{text="Illustrator" link="false"}
 
@@ -37,7 +37,7 @@ Ich arbeite mit
 
 :wordWave{text="NuxtJS" link="false"}
 
-ich bin auch auf
+you can also find me on
 
 :wordWave{text="Instagram" link="external" external="https://www.instagram.com/luca__engelhard/"}
 

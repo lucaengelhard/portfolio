@@ -7,6 +7,8 @@ thumbnail: "images/ao3-toolkit.png"
 :wordWave{text="nodejs" link="false"}
 :wordWave{text="axios" link="false"}
 
+---
+
   :wordWave{text="ao3-toolkit" link="false"}
 
 A Toolkit for interfacing with the Archive of Our Own

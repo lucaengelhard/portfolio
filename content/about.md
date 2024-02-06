@@ -3,7 +3,7 @@ title: "about"
 thumbnail: "/images/231104-anna_geburtstag-012.jpg"
 ---
 
-Hi! I'm bin Luca, Photgrapher, Designer und also a fledgeling web developer.
+Hi! I'm Luca, Photgrapher, Designer und also a fledgeling web developer.
 
 I work with
 

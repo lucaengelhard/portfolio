@@ -4,8 +4,8 @@ thumbnail: "images/ao3-toolkit.png"
 ---
 
 :wordWave{text="typescript" link="false"}
-:wordWave{text=" nodejs" link="false"}
-:wordWave{text=" axios" link="false"}
+:wordWave{text="nodejs" link="false"}
+:wordWave{text="axios" link="false"}
 
   :wordWave{text="ao3-toolkit" link="false"}
 

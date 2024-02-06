@@ -1,6 +1,7 @@
 ---
 title: "indymedia"
 thumbnail: "/images/indy-header.png"
+order: 2
 ---
 
 :wordWave{text="redesign" link="false"}

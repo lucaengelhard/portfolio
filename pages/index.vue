@@ -26,7 +26,7 @@ await callOnce(async () => {
     imageLink.value = aboutonce.value.thumbnail
 })
 
-const query = { path: '/projects', where: [{ title: { $ne: 'about' } }] }
+const query = { path: '/projects', where: [{ title: { $ne: 'about' } }], sort: { order: 1 } }
 
 </script>
 

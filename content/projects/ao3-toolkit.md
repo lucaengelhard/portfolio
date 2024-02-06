@@ -1,6 +1,7 @@
 ---
 title: "ao3-toolkit"
 thumbnail: "images/ao3-toolkit.png"
+order: 2
 ---
 
 :wordWave{text="typescript" link="false"}

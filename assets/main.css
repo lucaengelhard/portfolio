@@ -73,6 +73,10 @@ ul {
   white-space: nowrap;
 }
 
+.content hr {
+  border: none;
+}
+
 .content a {
   text-decoration: underline;
   max-width: 100%;

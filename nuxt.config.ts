@@ -12,5 +12,5 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
-  modules: ["@nuxt/content"],
+  modules: ["@nuxt/content", "@vueuse/nuxt"],
 });

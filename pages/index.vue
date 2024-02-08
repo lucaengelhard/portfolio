@@ -1,7 +1,7 @@
 <template>
     <main>
         <WordWave @mouseenter="imageLink = imageDefault" :text="about.title" />
-        <img :src="imageLink" alt="" class="landing-bg" />
+        <LandingImage :src="imageLink" :max-degrees="45" />
         <ContentList :query="query" v-slot="{ list }">
             <div class="projectlist">
                 <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
@@ -27,6 +27,8 @@ await callOnce(async () => {
 })
 
 const query = { path: '/projects', where: [{ title: { $ne: 'about' } }], sort: { order: 1 } }
+
+
 
 </script>
 
@@ -83,7 +85,7 @@ main>*:nth-child(1) {
     translate: 0 -50%;
     object-fit: contain;
     scale: 0.8;
-    transition: all 0.3s;
+    transition: width, height, scale 0.3s;
 }
 
 .page-enter-from .landing-bg,

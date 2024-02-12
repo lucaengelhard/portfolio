@@ -35,7 +35,7 @@ I work with
 
 :wordWave{text="VueJS" link="false"}
 
-:wordWave{text="NuxtJS" link="false"}
+test :wordWave{text="NuxtJS" link="false"}
 
 you can also find me on
 

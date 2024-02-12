@@ -48,6 +48,14 @@ a {
     height: 70px;
 }
 
+p a span {
+    color: white;
+}
+
+p a {
+    translate: 0 15px;
+}
+
 a>div:nth-child(1) {
     overflow: hidden;
 }

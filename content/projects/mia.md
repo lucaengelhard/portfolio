@@ -1,6 +1,6 @@
 ---
 title: "mia"
-thumbnail: "/images/221201-klimakalender-014.jpg"
+thumbnail: "/images/mia/Complete4.png"
 order: 6
 ---
 
@@ -15,4 +15,6 @@ in collaboration with:
 :wordWave{text="Sofie Freund" link="external" external="https://www.sofiefreund.com/"}
 :wordWave{text="Teresa Kahlenbach" link="external" external="https://www.teresakahlenbach.com/"}
 
-mia is an assistant that helps elderly people use their smartphone more independently. when users have a problem they can't solve on their own while using their phone, they can ask for help with the press of a simple button. the assistant will them guide them through the process of solving the issue.
+mia is an assistant and learning app that helps elderly people use their smartphone more independently. when users have a problem they can't solve on their own while using their phone, they can ask for help with the press of a simple button. the assistant will them guide them through the process of solving the issue.
+
+![mia starterbox](/images/mia/Complete5.png)

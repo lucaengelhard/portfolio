@@ -1,5 +1,5 @@
 <template>
-    <NuxtImg preload="" loading="lazy" width="100vw" format="webp" quality="80" :src="src" alt="" class="landing-bg" />
+    <NuxtImg preload width="100vw" format="webp" quality="80" :src="src" alt="" class="landing-bg" />
 </template>
 
 <script setup>

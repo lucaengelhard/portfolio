@@ -34,7 +34,7 @@ const textArray = cleanText.split("")
 <style scoped>
 a {
     display: inline-block;
-    height: 100px;
+    height: 70px;
     overflow: hidden;
     cursor: pointer;
     margin-right: 2rem;

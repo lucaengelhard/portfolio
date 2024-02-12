@@ -49,8 +49,12 @@ p span {
   color: black;
 }
 
+.content * {
+  font-size: 3rem;
+}
+
 code {
-  font-size: 2rem;
+  font-size: 2rem !important;
   width: calc(100% - 4rem);
   display: block;
   padding: 2rem;

@@ -89,10 +89,10 @@ a:hover span {
     cursor: default;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     a {
-        height: 50px;
-        font-size: 2rem;
+        height: 40px !important;
+        font-size: 1.5rem;
     }
 
     a span {

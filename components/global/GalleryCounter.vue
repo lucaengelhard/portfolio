@@ -1,5 +1,5 @@
 <template>
-    <div><span class="galleryCounterCurrent">{{ current }}</span> von <span class="galleryCounterTotal"></span>{{ length }}
+    <div><span class="galleryCounterCurrent">{{ current }}</span> of <span class="galleryCounterTotal"></span>{{ length }}
     </div>
 </template>
 

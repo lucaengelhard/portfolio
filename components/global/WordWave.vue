@@ -34,7 +34,7 @@ const textArray = cleanText.split("")
 <style scoped>
 a {
     display: inline-block;
-    height: 70px;
+    height: 100px;
     overflow: hidden;
     cursor: pointer;
     margin-right: 2rem;
@@ -42,6 +42,10 @@ a {
 
     mix-blend-mode: difference;
     font-size: 4rem;
+}
+
+.content a {
+    height: 70px;
 }
 
 a>div:nth-child(1) {

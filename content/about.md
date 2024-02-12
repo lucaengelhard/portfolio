@@ -35,7 +35,19 @@ I work with
 
 :wordWave{text="VueJS" link="false"}
 
-test :wordWave{text="NuxtJS" link="false"}
+:wordWave{text="NuxtJS" link="false"}
+
+**education:**
+
+
+**2019:** abitur at :wordWave{text="csg besigheim" link="external" external="https://www.csgb.de/"}
+
+**since 2020:** studying communication design at :wordWave{text="hfg schwäbisch gmünd" link="external" external="https://www.hfg-gmuend.de/"}
+
+**internships:** 
+:wordWave{text="buero uebele" link="external" external="https://www.uebele.com"}
+:wordWave{text="designklinik" link="external" external="https://www.designklinik.de"}
+
 
 you can also find me on
 

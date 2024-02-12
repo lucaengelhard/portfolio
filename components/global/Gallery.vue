@@ -1,5 +1,5 @@
 <template>
-    <div ref="gallery" class="gallery">
+    <div ref="gallery" @click="scrollGallery" class="gallery">
         <slot />
         <GalleryCounter />
     </div>
@@ -14,6 +14,17 @@ callOnce(() => {
     length.value = 1
     current.value = 1
 })
+
+function scrollGallery(event) {
+    const { width } = useWindowSize()
+    const next = event.clientX > (width.value / 2);
+
+    if (next) {
+        gallery.value.children[0].scrollBy({ left: event.target.clientWidth, behavior: "smooth" })
+    } else {
+        gallery.value.children[0].scrollBy({ left: -1 * event.target.clientWidth, behavior: "smooth" })
+    }
+}
 
 onMounted(() => {
     const images = Array.from(gallery.value.children[0].children);

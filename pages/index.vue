@@ -4,8 +4,7 @@
         <LandingImage :src="imageLink" :max-degrees="45" />
         <ContentList :query="query" v-slot="{ list }">
             <div class="projectlist">
-                <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail"
-                    @mouseleave="imageLink = imageDefault" />
+                <WordWave v-for="project in list" :text="project.title" @mouseenter="imageLink = project.thumbnail" />
             </div>
         </ContentList>
     </main>

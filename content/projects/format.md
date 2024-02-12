@@ -1,6 +1,6 @@
 ---
 title: "format"
-thumbnail: "/images/healing/220714-editorial-025.jpg"
+thumbnail: "/images/format/format28_Aufbereitung_Scans32.png"
 order: 5
 ---
 
@@ -10,6 +10,8 @@ order: 5
 
 the "format" is the student magazin of the hfg schwäbisch gmünd. every semester a new magazine is published under a different theme. the theme of the 28th edition was "borders". for this me and [leon beu](https://www.instagram.com/hartegestaltung/) wrote and layouted an article about the "reichsbürger" movement in germany.
 
-::Gallery
-
+::gallery
+![format28_Aufbereitung_Scans3.png](/images/format/format28_Aufbereitung_Scans3.png)
+![format28_Aufbereitung_Scans8.png](/images/format/format28_Aufbereitung_Scans8.png)
+![format overview](/images/format/c354a39f-d237-4d9f-8840-f1f6eae758df.jpg)
 ::

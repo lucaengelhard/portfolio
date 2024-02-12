@@ -7,7 +7,7 @@
 
                 </div>
                 <WordWave :text="doc.title" />
-                <img :src="doc.thumbnail" alt="" class="landing-bg" />
+                <LandingImage :src="doc.thumbnail" :max-degrees="10" />
             </div>
             <div class="content">
                 <ContentRenderer :value="doc" />
@@ -61,7 +61,7 @@ if (notProjects.includes(title)) {
     translate: 0 -50%;
     object-fit: contain;
     scale: 1;
-    transition: all 0.3s;
+    transition: width, height, scale 0.3s;
 }
 
 a {

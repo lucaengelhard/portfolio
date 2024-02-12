@@ -56,3 +56,15 @@ you can also find me on
 :wordWave{text="Flickr" link="external" external="https://flickr.com/photos/benengelhard/"}
 
 :wordWave{text="github" link="external" external="https://github.com/lucaengelhard"}
+
+**imprint**
+
+Ben Jonathan Engelhard
+
+Ledergasse 50
+
+73525 Schwäbisch Gmünd
+
+Tel: +49 15737997088
+
+E-Mail: me@lucaengelhard.com

@@ -1,6 +1,6 @@
 ---
 title: "comicon"
-thumbnail: "/images/221201-klimakalender-014.jpg"
+thumbnail: "/images/comicon/CCON_Banner_Base.png"
 order: 7
 ---
 

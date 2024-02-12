@@ -32,4 +32,10 @@ img {
     --rotateY: v-bind(offsetY);
     transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
 }
+
+.page-enter-from .landing-bg,
+.page-leave-to .landing-bg {
+    transform: perspective(5000px) rotateY(0) rotateX(0);
+    transition: transform 0.3s;
+}
 </style>

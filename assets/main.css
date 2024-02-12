@@ -45,7 +45,8 @@ h4 {
 pre,
 a,
 code,
-p span {
+p span,
+strong {
   color: black;
 }
 

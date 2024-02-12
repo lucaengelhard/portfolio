@@ -12,6 +12,9 @@ order: 2
 
 :wordWave{text="nodejs" link="false"}
 
+in collaboration with:
+:wordWave{text="Henri Kral" link="false"}
+
 Indymedia is a portal for (sometimes anonymous) publication of left-wing content. in a course for university we redesigned the corporate identity of the website and reworked the structure and look of the site. in the end we coded a working prototype of most of the pages and created a backend in nodejs with express.
 
 ![don't hate the media, become the media](/images/donthatethemedia.png)

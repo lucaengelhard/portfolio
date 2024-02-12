@@ -7,6 +7,10 @@ order: 4
 :wordWave{text="editorial" link="false"}
 :wordWave{text="photography" link="false"}
 
+in collaboration with:
+:wordWave{text="Amalia Gutmann" link="external" external="https://www.instagram.com/amalia.s.gutmann/"}
+:wordWave{text="Marisa Sombrutzki" link="external" external="https://www.instagram.com/mary.tzki/"}
+
 the "healing" magazine is an project made for the course "editorial design". in it we interviewed three people who have gone through different processes of healing. these interviews are then underlined with mostly abstract imagery.
 
 ::gallery

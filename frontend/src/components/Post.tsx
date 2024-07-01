@@ -94,6 +94,9 @@ function Gallery({
   images: string[];
   subtitle?: string;
 }) {
+  //TODO: Scroll On Click
+  //function onClick() {}
+
   return (
     <div className="my-8">
       <div className="flex gap-4 overflow-auto no-scrollbar h-96">

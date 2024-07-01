@@ -1,7 +1,7 @@
 import { Link, createLazyFileRoute } from "@tanstack/react-router";
+import { useQuery, gql } from "@apollo/client";
 
-import HeroImage from "/221202-hohlkehle-005.png";
-import { NavPoint } from "./__root";
+import { NavPoint, baseUrl } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 
 export const Route = createLazyFileRoute("/")({
@@ -16,11 +16,38 @@ function Index() {
   );
 }
 
+const HOME = gql`
+  query getHome {
+    home {
+      data {
+        attributes {
+          Heroimage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 function Hero() {
+  const { loading, error, data } = useQuery(HOME);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error</div>;
+
   return (
     <div className="h-screen w-full relative">
       <HeroText />
-      <img src={HeroImage} className="h-full w-full object-contain" alt="" />
+      <img
+        src={baseUrl + data.home.data.attributes.Heroimage.data.attributes.url}
+        className="h-full w-full object-contain"
+        alt=""
+      />
     </div>
   );
 }

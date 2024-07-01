@@ -886,6 +886,28 @@ export interface ApiDesignDesign extends Schema.CollectionType {
   };
 }
 
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Heroimage: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPhotoPhoto extends Schema.CollectionType {
   collectionName: 'photos';
   info: {
@@ -940,6 +962,7 @@ declare module '@strapi/types' {
       'api::about.about': ApiAboutAbout;
       'api::code.code': ApiCodeCode;
       'api::design.design': ApiDesignDesign;
+      'api::home.home': ApiHomeHome;
       'api::photo.photo': ApiPhotoPhoto;
     }
   }

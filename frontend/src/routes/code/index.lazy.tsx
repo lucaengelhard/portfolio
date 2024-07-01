@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 import Projectlist from "../../components/Project";
-import { placeHolderData } from "../../hooks/dataContext";
+import { placeHolderData } from "../../placeholder/placeholderData";
 
 export const Route = createLazyFileRoute("/code/")({
   component: Code,

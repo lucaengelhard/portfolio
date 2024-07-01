@@ -1,4 +1,4 @@
-import { placeHolderData } from "../hooks/dataContext";
+import { placeHolderData } from "../placeholder/placeholderData";
 import Tag from "./Tag";
 
 export default function Post({

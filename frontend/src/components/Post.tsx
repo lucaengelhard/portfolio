@@ -1,9 +1,11 @@
+import { useRef } from "react";
 import { cn } from "../lib/utils";
 import {
   placeHolderData,
   placeholderContent,
 } from "../placeholder/placeholderData";
 import Tag from "./Tag";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function Post({
   context,
@@ -97,17 +99,33 @@ export function Gallery({
   subtitle?: string;
   height?: string;
 }) {
-  //TODO: Scroll On Click
-  //function onClick() {}
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  function onClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (wrapperRef.current === null) return;
+
+    const wrapper = wrapperRef.current;
+    const rect = wrapper.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const divWidth = rect.width;
+
+    if (clickX < divWidth / 2) {
+      wrapper.scrollLeft -= 400;
+    } else {
+      wrapper.scrollLeft += 400;
+    }
+  }
 
   return (
-    <div className="my-8">
+    <div className="my-8 relative">
       <div
+        onClick={onClick}
+        ref={wrapperRef}
         className={cn(
-          "flex gap-4 overflow-auto no-scrollbar",
+          "flex gap-4 overflow-auto no-scrollbar cursor-pointer",
           height === undefined ? "h-96" : undefined
         )}
-        style={{ height: height }}
+        style={{ height: height, scrollBehavior: "smooth" }}
       >
         {images.map((image) => (
           <img className="object-cover" src={image} alt="" />

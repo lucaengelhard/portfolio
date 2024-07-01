@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { cn } from "../lib/utils";
 import Tag from "./Tag";
-import { TContent, TGallery, TProject } from "../types/api";
+import { TContent, TGallery, TListItem, TProject } from "../types/api";
 import { baseUrl } from "../routes/__root";
 
 export default function Post({ project }: { project: TProject }) {
@@ -50,14 +50,19 @@ export function PostContent({ content }: { content: TContent }) {
           switch (block.level) {
             case 1:
               return block.children.map((child) => (
-                <h1 key={child.text + index + block.level}>{child.text}</h1>
+                <h1
+                  className="text-5xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
+                  key={child.text + index + block.level}
+                >
+                  {child.text}
+                </h1>
               ));
 
             case 2:
               return block.children.map((child) => (
                 <h2
                   key={child.text + index + block.level}
-                  className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
+                  className="text-3xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
                 >
                   {child.text}
                 </h2>
@@ -67,7 +72,7 @@ export function PostContent({ content }: { content: TContent }) {
               return block.children.map((child) => (
                 <h3
                   key={child.text + index + block.level}
-                  className="font-bold mt-4 mb-2 max-w-screen-md "
+                  className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
                 >
                   {child.text}
                 </h3>
@@ -75,17 +80,32 @@ export function PostContent({ content }: { content: TContent }) {
 
             case 4:
               return block.children.map((child) => (
-                <h4 key={child.text + index + block.level}>{child.text}</h4>
+                <h4
+                  className="text-base font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
+                  key={child.text + index + block.level}
+                >
+                  {child.text}
+                </h4>
               ));
 
             case 5:
               return block.children.map((child) => (
-                <h5 key={child.text + index + block.level}>{child.text}</h5>
+                <h5
+                  className="text-base font-bold mt-4 mb-2 max-w-screen-md"
+                  key={child.text + index + block.level}
+                >
+                  {child.text}
+                </h5>
               ));
 
             case 6:
               return block.children.map((child) => (
-                <h6 key={child.text + index + block.level}>{child.text}</h6>
+                <h6
+                  className="text-base underline mt-4 mb-2 max-w-screen-md"
+                  key={child.text + index + block.level}
+                >
+                  {child.text}
+                </h6>
               ));
 
             default:
@@ -105,9 +125,62 @@ export function PostContent({ content }: { content: TContent }) {
             </figure>
           );
         }
+
+        if (block.type === "quote") {
+          return block.children.map((child) => (
+            <blockquote
+              key={child.text + index}
+              className="font-bold text-purple-600 text-2xl px-20 my-10"
+            >
+              {child.text}
+            </blockquote>
+          ));
+        }
+
+        if (block.type === "code") {
+          return block.children.map((child) => (
+            <code
+              key={child.text + index}
+              className="bg-purple-200 p-3 rounded-lg w-full block max-w-screen-md"
+            >
+              {child.text}
+            </code>
+          ));
+        }
+
+        if (block.type === "list") {
+          if (block.format === "ordered") {
+            return (
+              <ol className="list-decimal my-2 px-4">
+                {block.children.map((child) => (
+                  <ListItem item={child} />
+                ))}
+              </ol>
+            );
+          }
+          if (block.format === "unordered") {
+            return (
+              <ul className="list-disc my-2 px-4">
+                {block.children.map((child) => (
+                  <ListItem item={child} />
+                ))}
+              </ul>
+            );
+          }
+        }
+
+        console.log(block);
       })}
     </div>
   );
+
+  function ListItem({ item }: { item: TListItem }) {
+    return (
+      <li key={item.children[0].text} className="">
+        {item.children[0].text}
+      </li>
+    );
+  }
 }
 
 export function Gallery({

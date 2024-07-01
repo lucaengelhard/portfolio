@@ -18,7 +18,9 @@ export type TThumbnail = {
   };
 };
 
-export type TContent = [TParagraph | THeading | TImage];
+export type TContent = [
+  TParagraph | THeading | TImage | TBlockQuote | TCodeBlock | TList,
+];
 
 export type TParagraph = {
   type: "paragraph";
@@ -52,6 +54,27 @@ export type TImage = {
     url: string;
     width: number;
   };
+};
+
+export type TBlockQuote = {
+  type: "quote";
+  children: [{ type: "text"; text: string }];
+};
+
+export type TCodeBlock = {
+  type: "code";
+  children: [{ type: "text"; text: string }];
+};
+
+export type TList = {
+  type: "list";
+  format: "ordered" | "unordered";
+  children: TListItem[];
+};
+
+export type TListItem = {
+  type: "list-item";
+  children: [{ type: "text"; text: string }];
 };
 
 export type TGallery = {

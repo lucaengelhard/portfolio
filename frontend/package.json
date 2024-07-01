@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.8",
     "@tanstack/react-router": "^1.43.4",
     "chroma-js": "^2.4.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "font-color-contrast": "^11.1.0",
+    "graphql": "^16.9.0",
     "lucide-react": "^0.399.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

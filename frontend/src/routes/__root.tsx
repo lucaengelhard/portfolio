@@ -15,12 +15,21 @@ import {
 } from "lucide-react";
 import Flickr from "../assets/icons/Flickr";
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "http://localhost:1337/graphql",
+  cache: new InMemoryCache(),
+});
+
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Nav />
-      <Outlet />
-      <TanStackRouterDevtools />
+      <ApolloProvider client={client}>
+        <Nav />
+        <Outlet />
+        <TanStackRouterDevtools />
+      </ApolloProvider>
     </>
   ),
 });

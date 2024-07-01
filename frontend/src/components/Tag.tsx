@@ -2,8 +2,7 @@ import fontColorContrast from "font-color-contrast";
 import { cn } from "../lib/utils";
 
 export type TTag = {
-  id: number;
-  title: string;
+  Title: string;
   color: string;
 };
 
@@ -23,7 +22,7 @@ export default function Tag({
         color: fontColorContrast(tag.color),
       }}
     >
-      {tag.title}
+      {tag.Title}
     </div>
   );
 }

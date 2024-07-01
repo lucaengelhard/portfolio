@@ -44,7 +44,10 @@ function HeroText() {
 function HeroTextElement({ point }: { point: NavPoint }) {
   return (
     <div>
-      <Link to={point.path} className="cursor-pointer hover:text-purple-600">
+      <Link
+        to={point.path}
+        className="cursor-pointer transition-colors duration-300 hover:text-purple-600"
+      >
         {point.name}
       </Link>
     </div>

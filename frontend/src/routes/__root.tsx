@@ -40,7 +40,7 @@ function Nav() {
     { id: 3, name: "About", icon: <CircleUserRound />, path: "/about" },
   ];
   return (
-    <nav className="flex p-8 fixed top-0 left-0 z-50 w-full transition-colors duration-200 justify-between">
+    <nav className="flex p-8 fixed top-0 left-0 z-50 w-full transition-colors duration-200 justify-between ">
       <div className="flex gap-12 ">
         <Link
           to="/"
@@ -56,13 +56,13 @@ function Nav() {
       </div>{" "}
       <div className="flex gap-10">
         <a target="_blank" href="https://www.instagram.com/luca__engelhard/">
-          <Instagram className="hover:text-purple-600" />
+          <Instagram className="hover:text-purple-600 " />
         </a>
         <a target="_blank" href="https://github.com/lucaengelhard">
-          <Github className="hover:text-purple-600" />
+          <Github className="hover:text-purple-600 " />
         </a>
         <a target="_blank" href="https://flickr.com/photos/benengelhard/">
-          <Flickr className="hover:text-purple-600" />
+          <Flickr className="hover:text-purple-600 " />
         </a>
       </div>
     </nav>

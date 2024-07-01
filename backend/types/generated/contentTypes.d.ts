@@ -788,6 +788,40 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutAbout extends Schema.SingleType {
+  collectionName: 'abouts';
+  info: {
+    singularName: 'about';
+    pluralName: 'abouts';
+    displayName: 'About';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Welcome: Attribute.Text & Attribute.Required;
+    Portrait: Attribute.Media<'images'> & Attribute.Required;
+    Stack: Attribute.Component<'elements.tag', true> & Attribute.Required;
+    Education: Attribute.Component<'elements.tag', true> & Attribute.Required;
+    Imprint: Attribute.Component<'elements.tag', true> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCodeCode extends Schema.CollectionType {
   collectionName: 'codes';
   info: {
@@ -852,6 +886,39 @@ export interface ApiDesignDesign extends Schema.CollectionType {
   };
 }
 
+export interface ApiPhotoPhoto extends Schema.CollectionType {
+  collectionName: 'photos';
+  info: {
+    singularName: 'photo';
+    pluralName: 'photos';
+    displayName: 'Photo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required & Attribute.Unique;
+    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::photo.photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::photo.photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -870,8 +937,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::about.about': ApiAboutAbout;
       'api::code.code': ApiCodeCode;
       'api::design.design': ApiDesignDesign;
+      'api::photo.photo': ApiPhotoPhoto;
     }
   }
 }

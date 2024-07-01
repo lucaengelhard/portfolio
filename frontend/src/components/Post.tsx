@@ -147,6 +147,7 @@ export function Gallery({
       >
         {gallery.Images.data.map((image) => (
           <img
+            key={image.attributes.url}
             className="object-cover"
             src={baseUrl + image.attributes.url}
             alt=""

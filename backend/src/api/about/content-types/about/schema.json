@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Welcome": {
+      "type": "text",
+      "required": true
+    },
+    "Portrait": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Stack": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.tag",
+      "required": true
+    },
+    "Education": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.tag",
+      "required": true
+    },
+    "Imprint": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.tag",
+      "required": true
+    }
+  }
+}

@@ -4,15 +4,17 @@ export type TProject = {
     Title: string;
     Subtitle: string;
     Tags: TTag[];
-    Thumbnail: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
+    Thumbnail: TThumbnail;
     Content?: TContent;
     Gallery?: TGallery;
+  };
+};
+
+export type TThumbnail = {
+  data: {
+    attributes: {
+      url: string;
+    };
   };
 };
 
@@ -60,4 +62,24 @@ export type TGallery = {
 export type TTag = {
   Title: string;
   color: string;
+};
+
+export type TPhotoproject = {
+  id: string;
+  attributes: {
+    Title: string;
+    Description: string;
+    Thumbnail: TThumbnail;
+    Gallery?: TGallery;
+  };
+};
+
+export type TAbout = {
+  attributes: {
+    Portrait: TThumbnail;
+    Welcome: string;
+    Stack: TTag[];
+    Education: TTag[];
+    Imprint: TTag[];
+  };
 };

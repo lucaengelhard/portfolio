@@ -1,14 +1,13 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 import HeroImage from "/221202-hohlkehle-005.png";
-
 import Projectlist, { TProject } from "../components/Project";
 
-export const Route = createLazyFileRoute("/design")({
-  component: Designer,
+export const Route = createLazyFileRoute("/code")({
+  component: Code,
 });
 
-function Designer() {
+function Code() {
   const projects: TProject[] = [
     {
       id: 0,

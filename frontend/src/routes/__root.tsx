@@ -17,7 +17,12 @@ export const Route = createRootRoute({
   ),
 });
 
-type NavPoint = { id: number; name: string; icon: ReactNode; path: string };
+export type NavPoint = {
+  id: number;
+  name: string;
+  icon: ReactNode;
+  path: string;
+};
 
 export default function Nav() {
   const navPoints: NavPoint[] = [

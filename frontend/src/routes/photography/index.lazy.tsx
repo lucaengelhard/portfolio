@@ -3,6 +3,7 @@ import { Link, createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
 import { baseUrl } from "../__root";
+import { ImageLoader } from "../../components/Loading";
 
 export const Route = createLazyFileRoute("/photography/")({
   component: Photography,
@@ -32,7 +33,7 @@ const PROJECTS = gql`
 function Photography() {
   const { loading, error, data } = useQuery(PROJECTS);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <ImageLoader />;
   if (error) return <div>Error</div>;
 
   const projectlist = data.photos.data as TPhotoproject[];

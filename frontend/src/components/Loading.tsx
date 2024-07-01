@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Camera } from "lucide-react";
 
 const emptyarray = ["", "", "", "", ""];
 
@@ -51,5 +52,21 @@ function LoaderAnimation() {
       style={{ height: "120%" }}
       className="absolute -top-8 -left-16  w-32 bg-white opacity-50 blur-md"
     ></motion.div>
+  );
+}
+
+export function ImageLoader() {
+  return (
+    <div className="h-screen w-screen bg-purple-300 grid justify-center pointer-events-none items-center">
+      <div className="flex gap-2 ">
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, repeatType: "loop" }}
+        >
+          <Camera />{" "}
+        </motion.div>
+        <div>Loading...</div>
+      </div>
+    </div>
   );
 }

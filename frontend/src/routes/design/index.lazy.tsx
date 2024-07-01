@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
 import Projectlist from "../../components/Project";
+import { TProject } from "../../types/api";
 
 export const Route = createLazyFileRoute("/design/")({
   component: Designer,
@@ -31,25 +32,6 @@ const PROJECTS = gql`
     }
   }
 `;
-
-export type TProject = {
-  id: string;
-  attributes: {
-    Title: string;
-    Subtitle: string;
-    Tags: {
-      Title: string;
-      color: string;
-    }[];
-    Thumbnail: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-  };
-};
 
 function Designer() {
   const { loading, error, data } = useQuery(PROJECTS);

@@ -1,90 +1,109 @@
 import { useRef } from "react";
 import { cn } from "../lib/utils";
-import {
-  placeHolderData,
-  placeholderContent,
-} from "../placeholder/placeholderData";
 import Tag from "./Tag";
+import { TContent, TGallery, TProject } from "../types/api";
+import { baseUrl } from "../routes/__root";
 
-export default function Post({
-  context,
-  postId,
-}: {
-  postId: string;
-  context: "design" | "code";
-}) {
-  const project = placeHolderData.getPost(context, parseInt(postId));
-
-  if (project === undefined) {
-    return <div>Project not found</div>;
-  }
-
+export default function Post({ project }: { project: TProject }) {
   return (
     <div className="mx-auto max-w-screen-xl mt-16">
       <img
         className="w-full object-cover aspect-video px-4"
-        src={project.thumbnail}
-        alt={project.title}
+        src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+        alt={project.attributes.Title}
       />
       <div className="p-4">
         <h1 className="text-5xl font-bold mb-2 text-purple-600">
-          {project.title}
+          {project.attributes.Title}
         </h1>
-        <h2 className="text-xl">{project.subtitle}</h2>
+        <h2 className="text-xl">{project.attributes.Subtitle}</h2>
         <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-          {project.tags.map((tag) => (
-            <Tag tag={tag} />
+          {project.attributes.Tags.map((tag) => (
+            <Tag key={tag.Title} tag={tag} />
           ))}
         </div>
-        <PostContent />
+        {project.attributes.Content && (
+          <PostContent content={project.attributes.Content} />
+        )}
+        {project.attributes.Gallery && (
+          <Gallery gallery={project.attributes.Gallery} />
+        )}
       </div>
     </div>
   );
 }
 
-export function PostContent() {
+export function PostContent({ content }: { content: TContent }) {
   return (
     <div className="mt-4">
-      {placeholderContent.map((block) => {
-        if (block.type === "text") {
-          return <p className="my-2 max-w-screen-md">{block.content}</p>;
+      {content.map((block, index) => {
+        if (block.type === "paragraph") {
+          return block.children.map((child) => (
+            <p key={child.text + index} className="my-2 max-w-screen-md">
+              {child.text}
+            </p>
+          ));
         }
 
-        if (block.type === "h2") {
-          return (
-            <h2 className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
-              {block.content}
-            </h2>
-          );
+        if (block.type === "heading") {
+          //TODO: Heading Styling
+          switch (block.level) {
+            case 1:
+              return block.children.map((child) => (
+                <h1 key={child.text + index + block.level}>{child.text}</h1>
+              ));
+
+            case 2:
+              return block.children.map((child) => (
+                <h2
+                  key={child.text + index + block.level}
+                  className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
+                >
+                  {child.text}
+                </h2>
+              ));
+
+            case 3:
+              return block.children.map((child) => (
+                <h3
+                  key={child.text + index + block.level}
+                  className="font-bold mt-4 mb-2 max-w-screen-md "
+                >
+                  {child.text}
+                </h3>
+              ));
+
+            case 4:
+              return block.children.map((child) => (
+                <h4 key={child.text + index + block.level}>{child.text}</h4>
+              ));
+
+            case 5:
+              return block.children.map((child) => (
+                <h5 key={child.text + index + block.level}>{child.text}</h5>
+              ));
+
+            case 6:
+              return block.children.map((child) => (
+                <h6 key={child.text + index + block.level}>{child.text}</h6>
+              ));
+
+            default:
+              return block.children.map((child) => (
+                <p key={child.text + index + block.level}>{child.text}</p>
+              ));
+          }
         }
 
-        if (block.type === "h3") {
+        if (block.type === "image") {
           return (
-            <h3 className="font-bold mt-4 mb-2 max-w-screen-md ">
-              {block.content}
-            </h3>
-          );
-        }
-
-        if (block.type === "quote") {
-          return (
-            <blockquote className="font-bold text-purple-600 text-2xl px-20 my-10">
-              {block.content}
-            </blockquote>
-          );
-        }
-
-        if (block.type === "image" && typeof block.content === "string") {
-          return (
-            <figure>
-              <img src={block.content} className="max-w-screen-md" alt="" />
-              <figcaption className="italic">{block.subtitle}</figcaption>
+            <figure key={index + block.type}>
+              <img src={block.image.url} className="max-w-screen-md" alt="" />
+              <figcaption className="italic">
+                {block.children[0].text}
+              </figcaption>
             </figure>
           );
-        }
-
-        if (block.type === "gallery" && typeof block.content !== "string") {
-          return <Gallery images={block.content} subtitle={block.subtitle} />;
         }
       })}
     </div>
@@ -92,12 +111,10 @@ export function PostContent() {
 }
 
 export function Gallery({
-  images,
-  subtitle,
+  gallery,
   height,
 }: {
-  images: string[];
-  subtitle?: string;
+  gallery: TGallery;
   height?: string;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -128,11 +145,15 @@ export function Gallery({
         )}
         style={{ height: height, scrollBehavior: "smooth" }}
       >
-        {images.map((image) => (
-          <img className="object-cover" src={image} alt="" />
+        {gallery.Images.data.map((image) => (
+          <img
+            className="object-cover"
+            src={baseUrl + image.attributes.url}
+            alt=""
+          />
         ))}
       </div>
-      <div className="italic">{subtitle}</div>
+      <div className="italic">{gallery.Description}</div>
     </div>
   );
 }

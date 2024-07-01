@@ -378,6 +378,8 @@ export interface ApiDesignDesign extends Schema.CollectionType {
     Subtitle: Attribute.String & Attribute.Required;
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
     Tags: Attribute.Component<'elements.tag', true>;
+    Content: Attribute.Blocks & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

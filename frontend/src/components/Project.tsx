@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import Tag from "./Tag";
-import { TProject } from "../routes/design/index.lazy";
+
 import { baseUrl } from "../routes/__root";
+import { TProject } from "../types/api";
 
 export default function Projectlist({
   projectlist,

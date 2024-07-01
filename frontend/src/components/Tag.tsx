@@ -1,10 +1,6 @@
 import fontColorContrast from "font-color-contrast";
 import { cn } from "../lib/utils";
-
-export type TTag = {
-  Title: string;
-  color: string;
-};
+import { TTag } from "../types/api";
 
 export default function Tag({
   tag,

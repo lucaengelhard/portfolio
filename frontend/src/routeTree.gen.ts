@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PhotographyPostIdImport } from './routes/photography/$postId'
 import { Route as DesignPostIdImport } from './routes/design/$postId'
 import { Route as CodePostIdImport } from './routes/code/$postId'
 
@@ -20,6 +21,7 @@ import { Route as CodePostIdImport } from './routes/code/$postId'
 
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
+const PhotographyIndexLazyImport = createFileRoute('/photography/')()
 const DesignIndexLazyImport = createFileRoute('/design/')()
 const CodeIndexLazyImport = createFileRoute('/code/')()
 
@@ -35,6 +37,13 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const PhotographyIndexLazyRoute = PhotographyIndexLazyImport.update({
+  path: '/photography/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/photography/index.lazy').then((d) => d.Route),
+)
+
 const DesignIndexLazyRoute = DesignIndexLazyImport.update({
   path: '/design/',
   getParentRoute: () => rootRoute,
@@ -44,6 +53,11 @@ const CodeIndexLazyRoute = CodeIndexLazyImport.update({
   path: '/code/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/code/index.lazy').then((d) => d.Route))
+
+const PhotographyPostIdRoute = PhotographyPostIdImport.update({
+  path: '/photography/$postId',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DesignPostIdRoute = DesignPostIdImport.update({
   path: '/design/$postId',
@@ -87,6 +101,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignPostIdImport
       parentRoute: typeof rootRoute
     }
+    '/photography/$postId': {
+      id: '/photography/$postId'
+      path: '/photography/$postId'
+      fullPath: '/photography/$postId'
+      preLoaderRoute: typeof PhotographyPostIdImport
+      parentRoute: typeof rootRoute
+    }
     '/code/': {
       id: '/code/'
       path: '/code'
@@ -101,6 +122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/photography/': {
+      id: '/photography/'
+      path: '/photography'
+      fullPath: '/photography'
+      preLoaderRoute: typeof PhotographyIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -111,8 +139,10 @@ export const routeTree = rootRoute.addChildren({
   AboutLazyRoute,
   CodePostIdRoute,
   DesignPostIdRoute,
+  PhotographyPostIdRoute,
   CodeIndexLazyRoute,
   DesignIndexLazyRoute,
+  PhotographyIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -127,8 +157,10 @@ export const routeTree = rootRoute.addChildren({
         "/about",
         "/code/$postId",
         "/design/$postId",
+        "/photography/$postId",
         "/code/",
-        "/design/"
+        "/design/",
+        "/photography/"
       ]
     },
     "/": {
@@ -143,11 +175,17 @@ export const routeTree = rootRoute.addChildren({
     "/design/$postId": {
       "filePath": "design/$postId.tsx"
     },
+    "/photography/$postId": {
+      "filePath": "photography/$postId.tsx"
+    },
     "/code/": {
       "filePath": "code/index.lazy.tsx"
     },
     "/design/": {
       "filePath": "design/index.lazy.tsx"
+    },
+    "/photography/": {
+      "filePath": "photography/index.lazy.tsx"
     }
   }
 }

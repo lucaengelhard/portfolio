@@ -1,3 +1,4 @@
+import { cn } from "../lib/utils";
 import {
   placeHolderData,
   placeholderContent,
@@ -87,19 +88,27 @@ function PostContent() {
   );
 }
 
-function Gallery({
+export function Gallery({
   images,
   subtitle,
+  height,
 }: {
   images: string[];
   subtitle?: string;
+  height?: string;
 }) {
   //TODO: Scroll On Click
   //function onClick() {}
 
   return (
     <div className="my-8">
-      <div className="flex gap-4 overflow-auto no-scrollbar h-96">
+      <div
+        className={cn(
+          "flex gap-4 overflow-auto no-scrollbar",
+          height === undefined ? "h-96" : undefined
+        )}
+        style={{ height: height }}
+      >
         {images.map((image) => (
           <img className="object-cover" src={image} alt="" />
         ))}

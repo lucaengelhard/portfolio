@@ -6,30 +6,32 @@ import { baseUrl } from "../routes/__root";
 
 export default function Post({ project }: { project: TProject }) {
   return (
-    <div className="mx-auto max-w-screen-xl mt-16">
-      <img
-        className="w-full object-cover aspect-video px-4"
-        src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
-        alt={project.attributes.Title}
-      />
-      <div className="p-4">
-        <h1 className="text-5xl font-bold mb-2 text-purple-600">
-          {project.attributes.Title}
-        </h1>
-        <h2 className="text-xl">{project.attributes.Subtitle}</h2>
-        <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-          {project.attributes.Tags.map((tag) => (
-            <Tag key={tag.Title} tag={tag} />
-          ))}
+    <>
+      <div className="mx-auto max-w-screen-xl my-20">
+        <img
+          className="w-full object-cover aspect-video px-4"
+          src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+          alt={project.attributes.Title}
+        />
+        <div className="p-4">
+          <h1 className="text-5xl font-bold mb-2 text-purple-600">
+            {project.attributes.Title}
+          </h1>
+          <h2 className="text-xl">{project.attributes.Subtitle}</h2>
+          <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
+            {project.attributes.Tags.map((tag) => (
+              <Tag key={tag.Title} tag={tag} />
+            ))}
+          </div>
+          {project.attributes.Content && (
+            <PostContent content={project.attributes.Content} />
+          )}
         </div>
-        {project.attributes.Content && (
-          <PostContent content={project.attributes.Content} />
-        )}
-        {project.attributes.Gallery && (
-          <Gallery gallery={project.attributes.Gallery} />
-        )}
       </div>
-    </div>
+      {project.attributes.Gallery && (
+        <Gallery gallery={project.attributes.Gallery} height="50vh" />
+      )}
+    </>
   );
 }
 

@@ -11,7 +11,10 @@ export default function Tag({
 }) {
   return (
     <div
-      className={cn("py-1 px-2 rounded-full text-xs border", className)}
+      className={cn(
+        "py-1 px-2 rounded-full text-xs border pointer-events-none",
+        className
+      )}
       style={{
         backgroundColor: tag.color,
         borderColor: tag.color,

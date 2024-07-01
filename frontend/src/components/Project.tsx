@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import Tag, { TTag } from "./Tag";
 
 export type TProject = {
@@ -25,20 +26,22 @@ export default function Projectlist({
 export function Project({ project }: { project: TProject }) {
   return (
     <div className="border-2 border-black cursor-pointer rounded-lg hover:text-purple-600 hover:border-purple-600">
-      <img
-        className="w-full object-cover aspect-video"
-        src={project.thumbnail}
-        alt={project.title}
-      />
-      <div className="p-4">
-        <h1 className="text-2xl font-bold">{project.title}</h1>
-        <h2 className="text-xl">{project.subtitle}</h2>
-        <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-          {project.tags.map((tag) => (
-            <Tag tag={tag} />
-          ))}
+      <Link to={`${project.id}`}>
+        <img
+          className="w-full object-cover aspect-video"
+          src={project.thumbnail}
+          alt={project.title}
+        />
+        <div className="p-4">
+          <h1 className="text-2xl font-bold">{project.title}</h1>
+          <h2 className="text-xl">{project.subtitle}</h2>
+          <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
+            {project.tags.map((tag) => (
+              <Tag tag={tag} />
+            ))}
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

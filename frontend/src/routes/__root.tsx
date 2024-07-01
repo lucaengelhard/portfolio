@@ -5,7 +5,15 @@ import {
   createRootRoute,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { PenTool, Braces, Camera, CircleUserRound } from "lucide-react";
+import {
+  PenTool,
+  Braces,
+  Camera,
+  CircleUserRound,
+  Instagram,
+  Github,
+} from "lucide-react";
+import Flickr from "../assets/icons/Flickr";
 
 export const Route = createRootRoute({
   component: () => (
@@ -32,19 +40,32 @@ function Nav() {
     { id: 3, name: "About", icon: <CircleUserRound />, path: "/about" },
   ];
   return (
-    <div className="p-8 flex gap-12 w-full fixed top-0 left-0 z-50">
-      <Link
-        to="/"
-        className="font-bold hover:text-purple-600 cursor-pointer [&.active]:text-purple-600"
-      >
-        Luca Engelhard
-      </Link>
-      <nav className="flex gap-10">
-        {navPoints.map((point, index) => (
-          <NavItem key={index + point.id + point.name} navPoint={point} />
-        ))}
-      </nav>
-    </div>
+    <nav className="flex p-8 fixed top-0 left-0 z-50 w-full transition-colors duration-200 justify-between">
+      <div className="flex gap-12 ">
+        <Link
+          to="/"
+          className="font-bold hover:text-purple-600 cursor-pointer [&.active]:text-purple-600"
+        >
+          Luca Engelhard
+        </Link>
+        <div className="flex gap-10">
+          {navPoints.map((point, index) => (
+            <NavItem key={index + point.id + point.name} navPoint={point} />
+          ))}
+        </div>
+      </div>{" "}
+      <div className="flex gap-10">
+        <a target="_blank" href="https://www.instagram.com/luca__engelhard/">
+          <Instagram className="hover:text-purple-600" />
+        </a>
+        <a target="_blank" href="https://github.com/lucaengelhard">
+          <Github className="hover:text-purple-600" />
+        </a>
+        <a target="_blank" href="https://flickr.com/photos/benengelhard/">
+          <Flickr className="hover:text-purple-600" />
+        </a>
+      </div>
+    </nav>
   );
 }
 

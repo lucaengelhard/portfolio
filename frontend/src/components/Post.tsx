@@ -70,7 +70,7 @@ function PostContent() {
           );
         }
 
-        if (block.type === "image") {
+        if (block.type === "image" && typeof block.content === "string") {
           return (
             <figure>
               <img src={block.content} className="max-w-screen-md" alt="" />

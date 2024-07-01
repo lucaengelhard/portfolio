@@ -1,6 +1,20 @@
+import { createLazyFileRoute } from "@tanstack/react-router";
+
 import HeroImage from "/221202-hohlkehle-005.png";
 
-export default function Hero() {
+export const Route = createLazyFileRoute("/")({
+  component: Index,
+});
+
+function Index() {
+  return (
+    <>
+      <Hero />
+    </>
+  );
+}
+
+function Hero() {
   return (
     <div className="h-screen w-full relative">
       <HeroText />

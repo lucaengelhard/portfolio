@@ -1,4 +1,11 @@
+import { createLazyFileRoute } from "@tanstack/react-router";
+
 import HeroImage from "/221202-hohlkehle-005.png";
+import Tag, { TTag } from "../components/Tag";
+
+export const Route = createLazyFileRoute("/design")({
+  component: Designer,
+});
 
 type TProject = {
   id: number;
@@ -8,13 +15,7 @@ type TProject = {
   thumbnail: string;
 };
 
-type TTag = {
-  id: number;
-  title: string;
-  color: string;
-};
-
-export default function Designer() {
+function Designer() {
   const projects: TProject[] = [
     {
       id: 0,
@@ -63,23 +64,12 @@ function Project({ project }: { project: TProject }) {
       <div className="p-4">
         <h1 className="text-2xl font-bold">{project.title}</h1>
         <h2 className="text-xl">{project.subtitle}</h2>
-        <div className="flex gap-2 mt-3 overflow-auto">
+        <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
           {project.tags.map((tag) => (
             <Tag tag={tag} />
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function Tag({ tag }: { tag: TTag }) {
-  return (
-    <div
-      className="py-1 px-2 rounded-full text-xs text-black border"
-      style={{ backgroundColor: tag.color, borderColor: tag.color }}
-    >
-      {tag.title}
     </div>
   );
 }

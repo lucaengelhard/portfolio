@@ -40,7 +40,7 @@ export default function Post({
   );
 }
 
-function PostContent() {
+export function PostContent() {
   return (
     <div className="mt-4">
       {placeholderContent.map((block) => {

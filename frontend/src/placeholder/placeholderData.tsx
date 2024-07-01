@@ -153,3 +153,22 @@ export const placeholderImageProjects = [
 export function getImgPost(id: number) {
   return placeholderImageProjects.find((post) => post.id === id);
 }
+
+export const placeholderDesignStack = [
+  "Illustrator",
+  "Photoshop",
+  "InDesign",
+  "Premiere Pro",
+  "After Effects",
+  "Lightroom",
+  "Figma",
+];
+
+export const placeHolderTechStack = [
+  "React",
+  "VueJS",
+  "TypeScript",
+  "CraftCMS",
+  "NodeJS",
+  "NuxtJS",
+];

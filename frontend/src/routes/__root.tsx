@@ -24,7 +24,7 @@ export type NavPoint = {
   path: string;
 };
 
-export default function Nav() {
+function Nav() {
   const navPoints: NavPoint[] = [
     { id: 0, name: "Design", icon: <PenTool />, path: "/design" },
     { id: 1, name: "Code", icon: <Braces />, path: "/code" },

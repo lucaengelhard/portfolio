@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-router": "^1.43.4",
+    "chroma-js": "^2.4.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "font-color-contrast": "^11.1.0",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@tanstack/router-devtools": "^1.43.4",
     "@tanstack/router-plugin": "^1.43.1",
+    "@types/chroma-js": "^2.4.4",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

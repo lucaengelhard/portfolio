@@ -32,8 +32,8 @@ export function Project({ project }: { project: TProject }) {
           src={project.thumbnail}
           alt={project.title}
         />
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">{project.title}</h1>
+        <div className="p-4 transition-colors duration-300">
+          <h1 className="text-2xl font-bold ">{project.title}</h1>
           <h2 className="text-xl">{project.subtitle}</h2>
           <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
             {project.tags.map((tag) => (

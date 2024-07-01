@@ -362,42 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiDesignDesign extends Schema.CollectionType {
-  collectionName: 'designs';
-  info: {
-    singularName: 'design';
-    pluralName: 'designs';
-    displayName: 'Design';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required & Attribute.Unique;
-    Subtitle: Attribute.String & Attribute.Required;
-    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Tags: Attribute.Component<'elements.tag', true>;
-    Content: Attribute.Blocks & Attribute.Required;
-    Gallery: Attribute.Component<'elements.gallery'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::design.design',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::design.design',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -824,6 +788,70 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCodeCode extends Schema.CollectionType {
+  collectionName: 'codes';
+  info: {
+    singularName: 'code';
+    pluralName: 'codes';
+    displayName: 'Code';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required & Attribute.Unique;
+    Subtitle: Attribute.String & Attribute.Required;
+    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    Tags: Attribute.Component<'elements.tag', true> & Attribute.Required;
+    Content: Attribute.Blocks;
+    Gallery: Attribute.Component<'elements.gallery'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::code.code', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::code.code', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDesignDesign extends Schema.CollectionType {
+  collectionName: 'designs';
+  info: {
+    singularName: 'design';
+    pluralName: 'designs';
+    displayName: 'Design';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required & Attribute.Unique;
+    Subtitle: Attribute.String & Attribute.Required;
+    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    Tags: Attribute.Component<'elements.tag', true>;
+    Content: Attribute.Blocks & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::design.design',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::design.design',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -834,7 +862,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::design.design': ApiDesignDesign;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -843,6 +870,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::code.code': ApiCodeCode;
+      'api::design.design': ApiDesignDesign;
     }
   }
 }

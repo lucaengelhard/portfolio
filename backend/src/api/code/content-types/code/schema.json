@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codes",
+  "info": {
+    "singularName": "code",
+    "pluralName": "codes",
+    "displayName": "Code",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "Thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.tag",
+      "required": true
+    },
+    "Content": {
+      "type": "blocks",
+      "required": false
+    },
+    "Gallery": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.gallery"
+    }
+  }
+}

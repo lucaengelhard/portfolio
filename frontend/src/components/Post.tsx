@@ -5,7 +5,6 @@ import {
   placeholderContent,
 } from "../placeholder/placeholderData";
 import Tag from "./Tag";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function Post({
   context,

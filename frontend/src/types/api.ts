@@ -130,7 +130,7 @@ export type TPhotoproject = {
   id: string;
   attributes: {
     Title: string;
-    Description: string;
+    Content: TContent;
     Thumbnail: TThumbnail;
     Gallery?: TGallery;
   };

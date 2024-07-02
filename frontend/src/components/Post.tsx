@@ -75,7 +75,7 @@ function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
   );
 }
 
-function RenderContent({ content }: { content: TContent }) {
+export function RenderContent({ content }: { content: TContent }) {
   return (
     <>
       {content.map((block) => {

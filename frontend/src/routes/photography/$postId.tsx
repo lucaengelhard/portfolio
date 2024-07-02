@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Gallery } from "../../components/Post";
+import { Gallery, RenderContent } from "../../components/Post";
 import { gql, useQuery } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
 import { baseUrl } from "../__root";
@@ -16,7 +16,7 @@ const PROJECT = gql`
         id
         attributes {
           Title
-          Description
+          Content
           Gallery {
             Description
             Images {
@@ -63,8 +63,11 @@ function PhotoPost() {
         <h1 className="text-2xl font-bold text-purple-600 p-4">
           {project.attributes.Title}
         </h1>
-        //TODO: Rich Text
-        <p className="p-4">{project.attributes.Description}</p>
+        {project.attributes.Content && (
+          <div className="mt-4">
+            <RenderContent content={project.attributes.Content} />
+          </div>
+        )}
       </div>
       {project.attributes.Gallery && (
         <Gallery gallery={project.attributes.Gallery} height="60vh" />

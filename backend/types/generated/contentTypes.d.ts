@@ -936,6 +936,7 @@ export interface ApiPhotoPhoto extends Schema.CollectionType {
     singularName: 'photo';
     pluralName: 'photos';
     displayName: 'Photo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -943,8 +944,8 @@ export interface ApiPhotoPhoto extends Schema.CollectionType {
   attributes: {
     Title: Attribute.String & Attribute.Required & Attribute.Unique;
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Description: Attribute.Text & Attribute.Required;
     Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
+    Content: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

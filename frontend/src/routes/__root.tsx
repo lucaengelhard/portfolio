@@ -60,8 +60,8 @@ function Nav() {
           Luca Engelhard
         </Link>
         <div className="flex gap-10">
-          {navPoints.map((point, index) => (
-            <NavItem key={index + point.id + point.name} navPoint={point} />
+          {navPoints.map((point) => (
+            <NavItem key={point.id + point.name} navPoint={point} />
           ))}
         </div>
       </div>{" "}

@@ -19,17 +19,41 @@ export type TThumbnail = {
 };
 
 export type TContent = [
-  TParagraph | THeading | TImage | TBlockQuote | TCodeBlock | TList,
+  | TParagraph
+  | THeading
+  | TImage
+  | TBlockQuote
+  | TCodeBlock
+  | TList
+  | TText
+  | TLink
+  | TListItem,
 ];
+
+export type TText = {
+  type: "text";
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
+};
 
 export type TParagraph = {
   type: "paragraph";
-  children: [{ type: "text"; text: string }];
+  children: TContent;
+};
+
+export type TLink = {
+  type: "link";
+  children: TContent;
+  url: string;
 };
 
 export type THeading = {
   type: "heading";
-  children: [{ type: "text"; text: string }];
+  children: TContent;
   level: number;
 };
 
@@ -58,23 +82,23 @@ export type TImage = {
 
 export type TBlockQuote = {
   type: "quote";
-  children: [{ type: "text"; text: string }];
+  children: TContent;
 };
 
 export type TCodeBlock = {
   type: "code";
-  children: [{ type: "text"; text: string }];
+  children: TContent;
 };
 
 export type TList = {
   type: "list";
   format: "ordered" | "unordered";
-  children: TListItem[];
+  children: TContent;
 };
 
 export type TListItem = {
   type: "list-item";
-  children: [{ type: "text"; text: string }];
+  children: TContent;
 };
 
 export type TGallery = {

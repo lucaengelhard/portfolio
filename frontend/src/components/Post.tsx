@@ -1,7 +1,20 @@
 import { useRef } from "react";
 import { cn } from "../lib/utils";
 import Tag from "./Tag";
-import { TContent, TGallery, TListItem, TProject } from "../types/api";
+import {
+  TBlockQuote,
+  TCodeBlock,
+  TContent,
+  TGallery,
+  THeading,
+  TImage,
+  TLink,
+  TList,
+  TListItem,
+  TParagraph,
+  TProject,
+  TText,
+} from "../types/api";
 import { baseUrl } from "../routes/__root";
 
 export default function Post({ project }: { project: TProject }) {
@@ -24,7 +37,9 @@ export default function Post({ project }: { project: TProject }) {
             ))}
           </div>
           {project.attributes.Content && (
-            <PostContent content={project.attributes.Content} />
+            <div className="mt-4">
+              <RenderContent content={project.attributes.Content} />
+            </div>
           )}
         </div>
       </div>
@@ -35,154 +50,171 @@ export default function Post({ project }: { project: TProject }) {
   );
 }
 
-export function PostContent({ content }: { content: TContent }) {
+function RenderContent({ content }: { content: TContent }) {
+  console.log(content);
   return (
-    <div className="mt-4">
-      {content.map((block, index) => {
-        if (block.type === "paragraph") {
-          return block.children.map((child) => (
-            <p key={child.text + index} className="my-2 max-w-screen-md">
-              {child.text}
-            </p>
-          ));
+    <>
+      {content.map((block) => {
+        switch (block.type) {
+          case "paragraph":
+            return <PostParagraph paragraph={block} />;
+          case "link":
+            return <PostLink link={block} />;
+          case "text":
+            return <PostText text={block} />;
+          case "code":
+            return <PostCode code={block} />;
+          case "heading":
+            return <PostHeading heading={block} />;
+          case "image":
+            return <PostImage image={block} />;
+          case "list":
+            return <PostList list={block} />;
+          case "list-item":
+            return <PostListItem item={block} />;
+          case "quote":
+            return <PostQuote quote={block} />;
+          default:
+            break;
         }
-
-        if (block.type === "heading") {
-          //TODO: Heading Styling
-          switch (block.level) {
-            case 1:
-              return block.children.map((child) => (
-                <h1
-                  className="text-5xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
-                  key={child.text + index + block.level}
-                >
-                  {child.text}
-                </h1>
-              ));
-
-            case 2:
-              return block.children.map((child) => (
-                <h2
-                  key={child.text + index + block.level}
-                  className="text-3xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
-                >
-                  {child.text}
-                </h2>
-              ));
-
-            case 3:
-              return block.children.map((child) => (
-                <h3
-                  key={child.text + index + block.level}
-                  className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
-                >
-                  {child.text}
-                </h3>
-              ));
-
-            case 4:
-              return block.children.map((child) => (
-                <h4
-                  className="text-base font-bold text-purple-600 mt-4 mb-2 max-w-screen-md"
-                  key={child.text + index + block.level}
-                >
-                  {child.text}
-                </h4>
-              ));
-
-            case 5:
-              return block.children.map((child) => (
-                <h5
-                  className="text-base font-bold mt-4 mb-2 max-w-screen-md"
-                  key={child.text + index + block.level}
-                >
-                  {child.text}
-                </h5>
-              ));
-
-            case 6:
-              return block.children.map((child) => (
-                <h6
-                  className="text-base underline mt-4 mb-2 max-w-screen-md"
-                  key={child.text + index + block.level}
-                >
-                  {child.text}
-                </h6>
-              ));
-
-            default:
-              return block.children.map((child) => (
-                <p key={child.text + index + block.level}>{child.text}</p>
-              ));
-          }
-        }
-
-        if (block.type === "image") {
-          return (
-            <figure key={index + block.type}>
-              <img src={block.image.url} className="max-w-screen-md" alt="" />
-              <figcaption className="italic">
-                {block.children[0].text}
-              </figcaption>
-            </figure>
-          );
-        }
-
-        if (block.type === "quote") {
-          return block.children.map((child) => (
-            <blockquote
-              key={child.text + index}
-              className="font-bold text-purple-600 text-2xl px-20 my-10"
-            >
-              {child.text}
-            </blockquote>
-          ));
-        }
-
-        if (block.type === "code") {
-          return block.children.map((child) => (
-            <code
-              key={child.text + index}
-              className="bg-purple-200 p-3 rounded-lg w-full block max-w-screen-md"
-            >
-              {child.text}
-            </code>
-          ));
-        }
-
-        if (block.type === "list") {
-          if (block.format === "ordered") {
-            return (
-              <ol className="list-decimal my-2 px-4">
-                {block.children.map((child) => (
-                  <ListItem item={child} />
-                ))}
-              </ol>
-            );
-          }
-          if (block.format === "unordered") {
-            return (
-              <ul className="list-disc my-2 px-4">
-                {block.children.map((child) => (
-                  <ListItem item={child} />
-                ))}
-              </ul>
-            );
-          }
-        }
-
-        console.log(block);
       })}
-    </div>
+    </>
   );
+}
 
-  function ListItem({ item }: { item: TListItem }) {
-    return (
-      <li key={item.children[0].text} className="">
-        {item.children[0].text}
-      </li>
-    );
+function PostText({ text }: { text: TText }) {
+  const strikethrough = text.strikethrough ? "line-through" : "";
+  const underline = text.underline ? "underline" : "";
+
+  if (text.code) {
+    return <code className="bg-purple-200 p-1 rounded-lg">{text.text}</code>;
   }
+
+  return (
+    <span
+      style={{
+        fontWeight: text.bold ? "bold" : undefined,
+        fontStyle: text.italic ? "italic" : undefined,
+        textDecoration: `${strikethrough} ${underline}`,
+      }}
+    >
+      {text.text}
+    </span>
+  );
+}
+
+function PostParagraph({ paragraph }: { paragraph: TParagraph }) {
+  return (
+    <p className="max-w-screen-md mb-2">
+      <RenderContent content={paragraph.children} />
+    </p>
+  );
+}
+
+function PostLink({ link }: { link: TLink }) {
+  return (
+    <a href={link.url} className="text-purple-600 underline">
+      <RenderContent content={link.children} />
+    </a>
+  );
+}
+
+function PostCode({ code }: { code: TCodeBlock }) {
+  return (
+    <code className="bg-purple-200 p-3 rounded-lg w-full block max-w-screen-md">
+      <RenderContent content={code.children} />
+    </code>
+  );
+}
+
+function PostHeading({ heading }: { heading: THeading }) {
+  switch (heading.level) {
+    case 1:
+      return (
+        <h1 className="text-5xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h1>
+      );
+    case 2:
+      return (
+        <h2 className="text-3xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h2>
+      );
+    case 3:
+      return (
+        <h3 className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h3>
+      );
+    case 4:
+      return (
+        <h4 className="text-base font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h4>
+      );
+    case 5:
+      return (
+        <h5 className="text-base font-bold mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h5>
+      );
+    case 6:
+      return (
+        <h6 className="text-base underline mt-4 mb-2 max-w-screen-md">
+          <RenderContent content={heading.children} />
+        </h6>
+      );
+  }
+}
+
+function PostImage({ image }: { image: TImage }) {
+  return (
+    <figure>
+      <img
+        src={image.image.url}
+        className="max-w-screen-md"
+        alt={image.image.alternativeText}
+      />{" "}
+      <figcaption className="italic">
+        <RenderContent content={image.children} />
+      </figcaption>
+    </figure>
+  );
+}
+
+function PostList({ list }: { list: TList }) {
+  switch (list.format) {
+    case "ordered":
+      return (
+        <ol className="list-decimal my-2 px-4">
+          <RenderContent content={list.children} />
+        </ol>
+      );
+
+    case "unordered":
+      return (
+        <ul className="list-disc my-2 px-4">
+          <RenderContent content={list.children} />
+        </ul>
+      );
+  }
+}
+
+function PostListItem({ item }: { item: TListItem }) {
+  return (
+    <li>
+      <RenderContent content={item.children} />
+    </li>
+  );
+}
+
+function PostQuote({ quote }: { quote: TBlockQuote }) {
+  return (
+    <blockquote className="font-bold text-purple-600 text-2xl px-20 my-10">
+      <RenderContent content={quote.children} />
+    </blockquote>
+  );
 }
 
 export function Gallery({
@@ -229,7 +261,7 @@ export function Gallery({
           />
         ))}
       </div>
-      <div className="italic">{gallery.Description}</div>
+      <div className="italic pl-4">{gallery.Description}</div>
     </div>
   );
 }

@@ -32,8 +32,8 @@ export default function Post({ project }: { project: TProject }) {
           </h1>
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
           <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-            {project.attributes.Tags.map((tag) => (
-              <Tag key={tag.Title} tag={tag} />
+            {project.attributes.Tags.data.map((tag) => (
+              <Tag key={tag.id} tag={tag} />
             ))}
           </div>
           {project.attributes.Content && (

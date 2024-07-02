@@ -30,11 +30,6 @@
         "images"
       ]
     },
-    "Tags": {
-      "type": "component",
-      "repeatable": true,
-      "component": "elements.tag"
-    },
     "Content": {
       "type": "blocks",
       "required": true
@@ -43,6 +38,12 @@
       "type": "component",
       "repeatable": false,
       "component": "elements.gallery"
+    },
+    "Tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "Designs"
     }
   }
 }

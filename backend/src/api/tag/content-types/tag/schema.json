@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tag"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.tag",
+      "required": true
+    },
+    "Designs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::design.design",
+      "mappedBy": "Tags"
+    },
+    "Codes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::code.code",
+      "inversedBy": "Tags"
+    }
+  }
+}

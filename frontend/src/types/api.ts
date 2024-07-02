@@ -3,7 +3,7 @@ export type TProject = {
   attributes: {
     Title: string;
     Subtitle: string;
-    Tags: TTag[];
+    Tags: TTags;
     Thumbnail: TThumbnail;
     Content?: TContent;
     Gallery?: TGallery;
@@ -106,9 +106,19 @@ export type TGallery = {
   Images: { data: [{ attributes: { url: string } }] };
 };
 
+export type TTags = {
+  data: [TTag];
+};
+
 export type TTag = {
-  Title: string;
-  color: string;
+  __typename: "TagEntity";
+  id: string;
+  attributes: {
+    Tag: {
+      Title: string;
+      color: string;
+    };
+  };
 };
 
 export type TPhotoproject = {

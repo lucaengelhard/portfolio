@@ -837,9 +837,9 @@ export interface ApiCodeCode extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required & Attribute.Unique;
     Subtitle: Attribute.String & Attribute.Required;
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Tags: Attribute.Component<'elements.tag', true> & Attribute.Required;
     Content: Attribute.Blocks;
     Gallery: Attribute.Component<'elements.gallery'>;
+    Tags: Attribute.Relation<'api::code.code', 'manyToMany', 'api::tag.tag'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -865,9 +865,13 @@ export interface ApiDesignDesign extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required & Attribute.Unique;
     Subtitle: Attribute.String & Attribute.Required;
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Tags: Attribute.Component<'elements.tag', true>;
     Content: Attribute.Blocks & Attribute.Required;
     Gallery: Attribute.Component<'elements.gallery'>;
+    Tags: Attribute.Relation<
+      'api::design.design',
+      'manyToMany',
+      'api::tag.tag'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -941,6 +945,34 @@ export interface ApiPhotoPhoto extends Schema.CollectionType {
   };
 }
 
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Tag: Attribute.Component<'elements.tag'> & Attribute.Required;
+    Designs: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::design.design'
+    >;
+    Codes: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::code.code'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -964,6 +996,7 @@ declare module '@strapi/types' {
       'api::design.design': ApiDesignDesign;
       'api::home.home': ApiHomeHome;
       'api::photo.photo': ApiPhotoPhoto;
+      'api::tag.tag': ApiTagTag;
     }
   }
 }

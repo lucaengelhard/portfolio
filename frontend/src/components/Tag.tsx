@@ -12,16 +12,16 @@ export default function Tag({
   return (
     <div
       className={cn(
-        "py-1 px-2 rounded-full text-xs border pointer-events-none",
+        "py-1 px-2 rounded-full text-xs border pointer-events-none whitespace-nowrap",
         className
       )}
       style={{
-        backgroundColor: tag.color,
-        borderColor: tag.color,
-        color: fontColorContrast(tag.color),
+        backgroundColor: tag.attributes.Tag.color,
+        borderColor: tag.attributes.Tag.color,
+        color: fontColorContrast(tag.attributes.Tag.color),
       }}
     >
-      {tag.Title}
+      {tag.attributes.Tag.Title}
     </div>
   );
 }

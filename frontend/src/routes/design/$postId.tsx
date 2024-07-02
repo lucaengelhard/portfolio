@@ -24,8 +24,15 @@ const PROJECT = gql`
             }
           }
           Tags {
-            Title
-            color
+            data {
+              id
+              attributes {
+                Tag {
+                  Title
+                  color
+                }
+              }
+            }
           }
           Content
           Gallery {

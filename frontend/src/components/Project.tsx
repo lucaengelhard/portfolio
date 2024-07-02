@@ -36,9 +36,9 @@ export function Project({ project }: { project: TProject }) {
         <div className="p-4 transition-colors duration-300">
           <h1 className="text-2xl font-bold ">{project.attributes.Title}</h1>
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
-          <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-            {project.attributes.Tags.map((tag) => (
-              <Tag key={tag.Title} tag={tag} />
+          <div className="flex gap-2 mt-3 overflow-hidden flex-wrap">
+            {project.attributes.Tags.data.map((tag) => (
+              <Tag key={tag.id} tag={tag} />
             ))}
           </div>
         </div>

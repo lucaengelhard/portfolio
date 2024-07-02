@@ -17,8 +17,15 @@ const PROJECTS = gql`
           Title
           Subtitle
           Tags {
-            Title
-            color
+            data {
+              id
+              attributes {
+                Tag {
+                  Title
+                  color
+                }
+              }
+            }
           }
           Thumbnail {
             data {

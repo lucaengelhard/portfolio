@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "designs",
+  "info": {
+    "singularName": "design",
+    "pluralName": "designs",
+    "displayName": "Post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Subtitle": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "Thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Content": {
+      "type": "blocks",
+      "required": true
+    },
+    "Gallery": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.gallery"
+    },
+    "Tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "Designs"
+    },
+    "Collaborators": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::collaborator.collaborator",
+      "inversedBy": "Designs"
+    },
+    "Design": {
+      "type": "boolean",
+      "default": false
+    },
+    "Code": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

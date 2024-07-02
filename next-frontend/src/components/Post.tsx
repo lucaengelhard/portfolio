@@ -199,7 +199,9 @@ function PostImage({ image }: { image: TImage }) {
   return (
     <figure>
       <img
-        src={image.image.url}
+        src={
+          process.env.NEXT_PUBLIC_STRAPI_URL + "/uploads/" + image.image.name
+        }
         className="max-w-screen-md"
         alt={image.image.alternativeText}
       />{" "}

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "design",
     "pluralName": "designs",
-    "displayName": "Design",
+    "displayName": "Post",
     "description": ""
   },
   "options": {
@@ -50,6 +50,14 @@
       "relation": "manyToMany",
       "target": "api::collaborator.collaborator",
       "inversedBy": "Designs"
+    },
+    "Design": {
+      "type": "boolean",
+      "default": false
+    },
+    "Code": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

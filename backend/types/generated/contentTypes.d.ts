@@ -823,34 +823,6 @@ export interface ApiAboutAbout extends Schema.SingleType {
   };
 }
 
-export interface ApiCodeCode extends Schema.CollectionType {
-  collectionName: 'codes';
-  info: {
-    singularName: 'code';
-    pluralName: 'codes';
-    displayName: 'Code';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required & Attribute.Unique;
-    Subtitle: Attribute.String & Attribute.Required;
-    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Content: Attribute.Blocks;
-    Gallery: Attribute.Component<'elements.gallery'>;
-    Tags: Attribute.Relation<'api::code.code', 'manyToMany', 'api::tag.tag'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::code.code', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::code.code', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCollaboratorCollaborator extends Schema.CollectionType {
   collectionName: 'collaborators';
   info: {
@@ -894,7 +866,7 @@ export interface ApiDesignDesign extends Schema.CollectionType {
   info: {
     singularName: 'design';
     pluralName: 'designs';
-    displayName: 'Design';
+    displayName: 'Post';
     description: '';
   };
   options: {
@@ -916,6 +888,8 @@ export interface ApiDesignDesign extends Schema.CollectionType {
       'manyToMany',
       'api::collaborator.collaborator'
     >;
+    Design: Attribute.Boolean & Attribute.DefaultTo<false>;
+    Code: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1006,7 +980,6 @@ export interface ApiTagTag extends Schema.CollectionType {
       'manyToMany',
       'api::design.design'
     >;
-    Codes: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::code.code'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1036,7 +1009,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about.about': ApiAboutAbout;
-      'api::code.code': ApiCodeCode;
       'api::collaborator.collaborator': ApiCollaboratorCollaborator;
       'api::design.design': ApiDesignDesign;
       'api::home.home': ApiHomeHome;

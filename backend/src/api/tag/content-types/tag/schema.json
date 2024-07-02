@@ -22,12 +22,6 @@
       "relation": "manyToMany",
       "target": "api::design.design",
       "mappedBy": "Tags"
-    },
-    "Codes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::code.code",
-      "inversedBy": "Tags"
     }
   }
 }

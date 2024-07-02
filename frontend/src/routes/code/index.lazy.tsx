@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/code/")({
 
 const PROJECTS = gql`
   query GetCodes {
-    codes(pagination: { limit: 100 }) {
+    designs(pagination: { limit: 100 }, filters: { Code: { eq: true } }) {
       data {
         id
         attributes {
@@ -46,5 +46,5 @@ function Code() {
   if (loading) return <ProjectListLoader />;
   if (error) return <div>Error</div>;
 
-  return <Projectlist projectlist={data.codes.data as TProject[]} />;
+  return <Projectlist projectlist={data.designs.data as TProject[]} />;
 }

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/code/$postId")({
 
 const PROJECT = gql`
   query GetCode($id: ID!) {
-    code(id: $id) {
+    design(id: $id) {
       data {
         id
         attributes {
@@ -61,7 +61,7 @@ function Comp() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
-  const project = data.code.data as TProject;
+  const project = data.design.data as TProject;
 
   return <Post project={project} />;
 }

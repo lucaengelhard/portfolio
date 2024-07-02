@@ -6,8 +6,8 @@ const emptyarray = ["", "", "", "", ""];
 export function ProjectListLoader() {
   return (
     <div className=" grid max-h-screen overflow-hidden pointer-events-none grid-cols-2 gap-10 mx-auto max-w-screen-xl p-4 mt-16">
-      {emptyarray.map(() => (
-        <ProjectCardLoader />
+      {emptyarray.map((_, index) => (
+        <ProjectCardLoader key={index} />
       ))}
     </div>
   );
@@ -31,8 +31,11 @@ function ProjectCardLoader() {
           Loading...
         </h2>
         <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
-          {emptyarray.map(() => (
-            <div className="py-1 px-2 rounded-full text-xs border pointer-events-none bg-purple-400 text-purple-400">
+          {emptyarray.map((_, index) => (
+            <div
+              key={index}
+              className="py-1 px-2 rounded-full text-xs border pointer-events-none bg-purple-400 text-purple-400"
+            >
               Loading...
             </div>
           ))}

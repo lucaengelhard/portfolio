@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRef } from "react";
 import { cn } from "../lib/utils";
 import Tag from "./Tag";
@@ -66,7 +67,7 @@ function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
       <div>In collaboration with:</div>
       <div>
         {collaborators.data.map((collaborator) => (
-          <div>
+          <div key={collaborator.attributes.Name}>
             <a target="_blank" href={collaborator.attributes.URL}>
               {collaborator.attributes.Name}
             </a>

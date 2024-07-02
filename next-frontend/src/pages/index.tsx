@@ -4,6 +4,7 @@ import { gql } from "@apollo/client";
 import { client } from "./_document";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 import { ReactNode } from "react";
+import Link from "next/link";
 
 export async function getStaticProps() {
   const { data } = await client.query({
@@ -73,9 +74,12 @@ function HeroText() {
 function HeroTextElement({ point }: { point: NavPoint }) {
   return (
     <div>
-      <a className="cursor-pointer transition-colors duration-300 hover:text-purple-600">
+      <Link
+        href={point.path}
+        className="cursor-pointer transition-colors duration-300 hover:text-purple-600"
+      >
         {point.name}
-      </a>
+      </Link>
     </div>
   );
 }

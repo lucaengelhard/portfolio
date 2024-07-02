@@ -38,7 +38,7 @@ export function Project({ project }: { project: TProject }) {
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
           <div className="flex gap-2 mt-3 overflow-hidden flex-wrap">
             {project.attributes.Tags.data.map((tag) => (
-              <Tag key={tag.id} tag={tag} />
+              <Tag key={tag.id} tag={tag.attributes.Tag} />
             ))}
           </div>
         </div>

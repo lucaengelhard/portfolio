@@ -34,6 +34,16 @@ const PROJECT = gql`
               }
             }
           }
+          Collaborators {
+            data {
+              id
+              attributes {
+                Name
+                URL
+                Mail
+              }
+            }
+          }
           Content
           Gallery {
             Description

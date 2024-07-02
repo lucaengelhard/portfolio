@@ -850,6 +850,44 @@ export interface ApiCodeCode extends Schema.CollectionType {
   };
 }
 
+export interface ApiCollaboratorCollaborator extends Schema.CollectionType {
+  collectionName: 'collaborators';
+  info: {
+    singularName: 'collaborator';
+    pluralName: 'collaborators';
+    displayName: 'Collaborator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    URL: Attribute.String;
+    Mail: Attribute.Email;
+    Designs: Attribute.Relation<
+      'api::collaborator.collaborator',
+      'manyToMany',
+      'api::design.design'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::collaborator.collaborator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::collaborator.collaborator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiDesignDesign extends Schema.CollectionType {
   collectionName: 'designs';
   info: {
@@ -871,6 +909,11 @@ export interface ApiDesignDesign extends Schema.CollectionType {
       'api::design.design',
       'manyToMany',
       'api::tag.tag'
+    >;
+    Collaborators: Attribute.Relation<
+      'api::design.design',
+      'manyToMany',
+      'api::collaborator.collaborator'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -993,6 +1036,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about.about': ApiAboutAbout;
       'api::code.code': ApiCodeCode;
+      'api::collaborator.collaborator': ApiCollaboratorCollaborator;
       'api::design.design': ApiDesignDesign;
       'api::home.home': ApiHomeHome;
       'api::photo.photo': ApiPhotoPhoto;

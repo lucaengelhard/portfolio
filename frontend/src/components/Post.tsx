@@ -4,6 +4,7 @@ import Tag from "./Tag";
 import {
   TBlockQuote,
   TCodeBlock,
+  TCollaborators,
   TContent,
   TGallery,
   THeading,
@@ -33,9 +34,12 @@ export default function Post({ project }: { project: TProject }) {
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
           <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
             {project.attributes.Tags.data.map((tag) => (
-              <Tag key={tag.id} tag={tag} />
+              <Tag key={tag.id} tag={tag.attributes.Tag} />
             ))}
           </div>
+          {project.attributes.Collaborators && (
+            <PostCollab collaborators={project.attributes.Collaborators} />
+          )}
           {project.attributes.Content && (
             <div className="mt-4">
               <RenderContent content={project.attributes.Content} />
@@ -50,8 +54,28 @@ export default function Post({ project }: { project: TProject }) {
   );
 }
 
+function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
+  if (collaborators.data.length === 0) {
+    return;
+  }
+
+  return (
+    <div className="mt-2 flex gap-4 italic text-purple-600">
+      <div>In collaboration with:</div>
+      <div>
+        {collaborators.data.map((collaborator) => (
+          <div>
+            <a target="_blank" href={collaborator.attributes.URL}>
+              {collaborator.attributes.Name}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function RenderContent({ content }: { content: TContent }) {
-  console.log(content);
   return (
     <>
       {content.map((block) => {
@@ -113,7 +137,7 @@ function PostParagraph({ paragraph }: { paragraph: TParagraph }) {
 
 function PostLink({ link }: { link: TLink }) {
   return (
-    <a href={link.url} className="text-purple-600 underline">
+    <a href={link.url} target="_blank" className="text-purple-600 underline">
       <RenderContent content={link.children} />
     </a>
   );

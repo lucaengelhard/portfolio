@@ -7,6 +7,7 @@ export type TProject = {
     Thumbnail: TThumbnail;
     Content?: TContent;
     Gallery?: TGallery;
+    Collaborators?: TCollaborators;
   };
 };
 
@@ -107,18 +108,22 @@ export type TGallery = {
 };
 
 export type TTags = {
-  data: [TTag];
+  data: [{ id: string; attributes: { Tag: TTag } }];
 };
 
 export type TTag = {
-  __typename: "TagEntity";
-  id: string;
-  attributes: {
-    Tag: {
-      Title: string;
-      color: string;
-    };
-  };
+  Title: string;
+  color: string;
+};
+
+export type TCollaborators = {
+  data: { id: string; attributes: TCollaborator }[];
+};
+
+export type TCollaborator = {
+  Name: string;
+  URL: string;
+  Mail: string;
 };
 
 export type TPhotoproject = {

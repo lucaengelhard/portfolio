@@ -16,12 +16,12 @@ export default function Tag({
         className
       )}
       style={{
-        backgroundColor: tag.attributes.Tag.color,
-        borderColor: tag.attributes.Tag.color,
-        color: fontColorContrast(tag.attributes.Tag.color),
+        backgroundColor: tag.color,
+        borderColor: tag.color,
+        color: fontColorContrast(tag.color),
       }}
     >
-      {tag.attributes.Tag.Title}
+      {tag.Title}
     </div>
   );
 }

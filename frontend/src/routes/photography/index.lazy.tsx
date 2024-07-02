@@ -16,7 +16,6 @@ const PROJECTS = gql`
         id
         attributes {
           Title
-          Description
           Thumbnail {
             data {
               attributes {

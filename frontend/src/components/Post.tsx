@@ -265,6 +265,10 @@ export function Gallery({
     }
   }
 
+  const data = [...gallery.Images.data];
+
+  data.reverse();
+
   return (
     <div className="my-8 relative">
       <div
@@ -276,7 +280,7 @@ export function Gallery({
         )}
         style={{ height: height, scrollBehavior: "smooth" }}
       >
-        {gallery.Images.data.map((image) => (
+        {data.map((image) => (
           <img
             key={image.attributes.url}
             className="object-cover"

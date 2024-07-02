@@ -11,7 +11,7 @@ export const Route = createLazyFileRoute("/photography/")({
 
 const PROJECTS = gql`
   query GetPhotos {
-    photos {
+    photos(pagination: { limit: 100 }) {
       data {
         id
         attributes {

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "about",
     "pluralName": "abouts",
-    "displayName": "About"
+    "displayName": "About",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,18 +17,12 @@
       "required": true
     },
     "Portrait": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
-    },
-    "Stack": {
-      "type": "component",
-      "repeatable": true,
-      "component": "elements.tag",
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Education": {
       "type": "component",
@@ -40,6 +35,11 @@
       "repeatable": true,
       "component": "elements.tag",
       "required": true
+    },
+    "Stack": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
     }
   }
 }

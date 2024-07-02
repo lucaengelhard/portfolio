@@ -140,7 +140,7 @@ export type TAbout = {
   attributes: {
     Portrait: TThumbnail;
     Welcome: string;
-    Stack: TTag[];
+    Stack: TTags;
     Education: TTag[];
     Imprint: TTag[];
   };

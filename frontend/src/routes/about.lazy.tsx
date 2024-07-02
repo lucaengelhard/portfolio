@@ -22,9 +22,16 @@ const ABOUT = gql`
             }
           }
           Welcome
-          Stack {
-            Title
-            color
+          Stack(pagination: { limit: 100 }) {
+            data {
+              id
+              attributes {
+                Tag {
+                  Title
+                  color
+                }
+              }
+            }
           }
           Education {
             Title
@@ -48,6 +55,9 @@ function About() {
 
   const aboutdata = data.about.data as TAbout;
 
+  const stack = aboutdata.attributes.Stack.data.map((s) => s.attributes.Tag);
+  console.log(stack);
+
   return (
     <div>
       <div className="grid gap-8" style={{ gridTemplateColumns: "30% 70%" }}>
@@ -60,7 +70,7 @@ function About() {
           {aboutdata.attributes.Welcome}
         </div>
       </div>
-      <AboutTagList title="I work with" tags={aboutdata.attributes.Stack} />
+      <AboutTagList title="I work with" tags={stack} />
       <AboutTagList title="Education" tags={aboutdata.attributes.Education} />
       <AboutTagList title="Imprint" tags={aboutdata.attributes.Imprint} />
     </div>

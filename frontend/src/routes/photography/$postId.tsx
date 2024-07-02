@@ -17,7 +17,7 @@ const PROJECT = gql`
         attributes {
           Title
           Description
-          Gallery {
+          Gallery(pagination: { limit: 100 }) {
             Description
             Images {
               data {

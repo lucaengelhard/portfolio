@@ -11,13 +11,13 @@ export const Route = createLazyFileRoute("/design/")({
 
 const PROJECTS = gql`
   query GetDesigns {
-    designs {
+    designs(pagination: { limit: 100 }) {
       data {
         id
         attributes {
           Title
           Subtitle
-          Tags {
+          Tags(pagination: { limit: 100 }) {
             data {
               id
               attributes {

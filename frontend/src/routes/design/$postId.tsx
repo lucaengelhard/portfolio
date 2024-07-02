@@ -23,7 +23,7 @@ const PROJECT = gql`
               }
             }
           }
-          Tags {
+          Tags(pagination: { limit: 100 }) {
             data {
               id
               attributes {
@@ -34,7 +34,7 @@ const PROJECT = gql`
               }
             }
           }
-          Collaborators {
+          Collaborators(pagination: { limit: 100 }) {
             data {
               id
               attributes {
@@ -47,7 +47,7 @@ const PROJECT = gql`
           Content
           Gallery {
             Description
-            Images {
+            Images(pagination: { limit: 20 }) {
               data {
                 attributes {
                   url

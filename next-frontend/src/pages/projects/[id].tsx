@@ -5,7 +5,7 @@ import Post from "@/components/Post";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
-    query: gql`
+    query: gql(`
       query GetPostIds {
         designs(pagination: { limit: 100 }) {
           data {
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
           }
         }
       }
-    `,
+    `),
   });
 
   const paths = data.designs.data.map(
@@ -34,7 +34,7 @@ export async function getStaticProps(context: { params: any }) {
   const { params } = context;
   const { data } = await client.query({
     variables: { id: params.id },
-    query: gql`
+    query: gql(`
       query GetProject($id: ID!) {
         design(id: $id) {
           data {
@@ -85,12 +85,15 @@ export async function getStaticProps(context: { params: any }) {
           }
         }
       }
-    `,
+    `),
   });
 
   return { props: { post: data.design.data } };
 }
 
 export default function ProjectPost({ post }: { post: TProject }) {
+  if (post === undefined) {
+    return "undefined";
+  }
   return <Post project={post} />;
 }

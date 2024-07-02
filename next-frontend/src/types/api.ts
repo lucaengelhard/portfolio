@@ -28,7 +28,7 @@ export type TContent = [
   | TList
   | TText
   | TLink
-  | TListItem,
+  | TListItem
 ];
 
 export type TText = {

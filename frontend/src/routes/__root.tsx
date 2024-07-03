@@ -11,10 +11,13 @@ import {
   CircleUserRound,
   Instagram,
   Github,
+  Menu,
 } from "lucide-react";
 import Flickr from "../assets/icons/Flickr";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { useState } from "react";
+import { cn } from "../lib/utils";
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_PUBLIC_STRAPI_URL + "/graphql",
@@ -46,22 +49,30 @@ function Nav() {
     { id: 2, name: "Photography", icon: <Camera />, path: "/photography" },
     { id: 3, name: "About", icon: <CircleUserRound />, path: "/about" },
   ];
+
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <nav className="flex p-8 fixed top-0 left-0 z-50 w-full transition-colors duration-200 justify-between ">
-      <div className="flex gap-12 ">
+    <nav
+      className={cn(
+        "flex p-8 fixed top-0 left-0 z-50 w-full transition-colors duration-200 justify-between flex-wrap gap-x-4 gap-y-4 bg-white border-b-2 md:border-0 overflow-hidden border-purple-600 md:bg-transparent h-[4.5rem] md:h-fit",
+        expanded ? "h-fit" : undefined
+      )}
+    >
+      <div className="flex gap-x-12 flex-wrap gap-y-4">
         <Link
           to="/"
-          className="font-bold hover:text-purple-600 cursor-pointer [&.active]:text-purple-600"
+          className="font-bold hover:text-purple-600 cursor-pointer [&.active]:text-purple-600 whitespace-nowrap"
         >
           Luca Engelhard
         </Link>
-        <div className="flex gap-10">
+        <div className="flex gap-x-10 flex-wrap gap-y-2">
           {navPoints.map((point) => (
             <NavItem key={point.id + point.name} navPoint={point} />
           ))}
         </div>
       </div>{" "}
-      <div className="flex gap-10">
+      <div className="flex gap-x-4 md:gap-x-10">
         <a target="_blank" href="https://www.instagram.com/luca__engelhard/">
           <Instagram className="hover:text-purple-600 " />
         </a>
@@ -72,6 +83,12 @@ function Nav() {
           <Flickr className="hover:text-purple-600 " />
         </a>
       </div>
+      <button
+        onClick={() => setExpanded((current) => !current)}
+        className="absolute right-4 top-8 scale-125 text-purple-600 md:hidden"
+      >
+        <Menu />
+      </button>
     </nav>
   );
 }

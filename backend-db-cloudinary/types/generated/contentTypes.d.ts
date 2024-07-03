@@ -362,38 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCollaboratorCollaborator extends Schema.SingleType {
-  collectionName: 'collaborators';
-  info: {
-    singularName: 'collaborator';
-    pluralName: 'collaborators';
-    displayName: 'Collaborator';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required;
-    URL: Attribute.String;
-    Mail: Attribute.Email;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::collaborator.collaborator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::collaborator.collaborator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -820,6 +788,170 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutAbout extends Schema.SingleType {
+  collectionName: 'abouts';
+  info: {
+    singularName: 'about';
+    pluralName: 'abouts';
+    displayName: 'About';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Welcome: Attribute.String & Attribute.Required;
+    Portrait: Attribute.Media<'images'> & Attribute.Required;
+    Stack: Attribute.Relation<'api::about.about', 'oneToMany', 'api::tag.tag'>;
+    Education: Attribute.Relation<
+      'api::about.about',
+      'oneToMany',
+      'api::tag.tag'
+    >;
+    Imprint: Attribute.Relation<
+      'api::about.about',
+      'oneToMany',
+      'api::collaborator.collaborator'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCollaboratorCollaborator extends Schema.CollectionType {
+  collectionName: 'collaborators';
+  info: {
+    singularName: 'collaborator';
+    pluralName: 'collaborators';
+    displayName: 'Collaborator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    URL: Attribute.String;
+    Mail: Attribute.Email;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::collaborator.collaborator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::collaborator.collaborator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPhotoprojectPhotoproject extends Schema.CollectionType {
+  collectionName: 'photoprojects';
+  info: {
+    singularName: 'photoproject';
+    pluralName: 'photoprojects';
+    displayName: 'Photoproject';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
+    Content: Attribute.Blocks & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::photoproject.photoproject',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::photoproject.photoproject',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'Post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Subtitle: Attribute.String & Attribute.Required;
+    Thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
+    Tags: Attribute.Relation<'api::post.post', 'oneToMany', 'api::tag.tag'>;
+    Collaborators: Attribute.Relation<
+      'api::post.post',
+      'oneToMany',
+      'api::collaborator.collaborator'
+    >;
+    Code: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    Design: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Color: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -830,7 +962,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::collaborator.collaborator': ApiCollaboratorCollaborator;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -839,6 +970,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::about.about': ApiAboutAbout;
+      'api::collaborator.collaborator': ApiCollaboratorCollaborator;
+      'api::photoproject.photoproject': ApiPhotoprojectPhotoproject;
+      'api::post.post': ApiPostPost;
+      'api::tag.tag': ApiTagTag;
     }
   }
 }

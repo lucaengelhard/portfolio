@@ -1,10 +1,11 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "collaborators",
   "info": {
     "singularName": "collaborator",
     "pluralName": "collaborators",
-    "displayName": "Collaborator"
+    "displayName": "Collaborator",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

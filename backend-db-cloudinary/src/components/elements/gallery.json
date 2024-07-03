@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_elements_galleries",
+  "info": {
+    "displayName": "Gallery",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Description": {
+      "type": "string"
+    },
+    "Images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}

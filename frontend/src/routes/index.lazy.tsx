@@ -1,7 +1,7 @@
 import { Link, createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
-import { NavPoint, baseUrl } from "./__root";
+import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 
 export const Route = createLazyFileRoute("/")({
@@ -44,7 +44,10 @@ function Hero() {
     <div className="h-screen w-full relative">
       <HeroText />
       <img
-        src={baseUrl + data.home.data.attributes.Heroimage.data.attributes.url}
+        src={
+          import.meta.env.VITE_PUBLIC_STRAPI_URL +
+          data.home.data.attributes.Heroimage.data.attributes.url
+        }
         className="h-full w-full object-contain"
         alt=""
       />

@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import Tag from "./Tag";
 
-import { baseUrl } from "../routes/__root";
 import { TProject } from "../types/api";
 
 export default function Projectlist({
@@ -30,7 +29,10 @@ export function Project({ project }: { project: TProject }) {
       <Link to={`${project.id}`}>
         <img
           className="w-full object-cover aspect-video"
-          src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+          src={
+            import.meta.env.VITE_PUBLIC_STRAPI_URL +
+            project.attributes.Thumbnail.data.attributes.url
+          }
           alt={project.attributes.Title}
         />
         <div className="p-4 transition-colors duration-300">

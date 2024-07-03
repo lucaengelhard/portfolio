@@ -863,6 +863,28 @@ export interface ApiCollaboratorCollaborator extends Schema.CollectionType {
   };
 }
 
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Heroimage: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPhotoprojectPhotoproject extends Schema.CollectionType {
   collectionName: 'photoprojects';
   info: {
@@ -972,6 +994,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about.about': ApiAboutAbout;
       'api::collaborator.collaborator': ApiCollaboratorCollaborator;
+      'api::home.home': ApiHomeHome;
       'api::photoproject.photoproject': ApiPhotoprojectPhotoproject;
       'api::post.post': ApiPostPost;
       'api::tag.tag': ApiTagTag;

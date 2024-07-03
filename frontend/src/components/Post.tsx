@@ -16,7 +16,6 @@ import {
   TProject,
   TText,
 } from "../types/api";
-import { baseUrl } from "../routes/__root";
 
 export default function Post({ project }: { project: TProject }) {
   return (
@@ -24,7 +23,10 @@ export default function Post({ project }: { project: TProject }) {
       <div className="mx-auto max-w-screen-xl my-20">
         <img
           className="w-full object-cover aspect-video px-4"
-          src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+          src={
+            import.meta.env.VITE_PUBLIC_STRAPI_URL +
+            project.attributes.Thumbnail.data.attributes.url
+          }
           alt={project.attributes.Title}
         />
         <div className="p-4">
@@ -284,7 +286,7 @@ export function Gallery({
           <img
             key={image.attributes.url}
             className="object-cover"
-            src={baseUrl + image.attributes.url}
+            src={import.meta.env.VITE_PUBLIC_STRAPI_URL + image.attributes.url}
             alt=""
           />
         ))}

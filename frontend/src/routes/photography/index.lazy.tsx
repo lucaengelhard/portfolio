@@ -2,7 +2,6 @@ import { Link, createLazyFileRoute } from "@tanstack/react-router";
 
 import { useQuery, gql } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
-import { baseUrl } from "../__root";
 import { ImageLoader } from "../../components/Loading";
 
 export const Route = createLazyFileRoute("/photography/")({
@@ -49,7 +48,10 @@ function Photography() {
             </div>
             <img
               className="h-full object-cover w-full"
-              src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+              src={
+                import.meta.env.VITE_PUBLIC_STRAPI_URL +
+                project.attributes.Thumbnail.data.attributes.url
+              }
               alt=""
             />
           </div>

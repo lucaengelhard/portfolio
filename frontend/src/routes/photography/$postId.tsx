@@ -3,7 +3,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Gallery, RenderContent } from "../../components/Post";
 import { gql, useQuery } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
-import { baseUrl } from "../__root";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -56,7 +55,10 @@ function PhotoPost() {
     <div>
       <img
         className="h-screen w-screen object-cover"
-        src={baseUrl + project.attributes.Thumbnail.data.attributes.url}
+        src={
+          import.meta.env.VITE_PUBLIC_STRAPI_URL +
+          project.attributes.Thumbnail.data.attributes.url
+        }
         alt=""
       />
       <div className="grid" style={{ gridTemplateColumns: "20% 80%" }}>

@@ -4,7 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 
 import Tag from "../components/Tag";
 import { TAbout, TTag } from "../types/api";
-import { baseUrl } from "./__root";
+
 export const Route = createLazyFileRoute("/about")({
   component: About,
 });
@@ -63,7 +63,10 @@ function About() {
       <div className="grid gap-8" style={{ gridTemplateColumns: "30% 70%" }}>
         <img
           className="h-screen w-full object-cover"
-          src={baseUrl + aboutdata.attributes.Portrait.data.attributes.url}
+          src={
+            import.meta.env.VITE_PUBLIC_STRAPI_URL +
+            aboutdata.attributes.Portrait.data.attributes.url
+          }
           alt=""
         />
         <div className="max-w-screen-sm p-4 h-full grid items-center text-5xl font-bold text-purple-600">

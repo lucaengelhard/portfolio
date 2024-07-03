@@ -17,10 +17,8 @@ import Flickr from "../assets/icons/Flickr";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-export const baseUrl = "http://localhost:1337";
-
 const client = new ApolloClient({
-  uri: baseUrl + "/graphql",
+  uri: import.meta.env.VITE_PUBLIC_STRAPI_URL + "/graphql",
   cache: new InMemoryCache(),
 });
 

@@ -79,15 +79,21 @@ function About() {
   }));
 
   return (
-    <div>
-      <div className="grid gap-8" style={{ gridTemplateColumns: "30% 70%" }}>
+    <div className="w-screen">
+      <div className="relative h-screen w-full">
         <img
-          className="h-screen w-full object-cover"
+          className="h-screen w-full object-cover md:object-contain absolute object-left-top -z-10"
           src={aboutdata.attributes.Portrait.data.attributes.url}
           alt=""
         />
-        <div className="max-w-screen-sm p-4 h-full grid items-center text-5xl font-bold text-purple-600">
-          {aboutdata.attributes.Welcome}
+        <div
+          className="md:grid gap-8 h-full"
+          style={{ gridTemplateColumns: "30% 70%" }}
+        >
+          <div className="h-screen w-full hidden md:block"></div>
+          <div className="max-w-screen-sm p-8 h-full grid items-center text-5xl font-bold text-purple-600">
+            {aboutdata.attributes.Welcome}
+          </div>
         </div>
       </div>
       <AboutTagList title="I work with" tags={stack} />
@@ -100,10 +106,12 @@ function About() {
 function AboutTagList({ title, tags }: { title: string; tags: TTag[] }) {
   return (
     <div
-      className="grid gap-8 p-4 mt-10"
+      className="md:grid gap-8 p-4 mt-10"
       style={{ gridTemplateColumns: "30% 70%" }}
     >
-      <div className="text-3xl text-right font-bold ">{title}</div>
+      <div className="text-3xl mb-4 md:mb-0 md:text-right font-bold ">
+        {title}
+      </div>
 
       <div className="flex gap-4 flex-wrap max-w-screen-sm">
         {tags.map((item) => (

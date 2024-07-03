@@ -58,12 +58,12 @@ function PhotoPost() {
         src={project.attributes.Thumbnail.data.attributes.url}
         alt=""
       />
-      <div className="grid" style={{ gridTemplateColumns: "20% 80%" }}>
+      <div className="block sm:flex gap-4">
         <h1 className="text-2xl font-bold text-purple-600 p-4">
           {project.attributes.Title}
         </h1>
         {project.attributes.Content && (
-          <div className="mt-4">
+          <div className="p-4">
             <RenderContent content={project.attributes.Content} />
           </div>
         )}

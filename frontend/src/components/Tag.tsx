@@ -12,7 +12,7 @@ export default function Tag({
   return (
     <div
       className={cn(
-        "py-1 px-2 rounded-full text-xs border pointer-events-none whitespace-nowrap",
+        "py-1 px-2 rounded-full text-xs border pointer-events-none whitespace-nowrap max-w-full overflow-ellipsis overflow-hidden",
         className
       )}
       style={{

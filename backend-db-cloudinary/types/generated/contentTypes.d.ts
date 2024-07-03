@@ -933,7 +933,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required;
     Subtitle: Attribute.String & Attribute.Required;
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
+    Gallery: Attribute.Component<'elements.gallery'>;
     Tags: Attribute.Relation<'api::post.post', 'oneToMany', 'api::tag.tag'>;
     Code: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     Design: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;

@@ -32,7 +32,7 @@
       "type": "component",
       "repeatable": false,
       "component": "elements.gallery",
-      "required": true
+      "required": false
     },
     "Tags": {
       "type": "relation",

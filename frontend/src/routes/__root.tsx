@@ -85,7 +85,7 @@ function Nav() {
       </div>
       <button
         onClick={() => setExpanded((current) => !current)}
-        className="absolute right-4 top-8 scale-125 text-purple-600"
+        className="absolute right-4 top-8 scale-125 text-purple-600 md:hidden"
       >
         <Menu />
       </button>

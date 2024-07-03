@@ -37,6 +37,8 @@ const HOME = gql`
 `;
 
 function Hero() {
+  console.log(import.meta.env.VITE_PUBLIC_STRAPI_URL);
+
   const { loading, error, data } = useQuery(HOME);
 
   if (loading) return <div>Loading...</div>;

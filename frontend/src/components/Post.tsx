@@ -22,16 +22,16 @@ export default function Post({ project }: { project: TProject }) {
     <>
       <div className="mx-auto max-w-screen-xl my-20">
         <img
-          className="w-full object-cover aspect-video px-4"
+          className="w-full object-cover aspect-video sm:px-4"
           src={project.attributes.Thumbnail.data.attributes.url}
           alt={project.attributes.Title}
         />
         <div className="p-4">
-          <h1 className="text-5xl font-bold mb-2 text-purple-600">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-2 text-purple-600">
             {project.attributes.Title}
           </h1>
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
-          <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
+          <div className="flex gap-2 mt-3 flex-wrap">
             {project.attributes.Tags.data.map((tag) => (
               <Tag
                 key={tag.id}
@@ -65,7 +65,7 @@ function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
   }
 
   return (
-    <div className="mt-2 flex gap-4 italic text-purple-600">
+    <div className="mt-2 flex gap-2 sm:gap-4 italic text-purple-600 flex-wrap sm:flex-nowrap">
       <div>In collaboration with:</div>
       <div>
         {collaborators.data.map((collaborator) => (
@@ -202,7 +202,7 @@ function PostImage({ image }: { image: TImage }) {
     <figure>
       <img
         src={image.image.url}
-        className="max-w-screen-md"
+        className="max-w-screen-md w-full"
         alt={image.image.alternativeText}
       />{" "}
       <figcaption className="italic">
@@ -280,15 +280,15 @@ export function Gallery({
         onClick={onClick}
         ref={wrapperRef}
         className={cn(
-          "flex gap-4 overflow-auto no-scrollbar cursor-pointer",
-          height === undefined ? "h-96" : undefined
+          "flex gap-4 overflow-auto no-scrollbar cursor-pointer ",
+          height === undefined ? "h-72 sm:h-96" : undefined
         )}
         style={{ height: height, scrollBehavior: "smooth" }}
       >
         {data.map((image) => (
           <img
             key={image.attributes.url}
-            className="object-cover"
+            className="object-cover max-w-full"
             src={image.attributes.url}
             alt=""
           />

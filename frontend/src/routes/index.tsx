@@ -1,11 +1,11 @@
-import { Link, createLazyFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
 import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 import { TDBImage } from "../types/api";
 
-export const Route = createLazyFileRoute("/")({
+export const Route = createFileRoute("/")({
   component: Index,
 });
 

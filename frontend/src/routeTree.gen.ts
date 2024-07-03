@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as DesignIndexImport } from './routes/design/index'
 import { Route as PhotographyPostIdImport } from './routes/photography/$postId'
 import { Route as DesignPostIdImport } from './routes/design/$postId'
 import { Route as CodePostIdImport } from './routes/code/$postId'
@@ -20,9 +22,7 @@ import { Route as CodePostIdImport } from './routes/code/$postId'
 // Create Virtual Routes
 
 const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
 const PhotographyIndexLazyImport = createFileRoute('/photography/')()
-const DesignIndexLazyImport = createFileRoute('/design/')()
 const CodeIndexLazyImport = createFileRoute('/code/')()
 
 // Create/Update Routes
@@ -32,10 +32,10 @@ const AboutLazyRoute = AboutLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
-const IndexLazyRoute = IndexLazyImport.update({
+const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any)
 
 const PhotographyIndexLazyRoute = PhotographyIndexLazyImport.update({
   path: '/photography/',
@@ -44,15 +44,15 @@ const PhotographyIndexLazyRoute = PhotographyIndexLazyImport.update({
   import('./routes/photography/index.lazy').then((d) => d.Route),
 )
 
-const DesignIndexLazyRoute = DesignIndexLazyImport.update({
-  path: '/design/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/design/index.lazy').then((d) => d.Route))
-
 const CodeIndexLazyRoute = CodeIndexLazyImport.update({
   path: '/code/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/code/index.lazy').then((d) => d.Route))
+
+const DesignIndexRoute = DesignIndexImport.update({
+  path: '/design/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const PhotographyPostIdRoute = PhotographyPostIdImport.update({
   path: '/photography/$postId',
@@ -77,7 +77,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+      preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -108,18 +108,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhotographyPostIdImport
       parentRoute: typeof rootRoute
     }
+    '/design/': {
+      id: '/design/'
+      path: '/design'
+      fullPath: '/design'
+      preLoaderRoute: typeof DesignIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/code/': {
       id: '/code/'
       path: '/code'
       fullPath: '/code'
       preLoaderRoute: typeof CodeIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/design/': {
-      id: '/design/'
-      path: '/design'
-      fullPath: '/design'
-      preLoaderRoute: typeof DesignIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/photography/': {
@@ -135,13 +135,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
+  IndexRoute,
   AboutLazyRoute,
   CodePostIdRoute,
   DesignPostIdRoute,
   PhotographyPostIdRoute,
+  DesignIndexRoute,
   CodeIndexLazyRoute,
-  DesignIndexLazyRoute,
   PhotographyIndexLazyRoute,
 })
 
@@ -158,13 +158,13 @@ export const routeTree = rootRoute.addChildren({
         "/code/$postId",
         "/design/$postId",
         "/photography/$postId",
-        "/code/",
         "/design/",
+        "/code/",
         "/photography/"
       ]
     },
     "/": {
-      "filePath": "index.lazy.tsx"
+      "filePath": "index.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
@@ -178,11 +178,11 @@ export const routeTree = rootRoute.addChildren({
     "/photography/$postId": {
       "filePath": "photography/$postId.tsx"
     },
+    "/design/": {
+      "filePath": "design/index.tsx"
+    },
     "/code/": {
       "filePath": "code/index.lazy.tsx"
-    },
-    "/design/": {
-      "filePath": "design/index.lazy.tsx"
     },
     "/photography/": {
       "filePath": "photography/index.lazy.tsx"

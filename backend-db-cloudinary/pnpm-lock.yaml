@@ -20,6 +20,9 @@ importers:
       '@strapi/plugin-users-permissions':
         specifier: 4.25.1
         version: 4.25.1(@babel/runtime@7.24.7)(@codemirror/autocomplete@6.16.3(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.28.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.2)(@codemirror/lint@6.8.1)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.28.3)(@strapi/strapi@4.25.1(@babel/runtime@7.24.7)(@codemirror/autocomplete@6.16.3(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.28.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.2)(@codemirror/lint@6.8.1)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.28.3)(@swc/helpers@0.5.11)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.14.9)(@types/react@18.3.3)(codemirror@5.65.16)(pg@8.8.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@5.3.4(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.7)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))(terser@5.31.1)(type-fest@2.19.0))(@types/react@18.3.3)(codemirror@5.65.16)(react-dom@18.3.1(react@18.3.1))(react-router-dom@5.3.4(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.7)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))(typescript@5.2.2)
+      '@strapi/provider-upload-cloudinary':
+        specifier: ^4.25.1
+        version: 4.25.1
       '@strapi/strapi':
         specifier: 4.25.1
         version: 4.25.1(@babel/runtime@7.24.7)(@codemirror/autocomplete@6.16.3(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.28.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.2)(@codemirror/lint@6.8.1)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.28.3)(@swc/helpers@0.5.11)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.14.9)(@types/react@18.3.3)(codemirror@5.65.16)(pg@8.8.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@5.3.4(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.7)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))(terser@5.31.1)(type-fest@2.19.0)
@@ -1631,6 +1634,10 @@ packages:
     resolution: {integrity: sha512-eKp912Q0nIZOKEivgOpyFV9OAurNU+oJV/00eh9Q2uDWdtSl/Z7pO481XyFan7Jthn7aB2J5C50xzhQrsFaggA==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
 
+  '@strapi/provider-upload-cloudinary@4.25.1':
+    resolution: {integrity: sha512-s96itxvfTvS+ar8rTdD7GET1mag5KpyyPJIujzg9gwhBlGEQJ7NZKn3Nsh48pQwofV4bkGBNcNNNEN+ooxRW+w==}
+    engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
+
   '@strapi/provider-upload-local@4.25.1':
     resolution: {integrity: sha512-jkTfHfFPwE5PMWvU/yUHfyv9rI5D+OcUVtzKFmkkVs/l6T6UAWSWh+26kZYJ4fpotfNWX6XNHtgtvQXS+08uVw==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
@@ -2479,6 +2486,15 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
 
+  cloudinary-core@2.13.1:
+    resolution: {integrity: sha512-z53GPNWnvU0Zi+ns8CIVbZBfj7ps/++zDvwIyiFuq5p1MoK+KUCg0k5mBceDDHTnx1gHmHUd9aohS+gDxPNt6w==}
+    peerDependencies:
+      lodash: '>=4.0'
+
+  cloudinary@1.41.3:
+    resolution: {integrity: sha512-4o84y+E7dbif3lMns+p3UW6w6hLHEifbX/7zBJvaih1E9QNMZITENQ14GPYJC4JmhygYXsuuBb9bRA3xWEoOfg==}
+    engines: {node: '>=0.6'}
+
   co-body@5.2.0:
     resolution: {integrity: sha512-sX/LQ7LqUhgyaxzbe7IqwPeTr2yfpfUIQ/dgpKo6ZI4y4lpQA0YxAomWIY+7I7rHWcG02PG+OuPREzMW/5tszQ==}
 
@@ -2625,6 +2641,9 @@ packages:
 
   core-js-pure@3.37.1:
     resolution: {integrity: sha512-J/r5JTHSmzTxbiYYrzXg9w1VpqrYt+gexenBE9pugeyhwPZTAEJddyiReJWsLO6uNQ8xJZFbod6XC7KKwatCiA==}
+
+  core-js@3.37.1:
+    resolution: {integrity: sha512-Xn6qmxrQZyB0FFY8E3bgRXei3lWDJHhvI+u0q9TKIYM49G8pAr0FgnnrFRAmsbptZL1yxRADVXn+x5AGsbBfyw==}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -3217,6 +3236,9 @@ packages:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
 
+  from2@2.3.0:
+    resolution: {integrity: sha512-OMcX/4IC/uqEPVgGeyfN22LJk6AZrMkRZHxcHBMBvHScDGgwTm2GT2Wkgtocyd3JfZffjj2kYUDXXII0Fk9W0g==}
+
   fs-capacitor@6.2.0:
     resolution: {integrity: sha512-nKcE1UduoSKX27NSZlg879LdQc94OtbOsEmKMN2MBNudXREvijRKx2GEBsTMTfws+BrbkJoEuynbGSVRSpauvw==}
     engines: {node: '>=10'}
@@ -3660,6 +3682,10 @@ packages:
 
   intl-messageformat@10.3.4:
     resolution: {integrity: sha512-/FxUIrlbPtuykSNX85CB5sp2FjLVeTmdD7TfRkVFPft2n4FgcSlAcilFytYiFAEmPHc+0PvpLCIPXeaGFzIvOg==}
+
+  into-stream@5.1.1:
+    resolution: {integrity: sha512-krrAJ7McQxGGmvaYbB7Q1mcA+cRwg9Ij2RfWIeVesNBgVDZmzY/Fa4IpZUT3bmdRzMzdf/mzltCG2Dq99IZGBA==}
+    engines: {node: '>=8'}
 
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
@@ -4606,6 +4632,10 @@ packages:
     resolution: {integrity: sha512-BZOr3nRQHOntUjTrH8+Lh54smKHoHyur8We1V8DSMVrl5A2malOOwuJRnKRDjSnkoeBh4at6BwEnb5I7Jl31wg==}
     engines: {node: '>=8'}
 
+  p-is-promise@3.0.0:
+    resolution: {integrity: sha512-Wo8VsW4IRQSKVXsJCn7TomUaVtyfjVDn3nUP7kE967BQk0CwFpdbZs0X0uk5sW9mkBa9eNM7hCMaG93WUAwxYQ==}
+    engines: {node: '>=8'}
+
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -4921,6 +4951,14 @@ packages:
   purest@4.0.2:
     resolution: {integrity: sha512-Uq6kdia8zGVHOb/0zAOb7FvKFMKeyeTZTLEwpO0JR3cIFEkpH6asv3ls9M9URDjHiYIdgAPmht5ecSbvPacfyg==}
     engines: {node: '>=12.0.0'}
+
+  q@1.5.1:
+    resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
+    engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
+    deprecated: |-
+      You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
+      (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.11.1:
     resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
@@ -8301,6 +8339,12 @@ snapshots:
       '@strapi/utils': 4.25.1
       sendmail: 1.6.1
 
+  '@strapi/provider-upload-cloudinary@4.25.1':
+    dependencies:
+      '@strapi/utils': 4.25.1
+      cloudinary: 1.41.3
+      into-stream: 5.1.1
+
   '@strapi/provider-upload-local@4.25.1':
     dependencies:
       '@strapi/utils': 4.25.1
@@ -9478,6 +9522,17 @@ snapshots:
 
   clone@1.0.4: {}
 
+  cloudinary-core@2.13.1(lodash@4.17.21):
+    dependencies:
+      lodash: 4.17.21
+
+  cloudinary@1.41.3:
+    dependencies:
+      cloudinary-core: 2.13.1(lodash@4.17.21)
+      core-js: 3.37.1
+      lodash: 4.17.21
+      q: 1.5.1
+
   co-body@5.2.0:
     dependencies:
       inflation: 2.1.0
@@ -9633,6 +9688,8 @@ snapshots:
       yargs: 16.2.0
 
   core-js-pure@3.37.1: {}
+
+  core-js@3.37.1: {}
 
   core-util-is@1.0.3: {}
 
@@ -10281,6 +10338,11 @@ snapshots:
 
   fresh@0.5.2: {}
 
+  from2@2.3.0:
+    dependencies:
+      inherits: 2.0.4
+      readable-stream: 2.3.8
+
   fs-capacitor@6.2.0: {}
 
   fs-constants@1.0.0: {}
@@ -10790,6 +10852,11 @@ snapshots:
       '@formatjs/fast-memoize': 2.0.1
       '@formatjs/icu-messageformat-parser': 2.3.1
       tslib: 2.6.3
+
+  into-stream@5.1.1:
+    dependencies:
+      from2: 2.3.0
+      p-is-promise: 3.0.0
 
   invariant@2.2.4:
     dependencies:
@@ -11754,6 +11821,8 @@ snapshots:
 
   p-cancelable@2.1.1: {}
 
+  p-is-promise@3.0.0: {}
+
   p-limit@2.3.0:
     dependencies:
       p-try: 2.2.0
@@ -12065,6 +12134,8 @@ snapshots:
       request-compose: 2.1.6
       request-multipart: 1.0.0
       request-oauth: 1.0.1
+
+  q@1.5.1: {}
 
   qs@6.11.1:
     dependencies:

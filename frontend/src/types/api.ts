@@ -4,7 +4,7 @@ export type TProject = {
     Title: string;
     Subtitle: string;
     Tags: TTags;
-    Thumbnail: TThumbnail;
+    Thumbnail: TDBImage;
     Content?: TContent;
     Gallery?: TGallery;
     Collaborators?: TCollaborators;
@@ -108,12 +108,12 @@ export type TGallery = {
 };
 
 export type TTags = {
-  data: [{ id: string; attributes: { Tag: TTag } }];
+  data: [{ id: string; attributes: TTag }];
 };
 
 export type TTag = {
   Title: string;
-  color: string;
+  Color: string;
 };
 
 export type TCollaborators = {
@@ -141,7 +141,35 @@ export type TAbout = {
     Portrait: TThumbnail;
     Welcome: string;
     Stack: TTags;
-    Education: TTag[];
-    Imprint: TTag[];
+    Education: TTags;
+    Imprint: TTags;
+  };
+};
+
+export type TDBImage = {
+  data: {
+    attributes: {
+      url: string;
+      formats: {
+        [key in "large" | "small" | "medium" | "thumbnail"]: TDBImageFormat;
+      };
+    };
+  };
+};
+
+export type TDBImageFormat = {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path: string | null;
+  size: number;
+  width: number;
+  height: number;
+  sizeInBytes: number;
+  provider_metadata: {
+    public_id: string;
+    resource_type: string;
   };
 };

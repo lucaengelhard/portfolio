@@ -10,8 +10,8 @@ export const Route = createLazyFileRoute("/design/")({
 });
 
 const PROJECTS = gql`
-  query GetDesigns {
-    designs(pagination: { limit: 100 }, filters: { Design: { eq: true } }) {
+  query GetCodes {
+    posts(pagination: { limit: 100 }, filters: { Code: { eq: true } }) {
       data {
         id
         attributes {
@@ -21,10 +21,8 @@ const PROJECTS = gql`
             data {
               id
               attributes {
-                Tag {
-                  Title
-                  color
-                }
+                Title
+                Color
               }
             }
           }
@@ -47,5 +45,7 @@ function Designer() {
   if (loading) return <ProjectListLoader />;
   if (error) return <div>Error</div>;
 
-  return <Projectlist projectlist={data.designs.data as TProject[]} />;
+  console.log(data.posts.data);
+
+  return <Projectlist projectlist={data.posts.data as TProject[]} />;
 }

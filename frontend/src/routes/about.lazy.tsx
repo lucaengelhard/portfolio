@@ -26,20 +26,28 @@ const ABOUT = gql`
             data {
               id
               attributes {
-                Tag {
-                  Title
-                  color
-                }
+                Title
+                Color
               }
             }
           }
           Education {
-            Title
-            color
+            data {
+              id
+              attributes {
+                Title
+                Color
+              }
+            }
           }
           Imprint {
-            Title
-            color
+            data {
+              id
+              attributes {
+                Title
+                Color
+              }
+            }
           }
         }
       }
@@ -55,18 +63,27 @@ function About() {
 
   const aboutdata = data.about.data as TAbout;
 
-  const stack = aboutdata.attributes.Stack.data.map((s) => s.attributes.Tag);
-  console.log(stack);
+  const stack: TTag[] = aboutdata.attributes.Stack.data.map((s) => ({
+    Color: s.attributes.Color,
+    Title: s.attributes.Title,
+  }));
+
+  const education: TTag[] = aboutdata.attributes.Education.data.map((s) => ({
+    Color: s.attributes.Color,
+    Title: s.attributes.Title,
+  }));
+
+  const imprint: TTag[] = aboutdata.attributes.Imprint.data.map((s) => ({
+    Color: s.attributes.Color,
+    Title: s.attributes.Title,
+  }));
 
   return (
     <div>
       <div className="grid gap-8" style={{ gridTemplateColumns: "30% 70%" }}>
         <img
           className="h-screen w-full object-cover"
-          src={
-            import.meta.env.VITE_PUBLIC_STRAPI_URL +
-            aboutdata.attributes.Portrait.data.attributes.url
-          }
+          src={aboutdata.attributes.Portrait.data.attributes.url}
           alt=""
         />
         <div className="max-w-screen-sm p-4 h-full grid items-center text-5xl font-bold text-purple-600">
@@ -74,8 +91,8 @@ function About() {
         </div>
       </div>
       <AboutTagList title="I work with" tags={stack} />
-      <AboutTagList title="Education" tags={aboutdata.attributes.Education} />
-      <AboutTagList title="Imprint" tags={aboutdata.attributes.Imprint} />
+      <AboutTagList title="Education" tags={education} />
+      <AboutTagList title="Imprint" tags={imprint} />
     </div>
   );
 }

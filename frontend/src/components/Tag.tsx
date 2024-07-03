@@ -16,9 +16,9 @@ export default function Tag({
         className
       )}
       style={{
-        backgroundColor: tag.color,
-        borderColor: tag.color,
-        color: fontColorContrast(tag.color),
+        backgroundColor: tag.Color,
+        borderColor: tag.Color,
+        color: fontColorContrast(tag.Color),
       }}
     >
       {tag.Title}

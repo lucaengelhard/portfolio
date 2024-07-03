@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/photography/")({
 
 const PROJECTS = gql`
   query GetPhotos {
-    photos(pagination: { limit: 100 }) {
+    photoprojects(pagination: { limit: 100 }) {
       data {
         id
         attributes {
@@ -34,7 +34,7 @@ function Photography() {
   if (loading) return <ImageLoader />;
   if (error) return <div>Error</div>;
 
-  const projectlist = data.photos.data as TPhotoproject[];
+  const projectlist = data.photoprojects.data as TPhotoproject[];
 
   return (
     <div>
@@ -48,10 +48,7 @@ function Photography() {
             </div>
             <img
               className="h-full object-cover w-full"
-              src={
-                import.meta.env.VITE_PUBLIC_STRAPI_URL +
-                project.attributes.Thumbnail.data.attributes.url
-              }
+              src={project.attributes.Thumbnail.data.attributes.url}
               alt=""
             />
           </div>

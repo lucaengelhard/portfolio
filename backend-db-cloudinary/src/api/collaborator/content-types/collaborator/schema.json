@@ -4,8 +4,7 @@
   "info": {
     "singularName": "collaborator",
     "pluralName": "collaborators",
-    "displayName": "Collaborator",
-    "description": ""
+    "displayName": "Collaborator"
   },
   "options": {
     "draftAndPublish": true

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "post",
     "pluralName": "posts",
-    "displayName": "Post"
+    "displayName": "Post",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,12 +21,12 @@
       "required": true
     },
     "Thumbnail": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Gallery": {
       "type": "component",
@@ -38,11 +39,6 @@
       "relation": "oneToMany",
       "target": "api::tag.tag"
     },
-    "Collaborators": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::collaborator.collaborator"
-    },
     "Code": {
       "type": "boolean",
       "default": false,
@@ -52,6 +48,15 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "Content": {
+      "type": "blocks",
+      "required": true
+    },
+    "Collaborators": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collaborator.collaborator"
     }
   }
 }

@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 
 import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
+import { TDBImage } from "../types/api";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -25,6 +26,7 @@ const HOME = gql`
             data {
               attributes {
                 url
+                formats
               }
             }
           }
@@ -40,14 +42,13 @@ function Hero() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
+  const image = data.home.data.attributes.Heroimage as TDBImage;
+
   return (
     <div className="h-screen w-full relative">
       <HeroText />
       <img
-        src={
-          import.meta.env.VITE_PUBLIC_STRAPI_URL +
-          data.home.data.attributes.Heroimage.data.attributes.url
-        }
+        src={image.data.attributes.formats.large.url}
         className="h-full w-full object-contain"
         alt=""
       />

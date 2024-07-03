@@ -23,10 +23,7 @@ export default function Post({ project }: { project: TProject }) {
       <div className="mx-auto max-w-screen-xl my-20">
         <img
           className="w-full object-cover aspect-video px-4"
-          src={
-            import.meta.env.VITE_PUBLIC_STRAPI_URL +
-            project.attributes.Thumbnail.data.attributes.url
-          }
+          src={project.attributes.Thumbnail.data.attributes.url}
           alt={project.attributes.Title}
         />
         <div className="p-4">
@@ -36,7 +33,13 @@ export default function Post({ project }: { project: TProject }) {
           <h2 className="text-xl">{project.attributes.Subtitle}</h2>
           <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
             {project.attributes.Tags.data.map((tag) => (
-              <Tag key={tag.id} tag={tag.attributes.Tag} />
+              <Tag
+                key={tag.id}
+                tag={{
+                  Color: tag.attributes.Color,
+                  Title: tag.attributes.Title,
+                }}
+              />
             ))}
           </div>
           {project.attributes.Collaborators && (
@@ -286,7 +289,7 @@ export function Gallery({
           <img
             key={image.attributes.url}
             className="object-cover"
-            src={import.meta.env.VITE_PUBLIC_STRAPI_URL + image.attributes.url}
+            src={image.attributes.url}
             alt=""
           />
         ))}

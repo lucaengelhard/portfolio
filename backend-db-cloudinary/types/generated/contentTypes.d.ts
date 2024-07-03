@@ -794,6 +794,7 @@ export interface ApiAboutAbout extends Schema.SingleType {
     singularName: 'about';
     pluralName: 'abouts';
     displayName: 'About';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -810,7 +811,7 @@ export interface ApiAboutAbout extends Schema.SingleType {
     Imprint: Attribute.Relation<
       'api::about.about',
       'oneToMany',
-      'api::collaborator.collaborator'
+      'api::tag.tag'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -836,7 +837,6 @@ export interface ApiCollaboratorCollaborator extends Schema.CollectionType {
     singularName: 'collaborator';
     pluralName: 'collaborators';
     displayName: 'Collaborator';
-    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -924,6 +924,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     singularName: 'post';
     pluralName: 'posts';
     displayName: 'Post';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -934,13 +935,14 @@ export interface ApiPostPost extends Schema.CollectionType {
     Thumbnail: Attribute.Media<'images'> & Attribute.Required;
     Gallery: Attribute.Component<'elements.gallery'> & Attribute.Required;
     Tags: Attribute.Relation<'api::post.post', 'oneToMany', 'api::tag.tag'>;
+    Code: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    Design: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    Content: Attribute.Blocks & Attribute.Required;
     Collaborators: Attribute.Relation<
       'api::post.post',
       'oneToMany',
       'api::collaborator.collaborator'
     >;
-    Code: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    Design: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

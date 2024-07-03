@@ -15,8 +15,6 @@ import {
 } from "lucide-react";
 import Flickr from "../assets/icons/Flickr";
 
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useState } from "react";
 import { cn } from "../lib/utils";
@@ -32,7 +30,6 @@ export const Route = createRootRoute({
       <ApolloProvider client={client}>
         <Nav />
         <Outlet />
-        <TanStackRouterDevtools />
       </ApolloProvider>
     </>
   ),

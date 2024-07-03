@@ -2,7 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 import Projectlist from "../../components/Project";
 import { TProject } from "../../types/api";
-import { ProjectListLoader } from "../../components/Loading";
+import { BaseLoader } from "../../components/Loading";
 
 export const Route = createLazyFileRoute("/code/")({
   component: Code,
@@ -41,7 +41,7 @@ const PROJECTS = gql`
 function Code() {
   const { loading, error, data } = useQuery(PROJECTS);
 
-  if (loading) return <ProjectListLoader />;
+  if (loading) return <BaseLoader />;
   if (error) return <div>Error</div>;
 
   return <Projectlist projectlist={data.posts.data as TProject[]} />;

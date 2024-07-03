@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Camera } from "lucide-react";
+import { Braces, Camera, PenTool } from "lucide-react";
 
 const emptyarray = ["", "", "", "", ""];
 
@@ -43,6 +43,31 @@ function ProjectCardLoader() {
   );
 }
 
+export function PostLoader() {
+  return (
+    <div className="h-screen fixed inset-0">
+      <div className="mx-auto max-w-screen-xl my-20">
+        <div className="w-full object-cover aspect-video sm:px-4 bg-purple-400"></div>
+        <div className="p-4">
+          <h1 className="text-3xl w-max sm:text-5xl font-bold mb-2 bg-purple-600 text-purple-600">
+            Loadiiiiiiiiiii
+          </h1>
+          <h2 className="text-xl w-max bg-purple-400 text-purple-400">
+            Loading
+          </h2>
+          <div className="flex gap-2 mt-3 overflow-auto no-scrollbar">
+            {emptyarray.map(() => (
+              <div className="py-1 px-2 rounded-full text-xs border pointer-events-none bg-purple-400 text-purple-400">
+                Loading...
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LoaderAnimation() {
   return (
     <motion.div
@@ -66,6 +91,32 @@ export function ImageLoader() {
           <Camera />{" "}
         </motion.div>
         <div>Loading...</div>
+      </div>
+    </div>
+  );
+}
+export function BaseLoader() {
+  return (
+    <div className="h-screen w-screen bg-white text-purple-600 grid justify-center pointer-events-none items-center">
+      <div className="flex gap-2 ">
+        <motion.div
+          animate={{ y: [-10, 0, -10] }}
+          transition={{ repeat: Infinity, repeatType: "loop" }}
+        >
+          <PenTool />{" "}
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, repeatType: "loop" }}
+        >
+          <Braces />{" "}
+        </motion.div>
+        <motion.div
+          animate={{ y: [-10, 0, -10] }}
+          transition={{ repeat: Infinity, repeatType: "loop" }}
+        >
+          <Camera />{" "}
+        </motion.div>
       </div>
     </div>
   );

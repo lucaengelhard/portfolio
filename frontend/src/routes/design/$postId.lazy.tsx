@@ -1,10 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
 import { TProject } from "../../types/api";
 import Post from "../../components/Post";
+import { BaseLoader } from "../../components/Loading";
 
-export const Route = createFileRoute("/code/$postId")({
+export const Route = createLazyFileRoute("/design/$postId")({
   component: Comp,
 });
 
@@ -66,7 +67,7 @@ function Comp() {
     variables: { id: postId },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <BaseLoader />;
   if (error) return <div>Error</div>;
 
   const project = data.post.data as TProject;

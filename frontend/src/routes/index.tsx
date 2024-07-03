@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 import { TDBImage } from "../types/api";
+import { BaseLoader } from "../components/Loading";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -39,7 +40,7 @@ const HOME = gql`
 function Hero() {
   const { loading, error, data } = useQuery(HOME);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <BaseLoader />;
   if (error) return <div>Error</div>;
 
   const image = data.home.data.attributes.Heroimage as TDBImage;

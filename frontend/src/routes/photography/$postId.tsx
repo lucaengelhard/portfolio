@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Gallery, RenderContent } from "../../components/Post";
 import { gql, useQuery } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
+import { BaseLoader } from "../../components/Loading";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -46,7 +47,7 @@ function PhotoPost() {
     variables: { id: postId },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <BaseLoader />;
   if (error) return <div>Error</div>;
 
   const project = data.photoproject.data as TPhotoproject;

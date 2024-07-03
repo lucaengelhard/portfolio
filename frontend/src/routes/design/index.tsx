@@ -1,11 +1,11 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
 import Projectlist from "../../components/Project";
 import { TProject } from "../../types/api";
 import { ProjectListLoader } from "../../components/Loading";
 
-export const Route = createLazyFileRoute("/design/")({
+export const Route = createFileRoute("/design/")({
   component: Designer,
 });
 

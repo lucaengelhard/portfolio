@@ -4,7 +4,6 @@ import {
   ReactNode,
   createRootRoute,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import {
   PenTool,
   Braces,
@@ -28,7 +27,6 @@ export const Route = createRootRoute({
       <ApolloProvider client={client}>
         <Nav />
         <Outlet />
-        <TanStackRouterDevtools />
       </ApolloProvider>
     </>
   ),

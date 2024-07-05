@@ -4,6 +4,7 @@ import { Gallery, RenderContent } from "../../components/Post";
 import { gql, useQuery } from "@apollo/client";
 import { TPhotoproject } from "../../types/api";
 import { BaseLoader } from "../../components/Loading";
+import ErrorPage from "../../components/Error";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -48,7 +49,7 @@ function PhotoPost() {
   });
 
   if (loading) return <BaseLoader />;
-  if (error) return <div>Error</div>;
+  if (error) return <ErrorPage error={error} />;
 
   const project = data.photoproject.data as TPhotoproject;
 

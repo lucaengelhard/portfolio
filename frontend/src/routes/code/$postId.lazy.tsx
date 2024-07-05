@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import { TProject } from "../../types/api";
 import Post from "../../components/Post";
 import { BaseLoader } from "../../components/Loading";
+import ErrorPage from "../../components/Error";
 
 export const Route = createLazyFileRoute("/code/$postId")({
   component: Comp,
@@ -68,7 +69,7 @@ function Comp() {
   });
 
   if (loading) return <BaseLoader />;
-  if (error) return <div>Error</div>;
+  if (error) return <ErrorPage error={error} />;
 
   const project = data.post.data as TProject;
 

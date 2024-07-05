@@ -160,13 +160,13 @@ function PostHeading({ heading }: { heading: THeading }) {
   switch (heading.level) {
     case 1:
       return (
-        <h1 className="text-5xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+        <h1 className="text-5xl font-bold text-purple-600 mt-6 mb-2 max-w-screen-md">
           <RenderContent content={heading.children} />
         </h1>
       );
     case 2:
       return (
-        <h2 className="text-3xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+        <h2 className="text-3xl font-bold text-purple-600 mt-5 mb-2 max-w-screen-md">
           <RenderContent content={heading.children} />
         </h2>
       );
@@ -199,8 +199,9 @@ function PostHeading({ heading }: { heading: THeading }) {
 
 function PostImage({ image }: { image: TImage }) {
   return (
-    <figure>
+    <figure className="py-4">
       <img
+        loading="lazy"
         src={image.image.url}
         className="max-w-screen-md w-full"
         alt={image.image.alternativeText}
@@ -280,7 +281,7 @@ export function Gallery({
         onClick={onClick}
         ref={wrapperRef}
         className={cn(
-          "flex gap-4 overflow-auto no-scrollbar cursor-pointer ",
+          "flex gap-4 overflow-auto no-scrollbar cursor-pointer snap-x  snap-mandatory",
           height === undefined ? "h-72 sm:h-96" : undefined
         )}
         style={{ height: height, scrollBehavior: "smooth" }}
@@ -288,7 +289,7 @@ export function Gallery({
         {data.map((image) => (
           <img
             key={image.attributes.url}
-            className="object-cover max-w-full"
+            className="object-cover max-w-full snap-center"
             src={image.attributes.url}
             alt=""
           />

@@ -61,6 +61,7 @@ function Nav() {
     >
       <div className="flex gap-x-12 flex-wrap gap-y-4">
         <Link
+          onClick={() => setExpanded(false)}
           to="/"
           className="font-bold hover:text-purple-600 cursor-pointer [&.active]:text-purple-600 whitespace-nowrap"
         >
@@ -68,7 +69,11 @@ function Nav() {
         </Link>
         <div className="flex gap-x-10 flex-wrap gap-y-2">
           {navPoints.map((point) => (
-            <NavItem key={point.id + point.name} navPoint={point} />
+            <NavItem
+              key={point.id + point.name}
+              navPoint={point}
+              setExpanded={setExpanded}
+            />
           ))}
         </div>
       </div>{" "}
@@ -93,9 +98,16 @@ function Nav() {
   );
 }
 
-function NavItem({ navPoint }: { navPoint: NavPoint }) {
+function NavItem({
+  navPoint,
+  setExpanded,
+}: {
+  navPoint: NavPoint;
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <Link
+      onClick={() => setExpanded(false)}
       to={navPoint.path}
       className="flex gap-2 hover:text-purple-600 [&.active]:font-bold [&.active]:text-purple-600"
     >

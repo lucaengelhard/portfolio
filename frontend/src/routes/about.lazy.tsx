@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import Tag from "../components/Tag";
 import { TAbout, TTag } from "../types/api";
 import { BaseLoader } from "../components/Loading";
+import ErrorPage from "../components/Error";
 
 export const Route = createLazyFileRoute("/about")({
   component: About,
@@ -60,7 +61,7 @@ function About() {
   const { loading, error, data } = useQuery(ABOUT);
 
   if (loading) return <BaseLoader />;
-  if (error) return <div>Error</div>;
+  if (error) return <ErrorPage error={error} />;
 
   const aboutdata = data.about.data as TAbout;
 

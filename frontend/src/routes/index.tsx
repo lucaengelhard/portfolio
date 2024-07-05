@@ -5,6 +5,7 @@ import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
 import { TDBImage } from "../types/api";
 import { BaseLoader } from "../components/Loading";
+import ErrorPage from "../components/Error";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -41,7 +42,7 @@ function Hero() {
   const { loading, error, data } = useQuery(HOME);
 
   if (loading) return <BaseLoader />;
-  if (error) return <div>Error</div>;
+  if (error) return <ErrorPage error={error} />;
 
   const image = data.home.data.attributes.Heroimage as TDBImage;
 

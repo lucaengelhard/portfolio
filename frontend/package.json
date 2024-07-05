@@ -8,7 +8,8 @@
     "build": "pnpm run generate-routes && tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "generate-routes": "tsr generate"
+    "generate-routes": "tsr generate",
+    "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1"
   },
   "dependencies": {
     "@apollo/client": "^3.10.8",

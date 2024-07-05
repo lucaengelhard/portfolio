@@ -9,7 +9,7 @@
     "build": "strapi build",
     "strapi": "strapi",
     "deploy": "strapi deploy",
-    "dropbox-clean": "Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.tmp' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.strapi' -Stream com.dropbox.ignored -Value 1"
+    "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.tmp' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.strapi' -Stream com.dropbox.ignored -Value 1"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "4.25.1",

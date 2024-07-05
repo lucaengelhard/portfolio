@@ -51,7 +51,7 @@ function Hero() {
       <HeroText />
       <img
         src={image.data.attributes.formats.large.url}
-        className="h-full w-full object-contain"
+        className="h-full w-full object-cover sm:object-contain"
         alt=""
       />
     </div>
@@ -66,7 +66,7 @@ function HeroText() {
     { id: 3, name: "About", icon: <CircleUserRound />, path: "/about" },
   ];
   return (
-    <div className="p-8 absolute text-7xl top-1/3 font-bold ">
+    <div className="p-8 absolute hidden sm:block text-5xl md:text-7xl top-1/3 font-bold ">
       {navPoints.map((point, index) => (
         <HeroTextElement key={point.name + index} point={point} />
       ))}

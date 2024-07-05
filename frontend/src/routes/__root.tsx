@@ -72,7 +72,7 @@ function Nav() {
           ))}
         </div>
       </div>{" "}
-      <div className="flex gap-x-4 md:gap-x-10">
+      <div className="flex gap-x-4 md:gap-x-5">
         <a target="_blank" href="https://www.instagram.com/luca__engelhard/">
           <Instagram className="hover:text-purple-600 " />
         </a>

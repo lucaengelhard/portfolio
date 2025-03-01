@@ -1,78 +1,109 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Gallery, RenderContent } from "../../components/Post";
-import { gql, useQuery } from "@apollo/client";
-import { TPhotoproject } from "../../types/api";
 import { BaseLoader } from "../../components/Loading";
-import ErrorPage from "../../components/Error";
+import useFetch from "react-fetch-hook";
+import { Gallery } from "../../components/Post";
+import { useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
 });
 
-const PROJECT = gql`
-  query GetPhoto($id: ID!) {
-    photoproject(id: $id) {
-      data {
-        id
-        attributes {
-          Title
-          Content
-          Gallery {
-            Description
-            Images {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-          Thumbnail {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 function PhotoPost() {
+  const [current, setCurrent] = useState(0);
+  const [popOut, setPopOut] = useState(false);
   const { postId } = Route.useParams();
 
-  const { loading, error, data } = useQuery(PROJECT, {
-    variables: { id: postId },
-  });
+  const { isLoading, data } = useFetch(
+    `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr/album?albumId=${postId}`
+  );
 
-  if (loading) return <BaseLoader />;
-  if (error) return <ErrorPage error={error} />;
+  function closePopout() {
+    setPopOut(false);
+  }
 
-  const project = data.photoproject.data as TPhotoproject;
+  function prev() {
+    if (current <= 0) {
+      setCurrent(data.length - 1);
+    } else {
+      setCurrent(current - 1);
+    }
+  }
 
-  return (
-    <div>
+  function next() {
+    if (current >= data.length - 1) {
+      setCurrent(0);
+    } else {
+      setCurrent(current + 1);
+    }
+  }
+
+  return isLoading ? (
+    <BaseLoader />
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {data.map((image, i) => (
+        <img
+          className="h-full object-cover"
+          key={image[0].source}
+          src={image[10].source}
+          onClick={() => {
+            setCurrent(i);
+            setPopOut(true);
+          }}
+        />
+      ))}
+      <ImageGridPopout
+        active={popOut}
+        current={current}
+        images={data}
+        closePopOut={closePopout}
+        next={next}
+        prev={prev}
+      />
+    </div>
+  );
+}
+
+function ImageGridPopout({
+  current,
+  images,
+  active,
+  closePopOut,
+  next,
+  prev,
+}: {
+  images: Array<any>;
+  current: number;
+  active: boolean;
+  closePopOut: () => void;
+  prev: () => void;
+  next: () => void;
+}) {
+  const currentImg = useMemo(() => images[current], [current, images]);
+
+  return active ? (
+    <div className="fixed h-screen w-screen top-0 left-0 bg-black z-50">
       <img
-        className="h-screen w-screen object-cover"
-        src={project.attributes.Thumbnail.data.attributes.url}
+        className="object-contain w-full h-full"
+        src={currentImg[12].source}
         alt=""
       />
-      <div className="block sm:flex gap-4">
-        <h1 className="text-2xl font-bold text-purple-600 p-4">
-          {project.attributes.Title}
-        </h1>
-        {project.attributes.Content && (
-          <div className="p-4">
-            <RenderContent content={project.attributes.Content} />
-          </div>
-        )}
-      </div>
-      {project.attributes.Gallery && (
-        <Gallery gallery={project.attributes.Gallery} height="60vh" />
-      )}
+      <ArrowLeft
+        className="absolute left-4 top-1/2 text-white cursor-pointer hover:text-primary"
+        onClick={() => prev()}
+      />
+      <ArrowRight
+        className="absolute right-4 top-1/2 text-white cursor-pointer hover:text-primary"
+        onClick={() => next()}
+      />
+      <X
+        className="absolute right-4 top-4 text-white cursor-pointer hover:text-primary"
+        onClick={() => closePopOut()}
+      />
     </div>
+  ) : (
+    <div></div>
   );
 }

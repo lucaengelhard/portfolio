@@ -1,0 +1,5 @@
+/**
+ * flickr service
+ */
+
+export default () => ({});

@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createFileRoute } from "@tanstack/react-router";
 
 import { BaseLoader } from "../../components/Loading";
 import useFetch from "react-fetch-hook";
-import { Gallery } from "../../components/Post";
-import { useMemo, useState } from "react";
+import { SetStateAction, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 
 export const Route = createFileRoute("/photography/$postId")({
@@ -25,14 +25,14 @@ function PhotoPost() {
 
   function prev() {
     if (current <= 0) {
-      setCurrent(data.length - 1);
+      setCurrent((data as any).length - 1);
     } else {
       setCurrent(current - 1);
     }
   }
 
   function next() {
-    if (current >= data.length - 1) {
+    if (current >= (data as any).length - 1) {
       setCurrent(0);
     } else {
       setCurrent(current + 1);
@@ -43,21 +43,26 @@ function PhotoPost() {
     <BaseLoader />
   ) : (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {data.map((image, i) => (
-        <img
-          className="h-full object-cover"
-          key={image[0].source}
-          src={image[10].source}
-          onClick={() => {
-            setCurrent(i);
-            setPopOut(true);
-          }}
-        />
-      ))}
+      {(data as any).map(
+        (
+          image: { source: string | undefined }[],
+          i: SetStateAction<number>
+        ) => (
+          <img
+            className="h-full object-cover"
+            key={image[0].source}
+            src={image[10].source}
+            onClick={() => {
+              setCurrent(i);
+              setPopOut(true);
+            }}
+          />
+        )
+      )}
       <ImageGridPopout
         active={popOut}
         current={current}
-        images={data}
+        images={data as any}
         closePopOut={closePopout}
         next={next}
         prev={prev}

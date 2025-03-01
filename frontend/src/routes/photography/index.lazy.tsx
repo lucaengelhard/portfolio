@@ -22,6 +22,7 @@ function Photography() {
           id: string;
           title: string;
           description: string;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           primary: Array<any>;
         }>
       ).map((album) => (

@@ -12,12 +12,12 @@
     "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.tmp' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.strapi' -Stream com.dropbox.ignored -Value 1"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.25.1",
+    "@strapi/plugin-cloud": "4.25.20",
     "@strapi/plugin-graphql": "^4.25.20",
-    "@strapi/plugin-i18n": "4.25.1",
-    "@strapi/plugin-users-permissions": "4.25.1",
+    "@strapi/plugin-i18n": "4.25.20",
+    "@strapi/plugin-users-permissions": "4.25.20",
     "@strapi/provider-upload-cloudinary": "^4.25.20",
-    "@strapi/strapi": "4.25.1",
+    "@strapi/strapi": "4.25.20",
     "@strapi/typescript-utils": "^4.25.20",
     "pg": "8.8.0",
     "pg-connection-string": "^2.7.0",
@@ -41,5 +41,5 @@
     "@types/node": "^20.17.22",
     "better-sqlite3": "^11.8.1"
   },
-  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
+  "packageManager": "pnpm@9.12.2"
 }

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",
+    "@tailwindcss/vite": "^4.0.9",
     "@tanstack/react-router": "^1.112.0",
     "chroma-js": "^3.1.2",
     "class-variance-authority": "^0.7.1",
@@ -28,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.9",
     "@tanstack/router-cli": "^1.112.0",
     "@tanstack/router-devtools": "^1.112.0",
     "@tanstack/router-plugin": "^1.112.0",
@@ -38,11 +40,9 @@
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "postcss": "^8.5.3",
     "tailwindcss": "^4.0.9",
     "typescript": "^5.8.2",
     "vite": "^6.2.0"

@@ -5,7 +5,7 @@ const emptyarray = ["", "", "", "", ""];
 
 export function ProjectListLoader() {
   return (
-    <div className=" grid max-h-screen overflow-hidden pointer-events-none grid-cols-2 gap-10 mx-auto max-w-screen-xl p-4 mt-16">
+    <div className=" grid max-h-screen overflow-hidden pointer-events-none grid-cols-2 gap-10 mx-auto max-w-(--breakpoint-xl) p-4 mt-16">
       {emptyarray.map(() => (
         <ProjectCardLoader />
       ))}
@@ -46,7 +46,7 @@ function ProjectCardLoader() {
 export function PostLoader() {
   return (
     <div className="h-screen fixed inset-0">
-      <div className="mx-auto max-w-screen-xl my-20">
+      <div className="mx-auto max-w-(--breakpoint-xl) my-20">
         <div className="w-full object-cover aspect-video sm:px-4 bg-purple-400"></div>
         <div className="p-4">
           <h1 className="text-3xl w-max sm:text-5xl font-bold mb-2 bg-purple-600 text-purple-600">

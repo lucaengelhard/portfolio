@@ -3,29 +3,33 @@ import { Link, createLazyFileRoute } from "@tanstack/react-router";
 import { BaseLoader } from "../../components/Loading";
 
 import useFetch from "react-fetch-hook";
+import { imageQualities, ImageSet } from "../../components/Image";
+import ErrorPage from "../../components/Error";
+import { checkImageQualities } from "../../lib/typeguards";
 
 export const Route = createLazyFileRoute("/photography/")({
   component: Photography,
 });
 
+type AlbumData = Array<{
+  id: string;
+  title: string;
+  description: string;
+  primary: imageQualities;
+}>;
+
 function Photography() {
-  const { isLoading, data } = useFetch(
+  const { isLoading, data, error } = useFetch(
     `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr`
   );
 
+  if (error) return <ErrorPage />;
+
   return isLoading ? (
     <BaseLoader />
-  ) : (
+  ) : checkAlbumData(data) ? (
     <div>
-      {(
-        data as Array<{
-          id: string;
-          title: string;
-          description: string;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          primary: Array<any>;
-        }>
-      ).map((album) => (
+      {data.map((album) => (
         <Link key={album.id} to={album.id}>
           <div className="relative h-screen">
             <div className="absolute inset-0 bg-purple-600 bg-opacity-20 opacity-0 transition-opacity duration-300 grid items-center justify-center hover:opacity-100">
@@ -33,66 +37,33 @@ function Photography() {
                 {album.title}
               </h1>
             </div>
-            <img
+            <ImageSet
+              set={album.primary}
               className="h-full object-cover w-full"
-              src={album.primary[11].source}
-              alt=""
+              loading="lazy"
             />
           </div>
         </Link>
       ))}
     </div>
+  ) : (
+    <ErrorPage />
   );
 }
 
-/**
-const PROJECTS = gql`
-  query GetPhotos {
-    photoprojects(pagination: { limit: 100 }) {
-      data {
-        id
-        attributes {
-          Title
-          Thumbnail {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
+function checkAlbumData(data: unknown): data is AlbumData {
+  if (!Array.isArray(data as AlbumData)) return false;
+  for (const el of data as AlbumData) {
+    if (
+      !Object.prototype.hasOwnProperty.call(el, "id") ||
+      !Object.prototype.hasOwnProperty.call(el, "title") ||
+      !Object.prototype.hasOwnProperty.call(el, "description") ||
+      !Object.prototype.hasOwnProperty.call(el, "primary")
+    )
+      return false;
+
+    if (!checkImageQualities(el.primary)) return false;
   }
-`;
 
-function Photography() {
-  const { loading, error, data } = useQuery(PROJECTS);
-
-  if (loading) return <BaseLoader />;
-  if (error) return <ErrorPage error={error} />;
-
-  const projectlist = data.photoprojects.data as TPhotoproject[];
-
-  return (
-    <div>
-      {projectlist.map((project) => (
-        <Link key={project.id + project.attributes.Title} to={`${project.id}`}>
-          <div className="relative h-screen">
-            <div className="absolute inset-0 bg-purple-600 bg-opacity-20 opacity-0 transition-opacity duration-300 grid items-center justify-center hover:opacity-100">
-              <h1 className="text-6xl font-bold text-white p-4 inline-block">
-                {project.attributes.Title}
-              </h1>
-            </div>
-            <img
-              className="h-full object-cover w-full"
-              src={project.attributes.Thumbnail.data.attributes.url}
-              alt=""
-            />
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
+  return true;
 }
- */

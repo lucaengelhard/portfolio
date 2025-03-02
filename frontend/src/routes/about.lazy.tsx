@@ -93,7 +93,7 @@ function About() {
           style={{ gridTemplateColumns: "30% 70%" }}
         >
           <div className="h-screen w-full hidden md:block"></div>
-          <div className="max-w-screen-sm p-8 h-full grid items-center text-5xl font-bold text-purple-600">
+          <div className="max-w-(--breakpoint-sm) p-8 h-full grid items-center text-5xl font-bold text-purple-600">
             {aboutdata.attributes.Welcome}
           </div>
         </div>
@@ -115,7 +115,7 @@ function AboutTagList({ title, tags }: { title: string; tags: TTag[] }) {
         {title}
       </div>
 
-      <div className="flex gap-4 flex-wrap max-w-screen-sm">
+      <div className="flex gap-4 flex-wrap max-w-(--breakpoint-sm)">
         {tags.map((item) => (
           <Tag key={item.Title} tag={item} className="text-xl px-4 py-2" />
         ))}

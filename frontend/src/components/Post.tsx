@@ -20,7 +20,7 @@ import {
 export default function Post({ project }: { project: TProject }) {
   return (
     <>
-      <div className="mx-auto max-w-screen-xl my-20">
+      <div className="mx-auto max-w-(--breakpoint-xl) my-20">
         <img
           className="w-full object-cover aspect-video sm:px-4"
           src={project.attributes.Thumbnail.data.attributes.url}
@@ -134,7 +134,7 @@ function PostText({ text }: { text: TText }) {
 
 function PostParagraph({ paragraph }: { paragraph: TParagraph }) {
   return (
-    <p className="max-w-screen-md mb-2">
+    <p className="max-w-(--breakpoint-md) mb-2">
       <RenderContent content={paragraph.children} />
     </p>
   );
@@ -150,7 +150,7 @@ function PostLink({ link }: { link: TLink }) {
 
 function PostCode({ code }: { code: TCodeBlock }) {
   return (
-    <code className="bg-purple-200 p-3 rounded-lg w-full block max-w-screen-md">
+    <code className="bg-purple-200 p-3 rounded-lg w-full block max-w-(--breakpoint-md)">
       <RenderContent content={code.children} />
     </code>
   );
@@ -160,37 +160,37 @@ function PostHeading({ heading }: { heading: THeading }) {
   switch (heading.level) {
     case 1:
       return (
-        <h1 className="text-5xl font-bold text-purple-600 mt-6 mb-2 max-w-screen-md">
+        <h1 className="text-5xl font-bold text-purple-600 mt-6 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h1>
       );
     case 2:
       return (
-        <h2 className="text-3xl font-bold text-purple-600 mt-5 mb-2 max-w-screen-md">
+        <h2 className="text-3xl font-bold text-purple-600 mt-5 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h2>
       );
     case 3:
       return (
-        <h3 className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+        <h3 className="text-xl font-bold text-purple-600 mt-4 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h3>
       );
     case 4:
       return (
-        <h4 className="text-base font-bold text-purple-600 mt-4 mb-2 max-w-screen-md">
+        <h4 className="text-base font-bold text-purple-600 mt-4 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h4>
       );
     case 5:
       return (
-        <h5 className="text-base font-bold mt-4 mb-2 max-w-screen-md">
+        <h5 className="text-base font-bold mt-4 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h5>
       );
     case 6:
       return (
-        <h6 className="text-base underline mt-4 mb-2 max-w-screen-md">
+        <h6 className="text-base underline mt-4 mb-2 max-w-(--breakpoint-md)">
           <RenderContent content={heading.children} />
         </h6>
       );
@@ -203,7 +203,7 @@ function PostImage({ image }: { image: TImage }) {
       <img
         loading="lazy"
         src={image.image.url}
-        className="max-w-screen-md w-full"
+        className="max-w-(--breakpoint-md) w-full"
         alt={image.image.alternativeText}
       />{" "}
       <figcaption className="italic">

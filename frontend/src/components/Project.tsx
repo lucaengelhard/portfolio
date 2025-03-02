@@ -9,7 +9,7 @@ export default function Projectlist({
   projectlist: TProject[];
 }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-10 mx-auto max-w-screen-xl p-4 mt-16 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-10 mx-auto max-w-(--breakpoint-xl) p-4 mt-16 ">
       {projectlist.map((project: TProject) => (
         <Project
           project={project}

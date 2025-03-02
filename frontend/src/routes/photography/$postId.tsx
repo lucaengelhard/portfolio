@@ -58,16 +58,19 @@ function PhotoPost() {
   ) : checkImageList(data) ? (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {data.map((image, i) => (
-        <img
-          className="h-full w-full object-cover cursor-pointer hover:-translate-x-2 hover:-translate-y-2 transition-transform"
-          loading="lazy"
-          src={image[8].source}
-          key={image[0].source}
-          onClick={() => {
-            setCurrent(i);
-            setPopOut(true);
-          }}
-        />
+        <div className="relative">
+          <img
+            className="h-full w-full object-cover cursor-pointer hover:-translate-x-2 hover:-translate-y-2 transition-transform"
+            loading="lazy"
+            src={image[8].source}
+            key={image[0].source}
+            onClick={() => {
+              setCurrent(i);
+              setPopOut(true);
+            }}
+          />
+          <div className="absolute inset-0 -z-10 bg-purple-600"></div>
+        </div>
       ))}
       <ImageGridPopout
         active={popOut}

@@ -25,11 +25,9 @@ function Photography() {
 
   if (error) return <ErrorPage />;
 
-  if (!checkAlbumData(data)) return <ErrorPage />;
-
   return isLoading ? (
     <BaseLoader />
-  ) : (
+  ) : checkAlbumData(data) ? (
     <div>
       {data.map((album) => (
         <Link key={album.id} to={album.id}>
@@ -48,6 +46,8 @@ function Photography() {
         </Link>
       ))}
     </div>
+  ) : (
+    <ErrorPage />
   );
 }
 

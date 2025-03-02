@@ -25,8 +25,6 @@ function PhotoPost() {
 
   if (error) return <ErrorPage />;
 
-  if (!checkImageList(data)) return <ErrorPage />;
-
   function closePopout() {
     setPopOut(false);
   }
@@ -57,13 +55,13 @@ function PhotoPost() {
 
   return isLoading ? (
     <BaseLoader />
-  ) : (
+  ) : checkImageList(data) ? (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {data.map((image, i) => (
-        <ImageSet
-          className="h-full object-cover hover:-translate-x-2 hover:-translate-y-2 transition-transform"
+        <img
+          className="h-full w-full object-cover cursor-pointer hover:-translate-x-2 hover:-translate-y-2 transition-transform"
           loading="lazy"
-          set={image}
+          src={image[8].source}
           key={image[0].source}
           onClick={() => {
             setCurrent(i);
@@ -80,6 +78,8 @@ function PhotoPost() {
         prev={prev}
       />
     </div>
+  ) : (
+    <ErrorPage />
   );
 }
 

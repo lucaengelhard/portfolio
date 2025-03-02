@@ -4,7 +4,11 @@ type ImageSetProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   set: imageQualities;
 };
 
-export type imageQualities = Array<{ width: number; source: string }>;
+export type imageQualities = Array<{
+  width: number;
+  source: string;
+  height: number;
+}>;
 
 export function ImageSet({ set, ...props }: ImageSetProps) {
   const [current, setCurrent] = useState(set[0]);
@@ -16,7 +20,11 @@ export function ImageSet({ set, ...props }: ImageSetProps) {
     if (!elementRef.current) return;
     const resizeObserver = new ResizeObserver(() => {
       const currentwidth = elementRef.current?.clientWidth ?? 0;
-      let selection = sorted.find((el) => el.width <= currentwidth);
+      const currentHeight = elementRef.current?.clientHeight ?? 0;
+
+      let selection = sorted.find(
+        (el) => el.width >= currentwidth && el.height >= currentHeight
+      );
 
       if (!selection) selection = set[set.length - 1];
 

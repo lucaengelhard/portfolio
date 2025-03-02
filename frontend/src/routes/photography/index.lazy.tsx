@@ -33,7 +33,7 @@ function Photography() {
         <Link key={album.id} to={album.id}>
           <div className="relative h-screen">
             <div className="absolute inset-0 bg-purple-600 bg-opacity-20 opacity-0 transition-opacity duration-300 grid items-center justify-center hover:opacity-100">
-              <h1 className="text-6xl font-bold text-white p-4 inline-block">
+              <h1 className="text-2xl break-words font-bold text-white p-4 inline-block max-w-full sm:text-6xl">
                 {album.title}
               </h1>
             </div>

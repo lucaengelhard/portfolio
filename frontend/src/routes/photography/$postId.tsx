@@ -108,6 +108,7 @@ function ImageGridPopout({
     onSwiped: (eventData) => {
       if (eventData.dir === "Left") next();
       if (eventData.dir === "Right") prev();
+      if (eventData.dir === "Down") closePopOut();
     },
   });
 

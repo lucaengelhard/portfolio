@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { imageQualities, ImageSet } from "../../components/Image";
 import ErrorPage from "../../components/Error";
 import { checkImageQualities } from "../../lib/typeguards";
+import { useSwipeable } from "react-swipeable";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -103,8 +104,18 @@ function ImageGridPopout({
 }) {
   const currentImg = useMemo(() => images[current], [current, images]);
 
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      if (eventData.dir === "Left") next();
+      if (eventData.dir === "Right") prev();
+    },
+  });
+
   return active ? (
-    <div className="fixed h-screen w-screen top-0 left-0 bg-black z-50">
+    <div
+      {...handlers}
+      className="fixed h-screen w-screen top-0 left-0 bg-black z-50"
+    >
       <ImageSet
         set={currentImg}
         className="object-contain w-full h-full"
@@ -115,11 +126,11 @@ function ImageGridPopout({
         onClick={() => prev()}
       />
       <ArrowRight
-        className="absolute right-4 top-1/2 text-white cursor-pointer hover:text-primary"
+        className="absolute right-4 top-1/2 text-white cursor-pointer"
         onClick={() => next()}
       />
       <X
-        className="absolute right-4 top-4 text-white cursor-pointer hover:text-primary"
+        className="absolute right-4 top-4 text-white cursor-pointer"
         onClick={() => closePopOut()}
       />
     </div>

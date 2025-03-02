@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { imageQualities, ImageSet } from "../../components/Image";
 import ErrorPage from "../../components/Error";
 import { checkImageQualities } from "../../lib/typeguards";
+import { useSwipeable } from "react-swipeable";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -58,16 +59,19 @@ function PhotoPost() {
   ) : checkImageList(data) ? (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {data.map((image, i) => (
-        <img
-          className="h-full w-full object-cover cursor-pointer hover:-translate-x-2 hover:-translate-y-2 transition-transform"
-          loading="lazy"
-          src={image[8].source}
-          key={image[0].source}
-          onClick={() => {
-            setCurrent(i);
-            setPopOut(true);
-          }}
-        />
+        <div className="relative">
+          <img
+            className="h-full w-full object-cover cursor-pointer hover:-translate-x-2 hover:-translate-y-2 transition-transform"
+            loading="lazy"
+            src={image[8].source}
+            key={image[0].source}
+            onClick={() => {
+              setCurrent(i);
+              setPopOut(true);
+            }}
+          />
+          <div className="absolute inset-0 -z-10 bg-purple-600"></div>
+        </div>
       ))}
       <ImageGridPopout
         active={popOut}
@@ -100,8 +104,18 @@ function ImageGridPopout({
 }) {
   const currentImg = useMemo(() => images[current], [current, images]);
 
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      if (eventData.dir === "Left") next();
+      if (eventData.dir === "Right") prev();
+    },
+  });
+
   return active ? (
-    <div className="fixed h-screen w-screen top-0 left-0 bg-black z-50">
+    <div
+      {...handlers}
+      className="fixed h-screen w-screen top-0 left-0 bg-black z-50"
+    >
       <ImageSet
         set={currentImg}
         className="object-contain w-full h-full"
@@ -112,11 +126,11 @@ function ImageGridPopout({
         onClick={() => prev()}
       />
       <ArrowRight
-        className="absolute right-4 top-1/2 text-white cursor-pointer hover:text-primary"
+        className="absolute right-4 top-1/2 text-white cursor-pointer"
         onClick={() => next()}
       />
       <X
-        className="absolute right-4 top-4 text-white cursor-pointer hover:text-primary"
+        className="absolute right-4 top-4 text-white cursor-pointer"
         onClick={() => closePopOut()}
       />
     </div>

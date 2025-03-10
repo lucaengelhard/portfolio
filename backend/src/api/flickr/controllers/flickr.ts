@@ -2,10 +2,11 @@
  * A set of functions called "actions" for `flickr`
  */
 
+const flickrCache: Map<string, { timestamp: number; data: any }> = new Map();
+
 export default {
   getAlbums: async (ctx, next) => {
     const key = process.env.FLICKR_KEY;
-    // const secret = process.env.FLICKR_SECRET;
     const user_id = process.env.FLICKR_USERID;
     try {
       const albums = await getAllAlbums(user_id, key);
@@ -45,8 +46,7 @@ export default {
 async function getAllAlbums(user_id: string, key: string, page = 1, acc = []) {
   const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=${key}&user_id=${user_id}&format=json&nojsoncallback=1&page=${page}`;
 
-  const res = await fetch(url);
-  const data = (await res.json()) as any;
+  const data = await cachedFetch(url);
 
   if (data.stat !== "ok") {
     throw new Error("Failed to fetch Albums");
@@ -70,8 +70,7 @@ async function getAllPhotosInAlbum(
 ) {
   const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${key}&user_id=${user_id}&format=json&nojsoncallback=1&page=${page}&photoset_id=${photoset_id}`;
 
-  const res = await fetch(url);
-  const data = (await res.json()) as any;
+  const data = await cachedFetch(url);
 
   if (data.stat !== "ok") {
     throw new Error("Failed to fetch Photos in Album");
@@ -86,24 +85,10 @@ async function getAllPhotosInAlbum(
   }
 }
 
-async function getAlbumInfo(key: string, photoset_id: string, user_id: string) {
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getInfo&api_key=91109c9ec4ec498c68222199d741b9ad&photoset_id=72177720324136626&user_id=191665454%40N06&format=json&nojsoncallback=1`;
-
-  const res = await fetch(url);
-  const data = (await res.json()) as any;
-
-  if (data.stat !== "ok") {
-    throw new Error("Failed to fetch Photoset Info");
-  }
-
-  return data.photoset;
-}
-
 async function getPhotoSizes(key: string, photo_id: string) {
   const url = `https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=${key}&photo_id=${photo_id}&format=json&nojsoncallback=1`;
 
-  const res = await fetch(url);
-  const data = (await res.json()) as any;
+  const data = await cachedFetch(url);
 
   if (data.stat !== "ok") {
     throw new Error("Failed to fetch Photo");
@@ -117,4 +102,19 @@ async function getPhotoSizes(key: string, photo_id: string) {
     url: string;
     media: string;
   }>;
+}
+
+async function cachedFetch(url: string, expiry = 300000) {
+  const now = Date.now();
+  if (flickrCache.has(url)) {
+    const stored = flickrCache.get(url);
+    if (now - stored.timestamp < expiry) return stored.data;
+  }
+
+  return fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      flickrCache.set(url, { timestamp: now, data });
+      return data;
+    });
 }

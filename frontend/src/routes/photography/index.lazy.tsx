@@ -2,10 +2,10 @@ import { Link, createLazyFileRoute } from "@tanstack/react-router";
 
 import { BaseLoader } from "../../components/Loading";
 
-import useFetch from "react-fetch-hook";
 import { imageQualities, ImageSet } from "../../components/Image";
 import ErrorPage from "../../components/Error";
 import { checkImageQualities } from "../../lib/typeguards";
+import { useQuery } from "@tanstack/react-query";
 
 export const Route = createLazyFileRoute("/photography/")({
   component: Photography,
@@ -19,9 +19,11 @@ type AlbumData = Array<{
 }>;
 
 function Photography() {
-  const { isLoading, data, error } = useFetch(
-    `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr`
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["photography"],
+    queryFn: fetchAlbums,
+    refetchOnWindowFocus: false,
+  });
 
   if (error) return <ErrorPage />;
 
@@ -66,4 +68,12 @@ function checkAlbumData(data: unknown): data is AlbumData {
   }
 
   return true;
+}
+
+async function fetchAlbums() {
+  const res = await fetch(
+    `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr`
+  );
+
+  return res.json();
 }

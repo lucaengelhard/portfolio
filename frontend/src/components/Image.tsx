@@ -8,6 +8,7 @@ export type imageQualities = Array<{
   width: number;
   source: string;
   height: number;
+  label: string;
 }>;
 
 //TODO: fix images not loading
@@ -24,8 +25,19 @@ export function ImageSet({ set, ...props }: ImageSetProps) {
       const currentHeight = elementRef.current?.clientHeight ?? 0;
 
       let selection = sorted.find(
-        (el) => el.width >= currentwidth && el.height >= currentHeight
+        (el) =>
+          el.width >= currentwidth &&
+          el.height >= currentHeight &&
+          !(
+            el.label.toLowerCase().includes("3k") ||
+            el.label.toLowerCase().includes("4k") ||
+            el.label.toLowerCase().includes("5k") ||
+            el.label.toLowerCase().includes("6k") ||
+            el.label.toLowerCase().includes("X-Large")
+          )
       );
+
+      if (!selection) console.log(set);
 
       if (!selection) selection = set[set.length - 1];
 
@@ -36,5 +48,14 @@ export function ImageSet({ set, ...props }: ImageSetProps) {
     return () => resizeObserver.disconnect();
   });
 
-  return <img ref={elementRef} src={current.source} {...props} />;
+  return (
+    <img
+      onError={() => {
+        console.error(current);
+      }}
+      ref={elementRef}
+      src={current.source}
+      {...props}
+    />
+  );
 }

@@ -10,6 +10,7 @@ export type imageQualities = Array<{
   height: number;
 }>;
 
+//TODO: fix images not loading
 export function ImageSet({ set, ...props }: ImageSetProps) {
   const [current, setCurrent] = useState(set[0]);
   const elementRef = useRef<HTMLImageElement>(null);

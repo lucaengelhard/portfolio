@@ -18,18 +18,25 @@ import Flickr from "../assets/icons/Flickr";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useState } from "react";
 import { cn } from "../lib/utils";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_PUBLIC_STRAPI_URL + "/graphql",
   cache: new InMemoryCache(),
 });
 
+const queryClient = new QueryClient();
+
 export const Route = createRootRoute({
   component: () => (
     <>
       <ApolloProvider client={client}>
-        <Nav />
-        <Outlet />
+        <QueryClientProvider client={queryClient}>
+          <Nav />
+          <Outlet />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </ApolloProvider>
     </>
   ),

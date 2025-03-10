@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { BaseLoader } from "../../components/Loading";
-import useFetch from "react-fetch-hook";
+
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { imageQualities, ImageSet } from "../../components/Image";
 import ErrorPage from "../../components/Error";
 import { checkImageQualities } from "../../lib/typeguards";
 import { useSwipeable } from "react-swipeable";
+import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/photography/$postId")({
   component: PhotoPost,
@@ -20,9 +21,11 @@ function PhotoPost() {
   const [popOut, setPopOut] = useState(false);
   const { postId } = Route.useParams();
 
-  const { isLoading, data, error } = useFetch(
-    `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr/album?albumId=${postId}`
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["photography", postId],
+    queryFn: () => fetchAlbum(postId),
+    refetchOnWindowFocus: false,
+  });
 
   if (error) return <ErrorPage />;
 
@@ -146,4 +149,12 @@ function checkImageList(data: unknown): data is ImageList {
   }
 
   return true;
+}
+
+async function fetchAlbum(id: string) {
+  const res = await fetch(
+    `${import.meta.env.VITE_PUBLIC_STRAPI_URL}/api/flickr/album?albumId=${id}`
+  );
+
+  return await res.json();
 }

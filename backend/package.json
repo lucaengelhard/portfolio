@@ -12,19 +12,18 @@
     "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.tmp' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.strapi' -Stream com.dropbox.ignored -Value 1"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.25.20",
+    "@strapi/plugin-cloud": "5.12.1",
     "@strapi/plugin-graphql": "^4.25.20",
-    "@strapi/plugin-i18n": "4.25.20",
-    "@strapi/plugin-users-permissions": "4.25.20",
+    "@strapi/plugin-users-permissions": "5.12.1",
     "@strapi/provider-upload-cloudinary": "^4.25.20",
-    "@strapi/strapi": "4.25.20",
+    "@strapi/strapi": "5.12.1",
     "@strapi/typescript-utils": "^4.25.20",
     "pg": "8.8.0",
     "pg-connection-string": "^2.7.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
   "author": {
     "name": "Luca Engelhard"

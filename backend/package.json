@@ -12,12 +12,12 @@
     "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.tmp' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './.strapi' -Stream com.dropbox.ignored -Value 1"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.25.20",
+    "@strapi/plugin-cloud": "4.25.22",
     "@strapi/plugin-graphql": "^4.25.20",
-    "@strapi/plugin-i18n": "4.25.20",
-    "@strapi/plugin-users-permissions": "4.25.20",
+    "@strapi/plugin-i18n": "4.25.22",
+    "@strapi/plugin-users-permissions": "4.25.22",
     "@strapi/provider-upload-cloudinary": "^4.25.20",
-    "@strapi/strapi": "4.25.20",
+    "@strapi/strapi": "4.25.22",
     "@strapi/typescript-utils": "^4.25.20",
     "pg": "8.8.0",
     "pg-connection-string": "^2.7.0",

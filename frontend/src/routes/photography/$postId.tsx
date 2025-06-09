@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { BaseLoader } from "../../components/Loading";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { imageQualities, ImageSet } from "../../components/Image";
 import ErrorPage from "../../components/Error";
@@ -115,24 +115,31 @@ function ImageGridPopout({
     },
   });
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    switch (e.key) {
-      case "ArrowRight":
-        next();
-        break;
-      case "ArrowLeft":
-        prev();
-        break;
-      case "Escape":
-        closePopOut();
-        break;
-    }
-  }
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowRight":
+          next();
+          break;
+        case "ArrowLeft":
+          prev();
+          break;
+        case "Escape":
+          closePopOut();
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  });
 
   return active ? (
     <div
       {...handlers}
-      onKeyDown={onKeyDown}
       className="fixed h-screen w-screen top-0 left-0 bg-black z-50"
     >
       <ImageSet

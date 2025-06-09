@@ -115,9 +115,24 @@ function ImageGridPopout({
     },
   });
 
+  function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    switch (e.key) {
+      case "ArrowRight":
+        next();
+        break;
+      case "ArrowLeft":
+        prev();
+        break;
+      case "Escape":
+        closePopOut();
+        break;
+    }
+  }
+
   return active ? (
     <div
       {...handlers}
+      onKeyDown={onKeyDown}
       className="fixed h-screen w-screen top-0 left-0 bg-black z-50"
     >
       <ImageSet

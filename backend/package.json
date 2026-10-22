@@ -38,5 +38,12 @@
   "devDependencies": {
     "@types/node": "^20.17.22",
     "better-sqlite3": "^11.8.1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11",
+      "onFail": "download"
+    }
   }
 }

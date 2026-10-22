@@ -1,24 +1,3 @@
-export type TProject = {
-  id: string;
-  attributes: {
-    Title: string;
-    Subtitle: string;
-    Tags: TTags;
-    Thumbnail: TDBImage;
-    Content?: TContent;
-    Gallery?: TGallery;
-    Collaborators?: TCollaborators;
-  };
-};
-
-export type TThumbnail = {
-  data: {
-    attributes: {
-      url: string;
-    };
-  };
-};
-
 export type TContent = [
   | TParagraph
   | THeading
@@ -102,74 +81,7 @@ export type TListItem = {
   children: TContent;
 };
 
-export type TGallery = {
-  Description: string;
-  Images: { data: [{ attributes: { url: string } }] };
-};
-
-export type TTags = {
-  data: [{ id: string; attributes: TTag }];
-};
-
 export type TTag = {
   Title: string;
   Color: string;
-};
-
-export type TCollaborators = {
-  data: { id: string; attributes: TCollaborator }[];
-};
-
-export type TCollaborator = {
-  Name: string;
-  URL: string;
-  Mail: string;
-};
-
-export type TPhotoproject = {
-  id: string;
-  attributes: {
-    Title: string;
-    Content: TContent;
-    Thumbnail: TThumbnail;
-    Gallery?: TGallery;
-  };
-};
-
-export type TAbout = {
-  attributes: {
-    Portrait: TThumbnail;
-    Welcome: string;
-    Stack: TTags;
-    Education: TTags;
-    Imprint: TTags;
-  };
-};
-
-export type TDBImage = {
-  data: {
-    attributes: {
-      url: string;
-      formats: {
-        [key in "large" | "small" | "medium" | "thumbnail"]: TDBImageFormat;
-      };
-    };
-  };
-};
-
-export type TDBImageFormat = {
-  ext: string;
-  url: string;
-  hash: string;
-  mime: string;
-  name: string;
-  path: string | null;
-  size: number;
-  width: number;
-  height: number;
-  sizeInBytes: number;
-  provider_metadata: {
-    public_id: string;
-    resource_type: string;
-  };
 };

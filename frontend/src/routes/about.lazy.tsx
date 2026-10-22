@@ -2,8 +2,10 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 
 import { gql, useQuery } from "@apollo/client";
 
+import { GetAboutQuery } from "../types/__generated__/graphql";
+
 import Tag from "../components/Tag";
-import { TAbout, TTag } from "../types/api";
+import { TTag } from "../types/api";
 import { BaseLoader } from "../components/Loading";
 import ErrorPage from "../components/Error";
 
@@ -14,70 +16,47 @@ export const Route = createLazyFileRoute("/about")({
 const ABOUT = gql`
   query GetAbout {
     about {
-      data {
-        attributes {
-          Portrait {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-          Welcome
-          Stack(pagination: { limit: 100 }) {
-            data {
-              id
-              attributes {
-                Title
-                Color
-              }
-            }
-          }
-          Education {
-            data {
-              id
-              attributes {
-                Title
-                Color
-              }
-            }
-          }
-          Imprint {
-            data {
-              id
-              attributes {
-                Title
-                Color
-              }
-            }
-          }
-        }
+      Portrait {
+        url
+      }
+      Welcome
+      Stack(pagination: { limit: 100 }) {
+        Title
+        Color
+      }
+      Education {
+        Title
+        Color
+      }
+      Imprint {
+        Title
+        Color
       }
     }
   }
 `;
 
 function About() {
-  const { loading, error, data } = useQuery(ABOUT);
+  const { loading, error, data } = useQuery<GetAboutQuery>(ABOUT);
 
   if (loading) return <BaseLoader />;
   if (error) return <ErrorPage error={error} />;
 
-  const aboutdata = data.about.data as TAbout;
+  const aboutdata = data!.about!;
 
-  const stack: TTag[] = aboutdata.attributes.Stack.data.map((s) => ({
-    Color: s.attributes.Color,
-    Title: s.attributes.Title,
+  const stack: TTag[] = aboutdata.Stack.map((s) => ({
+    Color: s!.Color,
+    Title: s!.Title,
   }));
 
-  const education: TTag[] = aboutdata.attributes.Education.data.map((s) => ({
-    Color: s.attributes.Color,
-    Title: s.attributes.Title,
+  const education: TTag[] = aboutdata.Education.map((s) => ({
+    Color: s!.Color,
+    Title: s!.Title,
   }));
 
-  const imprint: TTag[] = aboutdata.attributes.Imprint.data.map((s) => ({
-    Color: s.attributes.Color,
-    Title: s.attributes.Title,
+  const imprint: TTag[] = aboutdata.Imprint.map((s) => ({
+    Color: s!.Color,
+    Title: s!.Title,
   }));
 
   return (
@@ -85,7 +64,7 @@ function About() {
       <div className="relative h-screen w-full">
         <img
           className="h-screen w-full object-cover md:object-contain absolute object-left-top -z-10"
-          src={aboutdata.attributes.Portrait.data.attributes.url}
+          src={aboutdata.Portrait.url}
           alt=""
         />
         <div
@@ -94,7 +73,7 @@ function About() {
         >
           <div className="h-screen w-full hidden md:block"></div>
           <div className="max-w-(--breakpoint-sm) p-8 h-full grid items-center text-5xl font-bold text-purple-600">
-            {aboutdata.attributes.Welcome}
+            {aboutdata.Welcome}
           </div>
         </div>
       </div>

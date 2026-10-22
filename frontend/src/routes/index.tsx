@@ -3,9 +3,10 @@ import { useQuery, gql } from "@apollo/client";
 
 import { NavPoint } from "./__root";
 import { Braces, Camera, CircleUserRound, PenTool } from "lucide-react";
-import { TDBImage } from "../types/api";
 import { BaseLoader } from "../components/Loading";
 import ErrorPage from "../components/Error";
+
+import { GetHomeQuery } from "../types/__generated__/graphql";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -22,35 +23,25 @@ function Index() {
 const HOME = gql`
   query getHome {
     home {
-      data {
-        attributes {
-          Heroimage {
-            data {
-              attributes {
-                url
-                formats
-              }
-            }
-          }
-        }
+      Heroimage {
+        url
+        formats
       }
     }
   }
 `;
 
 function Hero() {
-  const { loading, error, data } = useQuery(HOME);
+  const { loading, error, data } = useQuery<GetHomeQuery>(HOME);
 
   if (loading) return <BaseLoader />;
-  if (error) return <ErrorPage error={error} />;
-
-  const image = data.home.data.attributes.Heroimage as TDBImage;
+  if (error || !data || !data.home) return <ErrorPage error={error} />;
 
   return (
     <div className="h-screen w-full relative">
       <HeroText />
       <img
-        src={image.data.attributes.formats.large.url}
+        src={(data.home.Heroimage.formats as any).large.url as string}
         className="h-full w-full object-cover sm:object-contain"
         alt=""
       />

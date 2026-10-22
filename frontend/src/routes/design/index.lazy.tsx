@@ -2,9 +2,9 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { useQuery, gql } from "@apollo/client";
 
 import Projectlist from "../../components/Project";
-import { TProject } from "../../types/api";
 import { BaseLoader } from "../../components/Loading";
 import ErrorPage from "../../components/Error";
+import { GetDesignsQuery } from "../../types/__generated__/graphql";
 
 export const Route = createLazyFileRoute("/design/")({
   component: Designer,
@@ -13,38 +13,26 @@ export const Route = createLazyFileRoute("/design/")({
 const PROJECTS = gql`
   query GetDesigns {
     posts(pagination: { limit: 100 }, filters: { Design: { eq: true } }) {
-      data {
-        id
-        attributes {
-          Title
-          Subtitle
-          Tags(pagination: { limit: 100 }) {
-            data {
-              id
-              attributes {
-                Title
-                Color
-              }
-            }
-          }
-          Thumbnail {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
+      documentId
+      Title
+      Subtitle
+      Tags(pagination: { limit: 100 }) {
+        documentId
+        Title
+        Color
+      }
+      Thumbnail {
+        url
       }
     }
   }
 `;
 
 function Designer() {
-  const { loading, error, data } = useQuery(PROJECTS);
+  const { loading, error, data } = useQuery<GetDesignsQuery>(PROJECTS);
 
   if (loading) return <BaseLoader />;
   if (error) return <ErrorPage error={error} />;
 
-  return <Projectlist projectlist={data.posts.data as TProject[]} />;
+  return <Projectlist projectlist={data!.posts} />;
 }

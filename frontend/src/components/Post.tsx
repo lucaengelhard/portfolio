@@ -1,66 +1,74 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from "react";
 import { cn } from "../lib/utils";
 import Tag from "./Tag";
 import {
   TBlockQuote,
   TCodeBlock,
-  TCollaborators,
-  TContent,
-  TGallery,
   THeading,
   TImage,
   TLink,
   TList,
   TListItem,
   TParagraph,
-  TProject,
   TText,
 } from "../types/api";
+import { GetProjectQuery } from "../types/__generated__/graphql";
 
-export default function Post({ project }: { project: TProject }) {
+type Project = NonNullable<GetProjectQuery["post"]>;
+
+export default function Post({
+  project,
+}: {
+  project: GetProjectQuery["post"];
+}) {
+  if (!project) return null;
   return (
     <>
       <div className="mx-auto max-w-(--breakpoint-xl) my-20">
         <img
           className="w-full object-cover aspect-video sm:px-4"
-          src={project.attributes.Thumbnail.data.attributes.url}
-          alt={project.attributes.Title}
+          src={project.Thumbnail.url}
+          alt={project.Title}
         />
         <div className="p-4">
           <h1 className="text-3xl sm:text-5xl font-bold mb-2 text-purple-600">
-            {project.attributes.Title}
+            {project.Title}
           </h1>
-          <h2 className="text-xl">{project.attributes.Subtitle}</h2>
+          <h2 className="text-xl">{project.Subtitle}</h2>
           <div className="flex gap-2 mt-3 flex-wrap">
-            {project.attributes.Tags.data.map((tag) => (
+            {project.Tags.map((tag) => (
               <Tag
-                key={tag.id}
+                key={tag!.documentId}
                 tag={{
-                  Color: tag.attributes.Color,
-                  Title: tag.attributes.Title,
+                  Color: tag!.Color,
+                  Title: tag!.Title,
                 }}
               />
             ))}
           </div>
-          {project.attributes.Collaborators && (
-            <PostCollab collaborators={project.attributes.Collaborators} />
+          {project.Collaborators && (
+            <PostCollab collaborators={project.Collaborators} />
           )}
-          {project.attributes.Content && (
-            <div className="mt-4">
-              <RenderContent content={project.attributes.Content} />
-            </div>
-          )}
+          {project.Content &&
+            ((
+              <div className="mt-4">
+                <RenderContent content={project.Content} />
+              </div> // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ) as any)}
         </div>
       </div>
-      {project.attributes.Gallery && (
-        <Gallery gallery={project.attributes.Gallery} height="50vh" />
-      )}
+      {project.Gallery && <Gallery gallery={project.Gallery} height="50vh" />}
     </>
   );
 }
 
-function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
-  if (collaborators.data.length === 0) {
+function PostCollab({
+  collaborators,
+}: {
+  collaborators: Project["Collaborators"];
+}) {
+  if (collaborators.length === 0) {
     return;
   }
 
@@ -68,10 +76,10 @@ function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
     <div className="mt-2 flex gap-2 sm:gap-4 italic text-purple-600 flex-wrap sm:flex-nowrap">
       <div>In collaboration with:</div>
       <div>
-        {collaborators.data.map((collaborator) => (
+        {collaborators.map((collaborator) => (
           <div>
-            <a target="_blank" href={collaborator.attributes.URL}>
-              {collaborator.attributes.Name}
+            <a target="_blank" href={collaborator!.URL!}>
+              {collaborator!.Name}
             </a>
           </div>
         ))}
@@ -80,10 +88,10 @@ function PostCollab({ collaborators }: { collaborators: TCollaborators }) {
   );
 }
 
-export function RenderContent({ content }: { content: TContent }) {
+export function RenderContent({ content }: { content: Project["Content"] }) {
   return (
     <>
-      {content.map((block) => {
+      {(content as any).map((block: any) => {
         switch (block.type) {
           case "paragraph":
             return <PostParagraph paragraph={block} />;
@@ -251,10 +259,11 @@ export function Gallery({
   gallery,
   height,
 }: {
-  gallery: TGallery;
+  gallery: Project["Gallery"];
   height?: string;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  if (!gallery) return null;
 
   function onClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (wrapperRef.current === null) return;
@@ -271,7 +280,7 @@ export function Gallery({
     }
   }
 
-  const data = [...gallery.Images.data];
+  const data = [...gallery.Images];
 
   data.reverse();
 
@@ -282,15 +291,15 @@ export function Gallery({
         ref={wrapperRef}
         className={cn(
           "flex gap-4 overflow-auto no-scrollbar cursor-pointer snap-x  snap-mandatory",
-          height === undefined ? "h-72 sm:h-96" : undefined
+          height === undefined ? "h-72 sm:h-96" : undefined,
         )}
         style={{ height: height, scrollBehavior: "smooth" }}
       >
         {data.map((image) => (
           <img
-            key={image.attributes.url}
+            key={image!.url}
             className="object-cover max-w-full snap-center"
-            src={image.attributes.url}
+            src={image!.url}
             alt=""
           />
         ))}

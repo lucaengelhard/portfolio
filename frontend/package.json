@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "generate-routes": "tsr generate",
-    "dropbox-clean": "Set-Content -Path './node_modules' -Stream com.dropbox.ignored -Value 1 && Set-Content -Path './dist' -Stream com.dropbox.ignored -Value 1"
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",
@@ -32,6 +32,8 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^7.4.6",
+    "@graphql-codegen/typescript-operations": "^6.1.10",
     "@tailwindcss/postcss": "^4.0.9",
     "@tanstack/eslint-plugin-query": "4",
     "@tanstack/router-cli": "^1.112.0",

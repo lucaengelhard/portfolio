@@ -14,10 +14,6 @@ module.exports = ({ env }) => ({
       },
     },
   },
-  graphql: {
-    config: {
-      landingPage: true,
-    },
-  },
+  graphql: {},
   // ...
 });

@@ -33,13 +33,11 @@
     "uuid": "938185f1-6cca-4089-99a6-9fb2a5d8e36b"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
-    "npm": ">=6.0.0"
+    "node": ">=22.0.0"
   },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.17.22",
     "better-sqlite3": "^11.8.1"
-  },
-  "packageManager": "pnpm@9.12.2"
+  }
 }

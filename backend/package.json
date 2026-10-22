@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "preinstall": "pnpm -v",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
@@ -38,12 +39,5 @@
   "devDependencies": {
     "@types/node": "^20.17.22",
     "better-sqlite3": "^11.8.1"
-  },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11",
-      "onFail": "download"
-    }
   }
 }

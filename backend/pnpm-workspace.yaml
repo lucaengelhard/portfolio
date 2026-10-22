@@ -1,0 +1,9 @@
+allowBuilds:
+  '@apollo/protobufjs': true
+  '@strapi/strapi': true
+  '@swc/core': true
+  better-sqlite3: true
+  core-js: true
+  core-js-pure: true
+  esbuild: true
+  sharp: true
